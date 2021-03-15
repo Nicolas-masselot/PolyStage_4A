@@ -1,0 +1,84 @@
+<h1 class="mt-2">Administration</h1>
+<div class="card">
+    <div class="card-header custom-color-card d-flex align-items-center">
+        <span class="mr-auto">Gestion des retards</span>
+        <a ng-click="getRetards()" id="btn-one" class="btn btn-outline-primary btn-sm float-right m-0">Lister les
+            retardataires</a>
+    </div>
+    <div class="card-body" ng-if="retardsEleves && retardsTuteurs">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="title-form m-2">Tuteurs</h3>
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item" ng-repeat="retard in retardsTuteurs">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        {{ retard.prenom + ' ' + retard.nom }}
+                                    </div>
+                                    <div class="col-md-6 text-right">
+                                        <div class="row">
+                                            <div class="col-12 text-danger" ng-if="!retard.mailenvoye">
+                                                Mail d'avertissement non envoyé <i class="fa fa-times"
+                                                    aria-hidden="true"></i>
+                                            </div>
+                                            <div class="col-12 text-success" ng-if="retard.mailenvoye">
+                                                Mail d'avertissement déjà envoyé <i class="fa fa-check"
+                                                    aria-hidden="true"></i>
+                                            </div>
+                                            <div class="col-12 text-right text-danger">
+                                                Évaluation à faire <i class="fa fa-times" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <h3 class="title-form m-2">Élèves</h3>
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item" ng-repeat="retard in retardsEleves">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        {{ retard.prenom + ' ' + retard.nom }}
+                                    </div>
+                                    <div class="col-md-6 text-right">
+                                        <div class="row">
+                                            <div class="col-12 text-danger" ng-if="!retard.mailenvoye">
+                                                Mail d'avertissement non envoyé <i class="fa fa-times"
+                                                    aria-hidden="true"></i>
+                                            </div>
+                                            <div class="col-12 text-success" ng-if="retard.mailenvoye">
+                                                Mail d'avertissement déjà envoyé <i class="fa fa-check"
+                                                    aria-hidden="true"></i>
+                                            </div>
+                                            <div class="col-12 text-danger" ng-if="retard.rapport">
+                                                Rapport à télécharger <i class="fa fa-times" aria-hidden="true"></i>
+                                            </div>
+                                            <div class="col-12 text-danger" ng-if="retard.presentation">
+                                                Présentation à télécharger <i class="fa fa-times"
+                                                    aria-hidden="true"></i>
+                                            </div>
+                                            <div class="col-12 text-danger" ng-if="retard.autoeval">
+                                                Auto-évaluation à remplir <i class="fa fa-times" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <button type="submit" ng-click="sendMails()" class="btn btn-primary float-right mx-0"
+                    ng-disabled="retardsEleves.length == 0 && retardsTuteurs.length == 0">Envoyer les mails
+                    de rappel</button>
+            </div>
+        </div>
+    </div>
+</div>

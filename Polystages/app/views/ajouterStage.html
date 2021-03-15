@@ -1,0 +1,190 @@
+</br>
+<h1 class="d-flex justify-content-center">Ajouter des stages</h1>
+</br>
+<div class="d-flex justify-content-center" >
+  <div class="card w-75 text-center">
+    <div class="card-header bg-transparent" >
+      <h3> Importer un fichier pour ajouter des stages </h3>
+    </div> 
+    <form class="md-form" action="#">
+      <div class="file-field big-2">
+        <div class="btn btn-outline-success waves-effect btn-lg float-left">
+          <span>Choose files</span>
+          <input ng-change="" id="fileInput" ng-model="fileInput" type="file" multiple>
+        </div>
+        <div class="file-path-wrapper">
+          <input  class="file-path validate" type="text" placeholder="Upload one or more files">
+        </div>
+      </div>
+    </form>
+    <button ng-click="loadStagesFromCsv()"  class="btn btn-outline-primary ">Load</button>
+  </div>
+</div>
+
+<br>
+
+<div ng-if="listStages">
+  <div class="d-flex justify-content-center">
+    <div class="card w-75 text-center">
+      <div class="card-body">
+        <h2>La liste des stages</h2>
+        <p class="text-danger">veuillez vérifier les informations saisies avant de sauvegarder</p>
+        <button  type="button" class="btn btn-danger btn-lg float-lg-right" data-toggle="modal" data-target="#exampleModal">Annuler</button>
+        <button ng-click="setStagesData()"  class="btn btn-success btn-lg float-lg-right" data-toggle="modal" data-target="#saveModal" >Sauvegarder</button>  
+      </div>
+      
+      <div class="card border-dark text-center" ng-repeat="stage in listStages">
+        <div class="card-header bg-transparent">
+          <h3> {{stage.Sujetdustage}} </h3>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Nom de l'etudiant</h5>
+          <p class="card-text">{{stage.Nomdeleleve}}</p>
+
+          <h5 class="card-title">Prénom de l'etudiant</h5>
+          <p class="card-text">{{stage.Prenomdeleleve}}</p>
+      
+          <h5 class="card-title">Raison sociale</h5>
+          <p class="card-text">{{stage.Raisonsociale}}</p>
+      
+          <h5 class="card-title">Ville de stage</h5>
+          <p class="card-text">{{stage.VilledeStage}}</p>
+      
+          <h5 class="card-title">Pays de Stage</h5>
+          <p class="card-text">{{stage.PaysdeStage}}</p>
+      
+          <h5 class="card-title">Date de début</h5>
+          <p class="card-text">{{stage.Datededebut}}</p>
+      
+          <h5 class="card-title">Date de fin</h5>
+          <p class="card-text">{{stage.Datedefin}}</p>
+        
+          <button  ng-click="init(stage)" type="button" class="btn btn-danger btn-lg " data-toggle="modal" data-target="#modifyModal">Modifier</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modify modal -->
+<div class="modal fade" id="modifyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modifier les informations du stage</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="Sujetdustage">Sujet Du Stage</label>
+            <input type="text" class="form-control" id="Sujetdustage" aria-describedby="SujetdustageHelp" placeholder="">
+          </div>
+          <div class="form-group">
+            <label for="NomEtudiant">Nom de l'etudiant</label>
+            <input type="text" class="form-control" id="NomEtudiant" aria-describedby="NomEtudiantHelp" placeholder="">
+          </div>
+          <div class="form-group">
+            <label for="PrenomEtudiant">Prénom de l'etudiant</label>
+            <input type="text" class="form-control" id="PrenomEtudiant" aria-describedby="PrenomEtudiantHelp" placeholder="">
+          </div>
+          <div class="form-group">
+            <label for="Raisonsociale">Raison Sociale</label>
+            <input type="text" class="form-control" id="Raisonsociale" aria-describedby="RaisonsocialeHelp" placeholder="">
+          </div>
+          <div class="form-group">
+            <label for="VilledeStage">Ville de Stage</label>
+            <input type="text" class="form-control" id="VilledeStage" aria-describedby="VilledeStageHelp" placeholder="">
+          </div>
+          <div class="form-group">
+            <label for="PaysdeStage">Pays De Stage</label>
+            <input type="text" class="form-control" id="PaysdeStage" aria-describedby="PaysdeStageHelp" placeholder="">
+          </div>
+          <div class="form-group">
+            <label for="Datededebut">Date De Debut</label>
+            <input type="text" class="form-control" id="Datededebut" aria-describedby="DatededebutHelp" placeholder="">
+          </div>
+          <div class="form-group">
+            <label for="Datedefin">Date De Fin</label>
+            <input type="text" class="form-control" id="Datedefin" aria-describedby="DatedefinHelp" placeholder="">
+          </div>
+          <div class="form-group">
+            <label for="Nomenseignantencadrant">Nom de l'enseignant encadrant</label>
+            <input type="text" class="form-control" id="Nomenseignantencadrant" aria-describedby="NomenseignantencadrantHelp" placeholder="">
+          </div>
+          <div class="form-group">
+            <label for="Prenomenseignantencadrant">Prénom de l'enseignant encadrant</label>
+            <input type="text" class="form-control" id="Prenomenseignantencadrant" aria-describedby="PrenomenseignantencadrantHelp" placeholder="">
+          </div>
+          <div class="form-group">
+            <label for="MailTuteurDesStageDansLentreprise">Mail Tuteur Des Stage Dans L'entreprise</label>
+            <input type="text" class="form-control" id="MailTuteurDesStageDansLentreprise" aria-describedby="MailTuteurDesStageDansLentrepriseHelp" placeholder="">
+          </div>
+          <div class="form-group">
+            <label for="NomduTuteurDesStagesDansLentreprise">Nom du Tuteur Des Stages Dans L'entreprise</label>
+            <input type="text" class="form-control" id="NomduTuteurDesStagesDansLentreprise" aria-describedby="NomduTuteurDesStagesDansLentrepriseHelp" placeholder="">
+          </div>
+          <div class="form-group">
+            <label for="PrenomduTuteurDesStagesDansLentreprise">Prénom du Tuteur Des Stages Dans L'entreprise</label>
+            <input type="text" class="form-control" id="PrenomduTuteurDesStagesDansLentreprise" aria-describedby="PrenomduTuteurDesStagesDansLentrepriseHelp" placeholder="">
+          </div>
+          <div class="form-group">
+            <label for="Adressedustage">Adresse du stage</label>
+            <input type="text" class="form-control" id="Adressedustage" aria-describedby="AdressedustageHelp" placeholder="">
+          </div>
+        </form>        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Annuler</button>
+        <button ng-click="SaveModifications()" type="button" class="btn btn-danger">Sauvegarder</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Confirm modal for cancel -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Attention</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Vous êtes sur le point d'annuler l'enregistrement des stages dans votre base de données. </p>
+        <p>Etes-vous sûr de vouloir effectuer cette action ? </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Non</button>
+        <button ng-click="cancelSave()" type="button" class="btn btn-danger">Oui</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Confirm modal for save -->
+<div class="modal fade" id="saveModal" tabindex="-1" role="dialog" aria-labelledby="saveModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="saveModalLabel">Attention</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Vous êtes sur le point de sauvegarder les stages sur votre base de données. </p>
+        <p>Etes-vous sûr de vouloir effectuer cette action ? </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Non</button>
+        <button ng-click="saveStages()" type="button" class="btn btn-danger">Oui</button>
+      </div>
+    </div>
+  </div>
+</div>

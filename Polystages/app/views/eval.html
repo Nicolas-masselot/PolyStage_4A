@@ -1,0 +1,229 @@
+<h1 class="mt-2">Évaluation de l'élève {{ stage.prenom + ' ' + stage.nom }}</h1>
+
+<form ng-submit="submitQuestionnaire()" novalidate>
+    <div class="mb-4">
+        <h3 class="title-form">{{ categorie1.title }}</h3>
+        <div class="row">
+            <div class="col-md-6 md-form my-2" ng-repeat="question in categorie1.questions">
+                <div ng-if="question.idquest == 2">
+                    <input ng-model="fields[question.idquest]" type="text" id="{{question.idquest}}"
+                        class="form-control" disabled>
+                    <label for="{{question.idquest}}" class="pl-3 active">{{ question.question }}</label>
+                </div>
+                <div ng-if="question.idquest == 3">
+                    <input ng-model="fields[question.idquest]" type="text" id="{{question.idquest}}"
+                        class="form-control" disabled>
+                    <label for="{{question.idquest}}" class="pl-3 active">{{ question.question }}</label>
+                </div>
+                <div ng-if="question.idquest == 4">
+                    <input ng-model="fields[question.idquest]" type="text" id="{{question.idquest}}"
+                        class="form-control" disabled>
+                    <label for="{{question.idquest}}" class="pl-3 active">{{ question.question }}</label>
+                </div>
+                <div ng-if="question.idquest == 5">
+                    <input ng-model="fields[question.idquest]" type="text" id="{{question.idquest}}"
+                        class="form-control">
+                    <label for="{{question.idquest}}" class="pl-3">{{ question.question }}</label>
+                </div>
+                <div ng-if="question.idquest == 6">
+                    <input ng-model="fields[question.idquest]" type="text" id="{{question.idquest}}"
+                        class="form-control" disabled>
+                    <label for="{{question.idquest}}" class="pl-3 active">{{ question.question }}</label>
+                </div>
+                <div ng-if="question.idquest == 7">
+                    <input ng-model="fields[question.idquest]" type="text" id="{{question.idquest}}"
+                        class="form-control">
+                    <label for="{{question.idquest}}" class="pl-3">{{ question.question }}</label>
+                </div>
+                <div ng-if="question.idquest == 8">
+                    <input ng-model="fields[question.idquest]" type="text" id="{{question.idquest}}"
+                        class="form-control">
+                    <label for="{{question.idquest}}" class="pl-3">{{ question.question }}</label>
+                </div>
+                <div ng-if="question.idquest == 9">
+                    <input ng-model="fields[question.idquest]" type="text" id="{{question.idquest}}"
+                        class="form-control">
+                    <label for="{{question.idquest}}" class="pl-3">{{ question.question }}</label>
+                </div>
+                <div ng-if="question.idquest == 40">
+                    <input ng-model="fields[question.idquest]" type="text" id="{{question.idquest}}"
+                        class="form-control">
+                    <label for="{{question.idquest}}" class="pl-3">{{ question.question }}</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mb-4">
+        <h3 class="title-form">{{ categorie2.title }}</h3>
+        <div class="row">
+            <div class="col-md-6 md-form my-3" ng-repeat="question in categorie2.questions">
+                <p class="mb-0">{{ question.question }}</p>
+                <div ng-if="question.choix == 'ouinon'" class="mt--10">
+                    <div class="form-check pl-0" ng-repeat="choix in choixOuiNon">
+                        <input ng-model="fields[question.idquest]" type="radio" class="form-check-input"
+                            id="{{question.idquest}}-{{choix}}" name="{{question.idquest}}" value="{{ choix }}">
+                        <label class="form-check-label" for="{{question.idquest}}-{{choix}}">{{ choix }}</label>
+                    </div>
+                </div>
+                <div ng-if="question.choix == 'notation'" class="mt--10">
+                    <div class="form-check pl-0" ng-repeat="choix in choixNotation">
+                        <input ng-model="fields[question.idquest]" type="radio" class="form-check-input"
+                            id="{{question.idquest}}-{{choix}}" name="{{question.idquest}}" value="{{ choix }}">
+                        <label class="form-check-label" for="{{question.idquest}}-{{choix}}">{{ choix }}</label>
+                    </div>
+                </div>
+                <div ng-if="question.choix == 'classement'" class="mt--10">
+                    <div class="form-check pl-0" ng-repeat="choix in choixClassement">
+                        <input ng-model="fields[question.idquest]" type="radio" class="form-check-input"
+                            id="{{question.idquest}}-{{choix}}" name="{{question.idquest}}" value="{{ choix }}">
+                        <label class="form-check-label" for="{{question.idquest}}-{{choix}}">{{ choix }}</label>
+                    </div>
+                </div>
+                <div ng-if="question.choix == 'contrat'" class="mt--10">
+                    <div class="form-check pl-0" ng-repeat="choix in choixContrat">
+                        <input ng-model="fields[question.idquest]" type="radio" class="form-check-input"
+                            id="{{question.idquest}}-{{choix}}" name="{{question.idquest}}" value="{{ choix }}">
+                        <label class="form-check-label" for="{{question.idquest}}-{{choix}}">{{ choix }}</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mb-4">
+        <h3 class="title-form">{{ categorie3.title }}</h3>
+        <div class="row">
+            <div class="col-md-6 md-form my-3" ng-repeat="question in categorie3.questions">
+                <div ng-if="question.type == 'enum'">
+                    <p class="mb-0">{{ question.question }}</p>
+                    <div ng-if="question.choix == 'ouinon'" class="mt--10">
+                        <div class="form-check pl-0" ng-repeat="choix in choixOuiNon">
+                            <input ng-model="fields[question.idquest]" type="radio" class="form-check-input"
+                                id="{{question.idquest}}-{{choix}}" name="{{question.idquest}}" value="{{ choix }}">
+                            <label class="form-check-label" for="{{question.idquest}}-{{choix}}">{{ choix }}</label>
+                        </div>
+                    </div>
+                    <div ng-if="question.choix == 'notation'" class="mt--10">
+                        <div class="form-check pl-0" ng-repeat="choix in choixNotation">
+                            <input ng-model="fields[question.idquest]" type="radio" class="form-check-input"
+                                id="{{question.idquest}}-{{choix}}" name="{{question.idquest}}" value="{{ choix }}">
+                            <label class="form-check-label" for="{{question.idquest}}-{{choix}}">{{ choix }}</label>
+                        </div>
+                    </div>
+                    <div ng-if="question.choix == 'classement'" class="mt--10">
+                        <div class="form-check pl-0" ng-repeat="choix in choixClassement">
+                            <input ng-model="fields[question.idquest]" type="radio" class="form-check-input"
+                                id="{{question.idquest}}-{{choix}}" name="{{question.idquest}}" value="{{ choix }}">
+                            <label class="form-check-label" for="{{question.idquest}}-{{choix}}">{{ choix }}</label>
+                        </div>
+                    </div>
+                    <div ng-if="question.choix == 'contrat'" class="mt--10">
+                        <div class="form-check pl-0" ng-repeat="choix in choixContrat">
+                            <input ng-model="fields[question.idquest]" type="radio" class="form-check-input"
+                                id="{{question.idquest}}-{{choix}}" name="{{question.idquest}}" value="{{ choix }}">
+                            <label class="form-check-label" for="{{question.idquest}}-{{choix}}">{{ choix }}</label>
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="question.type == 'text'">
+                    <div class="md-form my-2">
+                        <input ng-model="fields[question.idquest]" type="text" id="{{question.idquest}}"
+                            class="form-control">
+                        <label for="{{question.idquest}}">{{ question.question }}</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mb-4">
+        <h3 class="title-form">{{ categorie4.title }}</h3>
+        <div class="row">
+            <div class="col-md-6 md-form my-3" ng-repeat="question in categorie4.questions">
+                <div ng-if="question.type == 'enum'">
+                    <p class="mb-0">{{ question.question }}</p>
+                    <div ng-if="question.choix == 'ouinon'" class="mt--10">
+                        <div class="form-check pl-0" ng-repeat="choix in choixOuiNon">
+                            <input ng-model="fields[question.idquest]" type="radio" class="form-check-input"
+                                id="{{question.idquest}}-{{choix}}" name="{{question.idquest}}" value="{{ choix }}">
+                            <label class="form-check-label" for="{{question.idquest}}-{{choix}}">{{ choix }}</label>
+                        </div>
+                    </div>
+                    <div ng-if="question.choix == 'notation'" class="mt--10">
+                        <div class="form-check pl-0" ng-repeat="choix in choixNotation">
+                            <input ng-model="fields[question.idquest]" type="radio" class="form-check-input"
+                                id="{{question.idquest}}-{{choix}}" name="{{question.idquest}}" value="{{ choix }}">
+                            <label class="form-check-label" for="{{question.idquest}}-{{choix}}">{{ choix }}</label>
+                        </div>
+                    </div>
+                    <div ng-if="question.choix == 'classement'" class="mt--10">
+                        <div class="form-check pl-0" ng-repeat="choix in choixClassement">
+                            <input ng-model="fields[question.idquest]" type="radio" class="form-check-input"
+                                id="{{question.idquest}}-{{choix}}" name="{{question.idquest}}" value="{{ choix }}">
+                            <label class="form-check-label" for="{{question.idquest}}-{{choix}}">{{ choix }}</label>
+                        </div>
+                    </div>
+                    <div ng-if="question.choix == 'contrat'" class="mt--10">
+                        <div class="form-check pl-0" ng-repeat="choix in choixContrat">
+                            <input ng-model="fields[question.idquest]" type="radio" class="form-check-input"
+                                id="{{question.idquest}}-{{choix}}" name="{{question.idquest}}" value="{{ choix }}">
+                            <label class="form-check-label" for="{{question.idquest}}-{{choix}}">{{ choix }}</label>
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="question.type == 'text'">
+                    <div class="md-form my-2">
+                        <input ng-model="fields[question.idquest]" type="text" id="{{question.idquest}}"
+                            class="form-control">
+                        <label for="{{question.idquest}}">{{ question.question }}</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mb-4">
+        <h3 class="title-form">{{ categorie5.title }}</h3>
+        <div class="row">
+            <div class="col-md-6 md-form my-3" ng-repeat="question in categorie5.questions"
+                ng-if="stage.niveau >= question.niveau" ng-class="{'mb-0-i': $last}">
+                <div ng-if="question.type == 'enum'">
+                    <p class="mb-0">{{ question.question }}</p>
+                    <div ng-if="question.choix == 'ouinon'" class="mt--10">
+                        <div class="form-check pl-0" ng-repeat="choix in choixOuiNon">
+                            <input ng-model="fields[question.idquest]" type="radio" class="form-check-input"
+                                id="{{question.idquest}}-{{choix}}" name="{{question.idquest}}" value="{{ choix }}">
+                            <label class="form-check-label" for="{{question.idquest}}-{{choix}}">{{ choix }}</label>
+                        </div>
+                    </div>
+                    <div ng-if="question.choix == 'notation'" class="mt--10">
+                        <div class="form-check pl-0" ng-repeat="choix in choixNotation">
+                            <input ng-model="fields[question.idquest]" type="radio" class="form-check-input"
+                                id="{{question.idquest}}-{{choix}}" name="{{question.idquest}}" value="{{ choix }}">
+                            <label class="form-check-label" for="{{question.idquest}}-{{choix}}">{{ choix }}</label>
+                        </div>
+                    </div>
+                    <div ng-if="question.choix == 'classement'" class="mt--10">
+                        <div class="form-check pl-0" ng-repeat="choix in choixClassement">
+                            <input ng-model="fields[question.idquest]" type="radio" class="form-check-input"
+                                id="{{question.idquest}}-{{choix}}" name="{{question.idquest}}" value="{{ choix }}">
+                            <label class="form-check-label" for="{{question.idquest}}-{{choix}}">{{ choix }}</label>
+                        </div>
+                    </div>
+                    <div ng-if="question.choix == 'contrat'" class="mt--10">
+                        <div class="form-check pl-0" ng-repeat="choix in choixContrat">
+                            <input ng-model="fields[question.idquest]" type="radio" class="form-check-input"
+                                id="{{question.idquest}}-{{choix}}" name="{{question.idquest}}" value="{{ choix }}">
+                            <label class="form-check-label" for="{{question.idquest}}-{{choix}}">{{ choix }}</label>
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="question.type == 'text'">
+                    <div class="md-form my-2">
+                        <input ng-model="fields[question.idquest]" type="text" id="{{question.idquest}}"
+                            class="form-control">
+                        <label for="{{question.idquest}}">{{ question.question }}</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary float-right mx-0">Valider l'évaluation</button>
+</form>

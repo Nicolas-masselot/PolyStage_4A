@@ -1,0 +1,52 @@
+<h1 class="mt-2">Évaluation des compétences de l'élève {{ stage.prenom + ' ' + stage.nom }}</h1>
+
+<form ng-submit="submitEval()" novalidate>
+    <div class="mb-4">
+        <h3 class="title-form mb-0">Aspects scientifiques et techniques</h3>
+        <div class="row">
+            <div class="col-md-6 md-form my-3" ng-repeat="competence in competences | filter: firstCategorie">
+                <p class="mb-0">{{ competence.sigle + ': ' + competence.libelle }}</p>
+                <div class="mt--10">
+                    <div class="form-check pl-0" ng-repeat="choix in competence.choix">
+                        <input ng-model="fields[competence.idcompetence]" type="radio" class="form-check-input"
+                            id="{{competence.idcompetence}}-{{$index}}" name="{{competence.idcompetence}}"
+                            value="{{ choix.libelle }}">
+                        <label class="form-check-label"
+                            for="{{competence.idcompetence}}-{{$index}}">{{ choix.libelle }}</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h3 class="title-form mt-3 mb-0">Adaptation aux exigences de l'entreprise et de la société</h3>
+        <div class="row">
+            <div class="col-md-6 md-form my-3" ng-repeat="competence in competences | filter: secondCategorie">
+                <p class="mb-0">{{ competence.sigle + ': ' + competence.libelle }}</p>
+                <div class="mt--10">
+                    <div class="form-check pl-0" ng-repeat="choix in competence.choix">
+                        <input ng-model="fields[competence.idcompetence]" type="radio" class="form-check-input"
+                            id="{{competence.idcompetence}}-{{$index}}" name="{{competence.idcompetence}}"
+                            value="{{ choix.libelle }}">
+                        <label class="form-check-label"
+                            for="{{competence.idcompetence}}-{{$index}}">{{ choix.libelle }}</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h3 class="title-form mt-3 mb-0">Dimension personnelle, organisationnelle et culturelle</h3>
+        <div class="row">
+            <div class="col-md-6 md-form my-3" ng-repeat="competence in competences | filter: thirdCategorie">
+                <p class="mb-0">{{ competence.sigle + ': ' + competence.libelle }}</p>
+                <div class="mt--10">
+                    <div class="form-check pl-0" ng-repeat="choix in competence.choix">
+                        <input ng-model="fields[competence.idcompetence]" type="radio" class="form-check-input"
+                            id="{{competence.idcompetence}}-{{$index}}" name="{{competence.idcompetence}}"
+                            value="{{ choix.libelle }}">
+                        <label class="form-check-label"
+                            for="{{competence.idcompetence}}-{{$index}}">{{ choix.libelle }}</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary float-right mx-0">Valider l'évaluation</button>
+</form>

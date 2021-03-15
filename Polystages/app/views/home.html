@@ -1,0 +1,238 @@
+<h1 class="mt-2">Accueil</h1>
+<div class="row" ng-if="$root.role == 'eleve'">
+  <div class="col-md-6 mb-4" ng-if="currentStage.length == 0">
+    <div
+      class="card grey lighten-2 h-100 mh-card card-ajouter-stage hoverable mouse-cursor"
+      ng-click="ajouterUnStage()"
+    >
+      <div
+        class="text-white text-center d-flex align-items-center rgba-black-light h-100"
+      >
+        <div class="mx-auto">
+          <h3 class="card-title pt-2 mb-0">
+            <strong>Ajouter un stage</strong>
+          </h3>
+          <a class="btn-floating btn-lg primary-color"
+            ><i class="fa fa-plus"></i
+          ></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 mb-4" ng-repeat="stage in stages">
+    <div
+      class="card h-100"
+      ng-class="{'card-disabled': $root.annee != stage.annee}"
+    >
+      <div class="" ng-init="myRandomImg = random()">
+        <img
+          class="card-img-top"
+          ng-src="/img/stage-{{myRandomImg}}.jpg"
+          alt="Card image cap"
+        />
+        <a>
+          <div class="mask rgba-white-slight"></div>
+        </a>
+      </div>
+      <a
+        class="btn-floating btn-action ml-auto mr-4 primary-color"
+        ng-href="#!/modifier/stage/{{stage.idstage}}"
+        ><i class="fa fa-edit pl-1"></i
+      ></a>
+      <div class="card-body">
+        <p class="mb-0 card-text">
+          Annee {{ stage.annee }} - {{ stage.niveau }}A
+        </p>
+        <h4 class="card-title mb-0">{{ stage.titrestage }}</h4>
+        <p class="mb-0 card-text">{{ stage.nomcomplet }}</p>
+        <hr />
+        <p class="card-text">{{ stage.description }}</p>
+        <div class="row">
+          <div class="col-md-6 mb-2">
+            <div class="file-field">
+              <div
+                class="btn btn-outline-primary w-100 m-0 py-1 px-2 h-100 waves-effect uploadRapport"
+              >
+                <!-- Ajouter la possibilité de retélécharger un autre stage -->
+                <span ng-if="stage.cheminrapport == null"
+                  >Télécharger rapport</span
+                >
+                <span ng-if="stage.cheminrapport != null"
+                  >ReTélécharger rapport</span
+                >
+                <input
+                  type="file"
+                  ng-model="rapportFile"
+                  ngf-select="uploadRapport(rapportFile, $root.annee, $root.niveau, $root.nom, $root.prenom, stage.idstage, $root.email)"
+                  name="file"
+                  accept=".pdf"
+                />
+              </div>
+              <a
+                ng-href="{{ stage.cheminrapport }}"
+                class="btn btn-outline-primary w-100 m-0 py-1 px-2 h-100 waves-effect"
+                target="_blank"
+                ng-if="stage.cheminrapport != null"
+                >Visualiser rapport
+              </a>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="file-field">
+              <div
+                class="btn btn-outline-primary w-100 m-0 py-1 px-2 h-100 waves-effect uploadPres"
+              >
+                <span ng-if="stage.cheminpres == null"
+                  >Télécharger présentation</span
+                >
+                <span ng-if="stage.cheminpres != null"
+                  >ReTélécharger présentation</span
+                >
+                <input
+                  type="file"
+                  ng-model="presFile"
+                  ngf-select="uploadPres(presFile, $root.annee, $root.niveau, $root.nom, $root.prenom, stage.idstage, $root.email)"
+                  name="file"
+                  accept=".pdf, .pptx"
+                />
+              </div>
+              <a
+                ng-href="{{ stage.cheminpres }}"
+                class="btn btn-outline-primary w-100 m-0 py-1 px-2 h-100 waves-effect"
+                target="_blank"
+                ng-if="stage.cheminpres != null"
+                >Visualiser présentation
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="rounded-bottom primary-color text-center">
+        <ul class="list-unstyled list-inline font-small mb-0 py-2">
+          <li class="list-inline-item pr-2 white-text">
+            <i class="far fa-clock pr-1"></i>{{ stage.datedebut |
+            amDateFormat:'DD/MM/YYYY' }}
+          </li>
+          <li class="list-inline-item pr-2 white-text">
+            <i class="far fa-clock pr-1"></i>-
+          </li>
+          <li class="list-inline-item pr-2 white-text">
+            <i class="far fa-clock pr-1"></i>{{ stage.datefin |
+            amDateFormat:'DD/MM/YYYY' }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button ng-if="$root.role == 'enseignant' && stages.length != 0" ng-click="lancerAllEvaluation()" class="btn btn-outline-primary mx-0" ng-disabled="isAllEvaluated==true" >
+    Lancer toutes les évaluations
+  </button>
+<div class="row" ng-if="$root.role == 'enseignant'">
+  <h4 ng-if="stages.length == 0" class="col-12">
+    Il n'y a aucun stage à afficher
+  </h4>
+  <div class="col-md-6  " ng-repeat="stage in stages">
+    <div class="card  mb-3 ">
+      <div class="card-header custom-color-card  text-center">
+        {{ stage.prenom + ' ' + stage.nom }}
+      </div>
+      <div class="card-body text-center">
+        <h5 class="card-title">{{ stage.titrestage }}</h5>
+        <p class="card-text mb-1">{{ stage.nomcomplet }}</p>
+        <div class="text-center">
+          <button
+            ng-click="lancerEvaluation(stage.idstage, stage.idtuteur, stage.nom, stage.prenom)"
+            class="btn btn-outline-primary mx-0"
+            ng-disabled="stage.evallancee || !stage.idtuteur"
+          >
+            Lancer évaluation
+          </button>
+        </div>
+        <div class="text-center" ng-if="stage.dateeval">
+          <a
+            ng-href="{{stage.chemineval}}"
+            target="_blank"
+            class="btn btn-outline-primary mx-0"
+            >Visualiser l'évaluation</a
+          >
+        </div>
+        <p class="text-center text-danger mb-0" ng-if="!stage.idtuteur">
+          L'élève n'a toujours pas renseigné de tuteur
+        </p>
+        <p class="text-center text-primary mb-0" ng-if="stage.evallancee">
+          L'évaluation a été lancée <span am-time-ago="stage.evallancee"></span>
+        </p>
+      </div>
+      <div class="card-footer custom-color-card text-center">
+        {{ stage.datedebut | amDateFormat:'DD/MM/YYYY' }} - {{ stage.datefin |
+        amDateFormat:'DD/MM/YYYY' }}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row" ng-if="$root.role == 'tuteur'">
+  <div class="col-md-12 mb-2" ng-repeat="stage in stages">
+    <div class="card w-100">
+      <div class="card-header custom-color-card text-center">
+        {{ stage.prenom + ' ' + stage.nom }}
+      </div>
+      <div class="card-body text-center">
+        <h5 class="card-title">{{ stage.titrestage }}</h5>
+        <p class="card-text mb-1">{{ stage.nomcomplet }}</p>
+        <div class="text-center">
+          <button
+            ng-click="evaluer(stage.idstage)"
+            class="btn btn-outline-primary mx-0"
+            ng-disabled="stage.dateeval"
+          >
+            Évaluer le stage
+          </button>
+          <button
+            ng-click="evaluerCompetences(stage.idstage)"
+            class="btn btn-outline-primary mx-0"
+            ng-disabled="stage.datecomp"
+          >
+            Évaluer les compétences
+          </button>
+        </div>
+        <div class="text-center">
+          <a
+            ng-href="{{stage.chemineval}}"
+            ng-if="stage.dateeval"
+            target="_blank"
+            class="btn btn-outline-primary mx-0"
+            >Visualiser l'évaluation du stage</a
+          >
+          <a
+            ng-href="{{stage.chemincomp}}"
+            ng-if="stage.datecomp"
+            target="_blank"
+            class="btn btn-outline-primary mx-0"
+            >Visualiser l'évaluation des compétences</a
+          >
+        </div>
+        <p
+          class="text-center text-primary mb-0"
+          ng-if="!stage.dateeval || !stage.datecomp"
+        >
+          L' évaluation est disponible
+        </p>
+        <p class="text-center text-primary mb-0" ng-if="stage.dateeval">
+          L'évaluation du stage a été faite
+          <span am-time-ago="stage.dateeval"></span>
+        </p>
+        <p class="text-center text-primary mb-0" ng-if="stage.datecomp">
+          L'évaluation des compétences a été faite
+          <span am-time-ago="stage.datecomp"></span>
+        </p>
+      </div>
+      <div class="card-footer text-center">
+        {{ stage.datedebut | amDateFormat:'DD/MM/YYYY' }} - {{ stage.datefin |
+        amDateFormat:'DD/MM/YYYY' }}
+      </div>
+    </div>
+  </div>
+</div>
