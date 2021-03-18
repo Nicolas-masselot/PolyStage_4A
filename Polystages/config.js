@@ -4,10 +4,10 @@ const config = {
   },
   db: {
     host: 'localhost',
-    port: 8889,
+    // port: 8889,
     database: 'Polystages',
     user: 'root',
-    password: 'root'
+    password: ''  // ou root
   },
   gmail: {
     user: 'polystage.alert@gmail.com',
