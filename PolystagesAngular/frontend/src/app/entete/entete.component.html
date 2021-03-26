@@ -1,0 +1,17 @@
+<nav class="navbar fixed-top navbar-toggleable-md navbar-expand-lg scrolling-navbar double-nav">
+  <div class="float-left">
+    <a data-activates="slide-out" class="button-collapse black-text" (click)="afficher_menu()"><i class="fa fa-bars"></i></a>
+  </div>
+  <div id="titreSite" class="breadcrumb-dn mr-auto text-uppercase">
+    <p>Polystage</p>
+  </div>
+  <ul class="nav navbar-nav nav-flex-icons ml-auto" *ngIf="connected">
+    <li class="nav-item text-muted">
+                     <span class="badge badge-danger"
+                          *ngIf="admin" >Admin</span>{{ prenom_utilisateur + ' ' + nom_utilisateur }}&nbsp;|&nbsp;
+    </li>
+    <li class="nav-item cursor-pointer" (click)="deconnexion()">
+      Déconnexion <i class="fa fa-power-off" aria-hidden="true"></i>
+    </li>
+  </ul>
+</nav>
