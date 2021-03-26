@@ -2,12 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Frontend</title>
+  <title>PolyStage</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
-<body>
+
+<body ng-controller="mainController" class="fixed-sn white-skin">
+  <div class="flex-center flex-column preloader">
+    <p>TODO : mettre les images dans le backend img/</p>
+    <!--
+    <img src="img/polytech.png" class="img-preloader mb-1">
+    -->
+    <div class="progress md-progress blue-gradient bar-preloader mt-1">
+      <div class="indeterminate"></div>
+    </div>
+  </div>
   <app-root></app-root>
 </body>
 </html>
