@@ -1,12 +1,41 @@
 
 <header>
+
   <app-menu [displayMenu]="'Accueil,Administration,RechercheStage'"></app-menu>
   <app-entete></app-entete>
+  
 </header>
 
 <main>
   <div class="container-fluid">
-    <p>Test de première page</p>
+    <div ng-view>
+
+      <div class="row d-flex justify-content-center align-items-center home-fullpage">
+        <div class="col-md-6">
+          <div class="card">
+            <h5 class="card-header primary-color white-text text-center py-4">
+              <strong class="text-uppercase">Connexion</strong>
+            </h5>
+            <div class="card-body px-lg-5">
+              <form class="text-center" ng-submit="connexion(identifiant, password)" name="login" novalidate>
+                <div class="md-form">
+                  <input type="text" id="identifiantForm" class="form-control" [(ngModel)]="identifiant" [ngModelOptions]="{standalone: true}">
+                  <label for="identifiantForm">Identifiant</label>
+                </div>
+                <div class="md-form">
+                  <input type="password" id="passwordForm" class="form-control" [(ngModel)]="password" [ngModelOptions]="{standalone: true}">
+                  <label for="passwordForm">Mot de passe</label>
+                </div>
+                <p class="d-none">Vous n’avez pas de compte ? <a href="/register">Inscrivez-vous</a></p>
+                <button class="btn btn-outline-primary btn-block my-4 waves-effect z-depth-0 w-50 mx-auto"
+                        type="submit" (click)="tryConnection()">Se connecter</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 </main>
 
