@@ -27,7 +27,18 @@ export class LoginComponent implements OnInit
     {
       if (r["status"] == "ok")
       {
-        this.router.navigateByUrl("/eleve");
+        if (r["data"] == "eleve") // TODO : caller ça avec le backend
+        {
+          this.router.navigateByUrl("/eleve");
+        }
+        else if (r["data"] == "enseignant")
+        {
+          this.router.navigateByUrl("/enseignant");
+        }
+        else if (r["data"] == "tuteur")
+        {
+          this.router.navigateByUrl("/tuteur");
+        }
       }
       else
       {
