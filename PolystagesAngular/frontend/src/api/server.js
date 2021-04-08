@@ -9,11 +9,19 @@ const mysql = require('mysql');
 app.use(express.static('.'))
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+
+const cors = require ('cors');
+app.use(cors({origin: 'http://127.0.0.1:4200', credentials: true}));
+
+
+/*
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "http://localhost:4200");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
+*/
 
 const db = mysql.createConnection({
   host: config.db.host,
