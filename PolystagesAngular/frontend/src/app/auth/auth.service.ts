@@ -22,25 +22,19 @@ export class AuthService
     let data = {username: login, password: sha512.create().update(password).hex()}; // TODO : sha512 le mot de passe
     let response = this.service.sendGetMessageQuery("authentification", data);
     response.subscribe(
-      r => {this.finalizeAuthentication(r);}
+      r => {this.finalizeAuthentication(r);},
+      error => {this.authenticated = false;}
     );
     return response;
   }
 
   finalizeAuthentication(message: any): void
   {
-    if (message[0] != undefined)
-    {
-      this.authenticated = true;
+    this.authenticated = true;
 
-      this.authAs = message[0]["role"];
-      this.nom = message[0]["nom"];
-      this.prenom = message[0]["prenom"];
-    }
-    else
-    {
-      this.authenticated = false;
-    }
+    this.authAs = message[0]["role"];
+    this.nom = message[0]["nom"];
+    this.prenom = message[0]["prenom"];
   }
 
   isAuthenticated(): boolean

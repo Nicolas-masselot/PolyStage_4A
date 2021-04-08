@@ -25,26 +25,22 @@ export class LoginComponent implements OnInit
   {
     this.service.sendAuthentication(this.identifiant, this.password).subscribe(r =>
     {
-      console.log("DEBUG 1 : " + JSON.stringify(r));
-      if (r[0] != undefined)
+      if (r[0]["role"] == "eleve")
       {
-        if (r[0]["role"] == "eleve")
-        {
-          this.router.navigateByUrl("/eleve");
-        }
-        else if (r[0]["role"] == "enseignant")
-        {
-          this.router.navigateByUrl("/enseignant");
-        }
-        else if (r[0]["role"] == "tuteur")
-        {
-          this.router.navigateByUrl("/tuteur");
-        }
+        this.router.navigateByUrl("/eleve");
       }
-      else
+      else if (r[0]["role"] == "enseignant")
       {
-        this.toastr.error("Mauvais identifiant / mot de passe");
+        this.router.navigateByUrl("/enseignant");
       }
+      else if (r[0]["role"] == "tuteur")
+      {
+        this.router.navigateByUrl("/tuteur");
+      }
+    },
+    error =>
+    {
+      this.toastr.error("Mauvais identifiant / mot de passe");
     });
   }
 
