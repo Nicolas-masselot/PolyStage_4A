@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpResponse} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {environment} from "../../environments/environment";
 
@@ -35,4 +35,23 @@ export class MessageService implements Data
     );
 
   }
+
+  sendGetMessagebyID(url: string, id_param: number): Observable<Data>
+  {
+    let fullUrl : string = environment.baseUrl + url + id_param;
+    return this.http.get<Data>(
+      fullUrl
+    )
+  }
+
+  sendGetMessageQuery(url: string , data: any) : Observable<Data> {
+    let fullUrl : string = environment.baseUrl + url;
+
+    return this.http.get<Data>(
+      fullUrl,
+      { params: data }
+    )
+  }
+
+// faire si besoin une fonction pour les requêtes put
 }
