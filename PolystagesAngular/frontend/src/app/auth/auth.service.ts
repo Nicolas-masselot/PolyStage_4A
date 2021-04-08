@@ -11,26 +11,31 @@ export class AuthService
 
   authenticated: boolean = false;
   authAs: string = ""; // eleve, enseignant ou tuteur
+  prenom: string = "";
+  nom: string = "";
 
   constructor(@Inject(MessageService) private service: MessageService)
   {}
 
-  sendAuthentication(login: string, password: string): Observable<Data>
+  sendAuthentication(login: string, password: string): Observable<any>
   {
     let data = {username: login, password: sha512.create().update(password).hex()}; // TODO : sha512 le mot de passe
-    let response = this.service.sendMessage("authentification", data)
+    let response = this.service.sendGetMessageQuery("authentification", data);
     response.subscribe(
       r => {this.finalizeAuthentication(r);}
     );
     return response;
   }
 
-  finalizeAuthentication(message: Data): void
+  finalizeAuthentication(message: any): void
   {
-    if (message["status"] == "ok")
+    if (message[0] != undefined)
     {
       this.authenticated = true;
-      this.authAs = message["data"]; // TODO : caller ça avec le backend
+
+      this.authAs = message[0]["role"];
+      this.nom = message[0]["nom"];
+      this.prenom = message[0]["prenom"];
     }
     else
     {

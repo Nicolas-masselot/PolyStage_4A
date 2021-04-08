@@ -25,17 +25,18 @@ export class LoginComponent implements OnInit
   {
     this.service.sendAuthentication(this.identifiant, this.password).subscribe(r =>
     {
-      if (r["status"] == "ok")
+      console.log("DEBUG 1 : " + JSON.stringify(r));
+      if (r[0] != undefined)
       {
-        if (r["data"] == "eleve") // TODO : caller ça avec le backend
+        if (r[0]["role"] == "eleve")
         {
           this.router.navigateByUrl("/eleve");
         }
-        else if (r["data"] == "enseignant")
+        else if (r[0]["role"] == "enseignant")
         {
           this.router.navigateByUrl("/enseignant");
         }
-        else if (r["data"] == "tuteur")
+        else if (r[0]["role"] == "tuteur")
         {
           this.router.navigateByUrl("/tuteur");
         }
