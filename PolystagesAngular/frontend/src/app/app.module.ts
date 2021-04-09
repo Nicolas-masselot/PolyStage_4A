@@ -12,6 +12,9 @@ import {HttpClientModule} from "@angular/common/http";
 // @ts-ignore
 import {ToastrModule} from "ngx-toastr";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { EleveComponent } from './eleve/eleve.component';
+import { EnseignantComponent } from './enseignant/enseignant.component';
+import { TuteurComponent } from './tuteur/tuteur.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,10 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     EnteteComponent,
     MenuComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    EleveComponent,
+    EnseignantComponent,
+    TuteurComponent
   ],
   imports: [
     BrowserModule,
