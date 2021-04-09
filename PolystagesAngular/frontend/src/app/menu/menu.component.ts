@@ -1,13 +1,13 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {AuthService} from "../auth/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.scss']
+  styleUrls: ['./menu.component.scss'],
 })
 export class MenuComponent implements OnInit {
-
-  @Input() displayMenu: string = "";
 
   displayAccueil: boolean = false;
   displayAdministration: boolean = false;
@@ -15,18 +15,28 @@ export class MenuComponent implements OnInit {
   displayRechercheStage: boolean = false;
   displayStatistiques: boolean = false;
 
-  constructor()
-  {}
+  constructor(private authservice: AuthService, private router: Router)
+  {
+    this.router.events.subscribe((ev) => {
+
+      if (this.authservice.isAuthenticated()){
+        this.displayAccueil = true;
+        if (this.authservice.admin) this.displayAdministration = true;
+        if (this.authservice.admin) this.displayAjoutStage = true;
+        if (this.authservice.admin) this.displayRechercheStage = true;
+        if (this.authservice.admin) this.displayStatistiques = true;
+      } else {
+        this.displayAccueil = false;
+        this.displayAdministration = false;
+        this.displayAjoutStage = false;
+        this.displayRechercheStage = false;
+        this.displayStatistiques = false;
+      }
+    });
+
+  }
 
   ngOnInit(): void
-  {
-    let displayMenuS: string[] = this.displayMenu.split(",");
-
-    if (displayMenuS.includes("Accueil")) this.displayAccueil = true;
-    if (displayMenuS.includes("Administration")) this.displayAdministration = true;
-    if (displayMenuS.includes("AjoutStage")) this.displayAjoutStage = true;
-    if (displayMenuS.includes("RechercheStage")) this.displayRechercheStage = true;
-    if (displayMenuS.includes("Statistiques")) this.displayStatistiques = true;
-  }
+  {}
 
 }

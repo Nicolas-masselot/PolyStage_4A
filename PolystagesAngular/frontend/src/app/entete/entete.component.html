@@ -8,10 +8,11 @@
   <ul class="nav navbar-nav nav-flex-icons ml-auto" *ngIf="connected">
     <li class="nav-item text-muted">
                      <span class="badge badge-danger"
-                          *ngIf="admin" >Admin</span>{{ prenom_utilisateur + ' ' + nom_utilisateur }}&nbsp;|&nbsp;
+                          *ngIf="admin" >Admin</span>{{' '+prenom_utilisateur + ' ' + nom_utilisateur }}&nbsp;|&nbsp;
     </li>
     <li class="nav-item cursor-pointer" (click)="deconnexion()">
       Déconnexion <i class="fa fa-power-off" aria-hidden="true"></i>
     </li>
   </ul>
 </nav>
+<app-menu></app-menu>
