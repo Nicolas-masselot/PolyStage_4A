@@ -13,6 +13,7 @@ export class AuthService
   authAs: string = ""; // eleve, enseignant ou tuteur
   prenom: string = "";
   nom: string = "";
+  admin: boolean = false;
 
   constructor(@Inject(MessageService) private service: MessageService)
   {}
@@ -35,11 +36,21 @@ export class AuthService
     this.authAs = message[0]["role"];
     this.nom = message[0]["nom"];
     this.prenom = message[0]["prenom"];
+    this.admin = message[0]["admin"] ;
   }
 
   isAuthenticated(): boolean
   {
     return this.authenticated;
+  }
+
+  logout():void{
+    this.authenticated = false;
+
+    this.authAs =  '';
+    this.nom = '';
+    this.prenom = '';
+    this.admin = false;
   }
 
 }

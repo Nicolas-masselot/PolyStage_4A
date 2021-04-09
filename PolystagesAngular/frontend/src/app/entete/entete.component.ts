@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthService} from "../auth/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-entete',
@@ -12,17 +14,22 @@ export class EnteteComponent implements OnInit {
   admin : boolean | undefined ;
   connected: boolean | undefined ;
 
-  constructor() { }
-
-  ngOnInit(): void {
-    this.nom_utilisateur = "insérer un nom ici" ;
-    this.prenom_utilisateur = "insérer un prénom ici" ; // initialiser si l'utilisateur est connecté
-    this.admin = false ;
-    this.connected = true ;
+  constructor(private authservice: AuthService, private router: Router) {
+    this.router.events.subscribe((ev) => {
+      this.connected = this.authservice.isAuthenticated() ;
+      if(this.connected){
+        this.nom_utilisateur = this.authservice.nom ;
+        this.prenom_utilisateur = this.authservice.prenom;
+        this.admin = this.authservice.admin ;
+      }
+    });
   }
 
+  ngOnInit(): void {}
+
   deconnexion() : void {
-    console.log("déconnexion") ;
+    this.authservice.logout() ;
+    this.router.navigateByUrl("/") ;
   }
 
   afficher_menu() : void {

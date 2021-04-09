@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 
 
 const cors = require ('cors');
-app.use(cors({origin: 'http://127.0.0.1:4200', credentials: true}));
+app.use(cors({origin: 'http://localhost:4200', credentials: true}));
 
 
 /*
