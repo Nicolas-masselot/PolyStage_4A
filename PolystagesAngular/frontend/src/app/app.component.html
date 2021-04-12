@@ -1,2 +1,27 @@
-<app-entete></app-entete>
-<router-outlet></router-outlet>
+<div class="conteneurAppli" [class.appli-is-mobile]="mobileQuery.matches">
+  <mat-toolbar color="primary" class="entetebar">
+    <button mat-icon-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
+    <span class="text-uppercase">Polystage</span>
+    <span class="spacer"></span>
+    <app-entete></app-entete>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="conteneurAppliSideNav">
+    <mat-sidenav #sidenav [mode]="mobileQuery.matches ? 'over' : 'side'"
+                 [fixedInViewport]="mobileQuery.matches" fixedTopGap="56" class="menu_appli">
+      <mat-nav-list>
+        <app-menu></app-menu>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+
+  </mat-sidenav-container>
+
+</div>
+
+
+
+

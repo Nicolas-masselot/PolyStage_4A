@@ -1,45 +1,36 @@
-<div id="menu_content" class="side-nav sn-bg-4 fixed">
-  <ul class="custom-scrollbar">
-    <li>
-      <div class="logo-wrapper waves-effect">
-        <a href="/" class="logo-polytech"><img src="assets/img/polytech.png"
-                                                 class="img-fluid flex-center" alt=""></a>
-      </div>
-    </li>
-    <li class="menu">
-      <ul class="collapsible collapsible-accordion mt-0">
-        <li *ngIf="displayAccueil">
-          <a class="collapsible-header waves-effect arrow-r" href="/home">
-            <i class="fa fa-home text-primary"></i> &nbsp; Accueil
-          </a>
-        </li>
-        <li *ngIf="displayAdministration">
-          <a class="collapsible-header waves-effect arrow-r" href="/admin">
-            <i class="fa fa-cogs text-primary"></i> &nbsp;Administration
-          </a>
-        </li>
-        <li *ngIf="displayAjoutStage">
-          <a class="collapsible-header waves-effect arrow-r" href="/ajouterStage">
-            <i class="fa fa-plus-square-o text-primary"></i> &nbsp; Ajouter des stages
-          </a>
-        </li>
-        <li *ngIf="displayRechercheStage">
-          <a class="collapsible-header waves-effect arrow-r" href="/rechercherStage">
-            <i class="fa fa-search text-primary"></i> &nbsp;Rechercher un stage
-          </a>
-        </li>
-        <li *ngIf="displayStatistiques">
-          <a class="collapsible-header waves-effect arrow-r" href="/statistique">
-            <i class="fa fa-bar-chart text-primary"></i> &nbsp;Statistiques
-          </a>
-        </li>
-      </ul>
-    </li>
-  </ul>
-  <div class="sidenav-bg mask-light"></div>
-</div>
-
-
-
+<mat-list-item>
+    <a href="#!/" class="logo-polytech"><img src="assets/img/polytech.png"
+                                             class="img-fluid flex-center"></a>
+</mat-list-item>
+<mat-divider></mat-divider>
+<mat-list-item *ngIf="displayAccueil">
+  <a class="collapsible-header waves-effect arrow-r" href="/home">
+    <i class="fa fa-home text-primary"></i> &nbsp; Accueil
+  </a>
+</mat-list-item>
+<mat-divider></mat-divider>
+<mat-list-item *ngIf="displayAdministration">
+  <a class="collapsible-header waves-effect arrow-r" href="/admin">
+    <i class="fa fa-cogs text-primary"></i> &nbsp;Administration
+  </a>
+</mat-list-item>
+<mat-divider></mat-divider>
+<mat-list-item *ngIf="displayAjoutStage">
+  <a class="collapsible-header waves-effect arrow-r" href="/ajouterStage">
+    <i class="fa fa-plus-square-o text-primary"></i> &nbsp; Ajouter des stages
+  </a>
+</mat-list-item>
+<mat-divider></mat-divider>
+<mat-list-item *ngIf="displayRechercheStage">
+  <a class="collapsible-header waves-effect arrow-r" href="/rechercherStage">
+    <i class="fa fa-search text-primary"></i> &nbsp;Rechercher un stage
+  </a>
+</mat-list-item>
+<mat-divider></mat-divider>
+<mat-list-item *ngIf="displayStatistiques">
+  <a class="collapsible-header waves-effect arrow-r" href="/statistique">
+    <i class="fa fa-bar-chart text-primary"></i> &nbsp;Statistiques
+  </a>
+</mat-list-item>
 
 

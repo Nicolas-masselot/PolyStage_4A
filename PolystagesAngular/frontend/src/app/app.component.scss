@@ -1,0 +1,32 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+.conteneurAppli{
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.conteneurAppliSideNav {
+  flex: 1;
+}
+
+.menu_appli{
+  background-color: darkgray;
+  width: 20%;
+}
+
+.appli-is-mobile .conteneurAppliSideNav {
+  flex: 1 0 auto;
+}
+
+.entetebar {
+  position: fixed;
+  z-index: 2;
+  box-shadow: 1px 5px 5px grey;
+}
