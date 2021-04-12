@@ -1,4 +1,53 @@
-<main>
-  <p>enseignant works!</p>
-</main>
 
+<h1 class="mt-2">Accueil</h1>
+
+<button ng-if="$root.role == 'enseignant' && stages.length != 0" ng-click="lancerAllEvaluation()" class="btn btn-outline-primary mx-0" ng-disabled="isAllEvaluated==true" >
+  Lancer toutes les évaluations
+</button>
+<div class="row">
+  <h4 ng-if="stages.length == 0" class="col-12">
+    Il n'y a aucun stage à afficher
+  </h4>
+  <div class="col-md-6  " ng-repeat="stage in stages">
+    <div class="card  mb-3 ">
+      <div class="card-header custom-color-card  text-center">
+        {{ stage.prenom + ' ' + stage.nom }}
+      </div>
+      <div class="card-body text-center">
+        <h5 class="card-title">{{ stage.titrestage }}</h5>
+        <p class="card-text mb-1">{{ stage.nomcomplet }}</p>
+        <div class="text-center">
+          <button
+            ng-click="lancerEvaluation(stage.idstage, stage.idtuteur, stage.nom, stage.prenom)"
+            class="btn btn-outline-primary mx-0"
+            ng-disabled="stage.evallancee || !stage.idtuteur"
+          >
+            Lancer évaluation
+          </button>
+        </div>
+        <div class="text-center" ng-if="stage.dateeval">
+          <!-- TODO : fixe ng-href
+          <a
+            ng-href="{{stage.chemineval}}"
+            target="_blank"
+            class="btn btn-outline-primary mx-0"
+          >Visualiser l'évaluation</a
+          -->
+          >
+        </div>
+        <p class="text-center text-danger mb-0" ng-if="!stage.idtuteur">
+          L'élève n'a toujours pas renseigné de tuteur
+        </p>
+        <p class="text-center text-primary mb-0" ng-if="stage.evallancee">
+          L'évaluation a été lancée <span am-time-ago="stage.evallancee"></span>
+        </p>
+      </div>
+      <div class="card-footer custom-color-card text-center">
+        <!-- TODO : fixe amDateFormat
+        {{ stage.datedebut | amDateFormat:'DD/MM/YYYY' }} - {{ stage.datefin |
+        amDateFormat:'DD/MM/YYYY' }}
+        -->
+      </div>
+    </div>
+  </div>
+</div>

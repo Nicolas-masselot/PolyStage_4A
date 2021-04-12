@@ -15,6 +15,10 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { EleveComponent } from './eleve/eleve.component';
 import { EnseignantComponent } from './enseignant/enseignant.component';
 import { TuteurComponent } from './tuteur/tuteur.component';
+import { AdministrationComponent } from './administration/administration.component';
+import { AjouterStageComponent } from './ajouter-stage/ajouter-stage.component';
+import { RechercherStageComponent } from './rechercher-stage/rechercher-stage.component';
+import { StatistiquesComponent } from './statistiques/statistiques.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +29,11 @@ import { TuteurComponent } from './tuteur/tuteur.component';
     RegisterComponent,
     EleveComponent,
     EnseignantComponent,
-    TuteurComponent
+    TuteurComponent,
+    AdministrationComponent,
+    AjouterStageComponent,
+    RechercherStageComponent,
+    StatistiquesComponent
   ],
   imports: [
     BrowserModule,

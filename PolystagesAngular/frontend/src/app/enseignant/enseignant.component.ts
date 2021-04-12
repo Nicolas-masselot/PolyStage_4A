@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {Stage} from "../dataTemplate/Stage";
+import {HttpClient} from "@angular/common/http";
+import {MessageService} from "../message/message.service";
 
 @Component({
   selector: 'app-enseignant',
@@ -7,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EnseignantComponent implements OnInit {
 
-  constructor() { }
+  stages: Stage[] = [];
+  stage: Stage = {"nom": "", "prenom": "", "titrestage": "", "nomcomplet": "", "chemineval": "", "datedebut": "", "datefin": ""};
 
-  ngOnInit(): void {
+  constructor() {}
+
+  ngOnInit(): void
+  {
+
   }
 
 }
