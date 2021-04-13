@@ -24,6 +24,7 @@ import { EnseignantComponent } from './enseignant/enseignant.component';
 import { TuteurComponent } from './tuteur/tuteur.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatRippleModule} from "@angular/material/core";
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import {MatToolbarModule} from "@angular/material/toolbar";
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatRippleModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -16,9 +16,18 @@
   flex: 1;
 }
 
+::ng-deep .mat-sidenav-backdrop.mat-sidenav-shown {
+  background-color: black;
+  opacity: 40%;
+}
+
 .menu_appli{
-  background-color: darkgray;
   width: 20%;
+  background: linear-gradient(
+          rgba(249, 249, 249, 0.85),
+          rgba(249, 249, 249, 0.85)
+  ),url("/assets/img/sidenav.jpg");
+
 }
 
 .appli-is-mobile .conteneurAppliSideNav {
