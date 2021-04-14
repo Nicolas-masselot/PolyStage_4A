@@ -1,6 +1,6 @@
 <div class="conteneurAppli" [class.appli-is-mobile]="mobileQuery.matches">
 
-  <mat-sidenav-container class="conteneurAppliSideNav" [hasBackdrop]="true">
+  <mat-sidenav-container class="conteneurAppliSideNav" [hasBackdrop]="mobileQuery.matches">
     <mat-sidenav #sidenav [mode]="'over'" [opened]="!mobileQuery.matches"
                  [fixedInViewport]="mobileQuery.matches" class="menu_appli">
         <app-menu></app-menu>

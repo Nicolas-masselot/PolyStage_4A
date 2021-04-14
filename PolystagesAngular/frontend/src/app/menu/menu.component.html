@@ -1,32 +1,30 @@
 <mat-nav-list >
-  <mat-list-item>
-    <div class="logo-polytech">
-      <a href="#"><img src="assets/img/polytech.png"
+  <mat-list-item mdbWavesEffect>
+      <a href="#" class="logo-polytech"><img src="assets/img/polytech.png"
                         class="img-fluid flex-center"></a>
-    </div>
   </mat-list-item>
   <mat-divider class="logo_bottom"></mat-divider>
-  <mat-list-item *ngIf="displayAccueil">
+  <mat-list-item *ngIf="displayAccueil" mdbWavesEffect>
       <a mat-flat-button class="collapsible-header waves-effect arrow-r" href="/home">
         <i class="fa fa-home text-primary"></i> &nbsp;Accueil
       </a>
   </mat-list-item>
-  <mat-list-item *ngIf="displayAdministration">
+  <mat-list-item *ngIf="displayAdministration" mdbWavesEffect>
     <a mat-flat-button class="collapsible-header waves-effect arrow-r" href="/admin">
       <i class="fa fa-cogs text-primary"></i> &nbsp;Administration
     </a>
   </mat-list-item>
-  <mat-list-item *ngIf="displayAjoutStage">
+  <mat-list-item *ngIf="displayAjoutStage" mdbWavesEffect>
     <a mat-flat-button class="collapsible-header waves-effect arrow-r" href="/ajouterStage">
       <i class="fa fa-plus-square text-primary"></i> &nbsp; Ajouter des stages
     </a>
   </mat-list-item>
-  <mat-list-item *ngIf="displayRechercheStage">
+  <mat-list-item *ngIf="displayRechercheStage" mdbWavesEffect>
     <a mat-flat-button class="collapsible-header waves-effect arrow-r" href="/rechercherStage">
       <i class="fa fa-search text-primary"></i> &nbsp;Rechercher un stage
     </a>
   </mat-list-item>
-  <mat-list-item *ngIf="displayStatistiques">
+  <mat-list-item *ngIf="displayStatistiques" mdbWavesEffect>
     <a mat-flat-button class="collapsible-header waves-effect arrow-r" href="/statistique">
       <i class="fas fa-chart-bar text-primary"></i> &nbsp;Statistiques
     </a>
