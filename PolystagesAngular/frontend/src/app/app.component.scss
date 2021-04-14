@@ -16,11 +16,6 @@
   flex: 1;
 }
 
-::ng-deep .mat-sidenav-backdrop.mat-sidenav-shown {
-  background-color: black;
-  opacity: 40%;
-}
-
 .menu_appli{
   width: 20%;
   background: linear-gradient(
@@ -36,6 +31,6 @@
 
 .entetebar {
   position: fixed;
-  z-index: 2;
+  z-index: 1000;
   box-shadow: 1px 5px 5px grey;
 }
