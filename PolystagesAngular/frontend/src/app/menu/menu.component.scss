@@ -1,11 +1,15 @@
-#menu_content{
-  width: 25%;
+.logo-polytech {
+  height: inherit;
+  width: inherit;
+  margin: 10%;
+  outline: none;
 }
 
+.logo_bottom {
+  margin-top: 20px;
+}
 
-
-
-
-
-
+mat-list-item {
+  position: relative;
+}
 

@@ -21,6 +21,7 @@ export class EnteteComponent implements OnInit {
         this.nom_utilisateur = this.authservice.nom ;
         this.prenom_utilisateur = this.authservice.prenom;
         this.admin = this.authservice.admin ;
+      } else {
       }
     });
   }
@@ -29,11 +30,8 @@ export class EnteteComponent implements OnInit {
 
   deconnexion() : void {
     this.authservice.logout() ;
-    this.router.navigateByUrl("/") ;
+    this.router.navigateByUrl("/").then() ;
   }
 
-  afficher_menu() : void {
-    console.log("affichage menu") ;
-  }
 
 }
