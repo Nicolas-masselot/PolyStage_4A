@@ -12,11 +12,11 @@
             <div class="card-body px-lg-5">
               <form class="text-center" ng-submit="connexion(identifiant, password)" name="login" novalidate>
                 <div class="md-form">
-                  <input type="text" id="identifiantForm" class="form-control" [(ngModel)]="identifiant" [ngModelOptions]="{standalone: true}">
+                  <input type="text" id="identifiantForm" class="form-control" [(ngModel)]="identifiant" [ngModelOptions]="{standalone: true}" mdbInput>
                   <label for="identifiantForm">Identifiant</label>
                 </div>
                 <div class="md-form">
-                  <input type="password" id="passwordForm" class="form-control" [(ngModel)]="password" [ngModelOptions]="{standalone: true}">
+                  <input type="password" id="passwordForm" class="form-control" [(ngModel)]="password" [ngModelOptions]="{standalone: true}" mdbInput>
                   <label for="passwordForm">Mot de passe</label>
                 </div>
                 <p class="d-none">Vous n’avez pas de compte ? <a href="/register">Inscrivez-vous</a></p>
