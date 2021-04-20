@@ -36,6 +36,11 @@ export class MenuComponent implements OnInit {
 
   }
 
+  navigate(chemin: string)
+  {
+      this.router.navigateByUrl(chemin);
+  }
+
   ngOnInit(): void
   {}
 

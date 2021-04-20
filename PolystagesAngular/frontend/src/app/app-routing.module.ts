@@ -18,6 +18,27 @@ const routes: Routes =  [
   {path: "", pathMatch: "full", redirectTo: "login"},
   {path: "login", component: LoginComponent},
   {path: "register", component: RegisterComponent},
+  {path: "enseignant", component: EnseignantComponent},
+  {path: "administration", component: AdministrationComponent},
+  {path: "ajouterStage", component: AjouterStageComponent},
+  {path: "rechercherStage", component: RechercherStageComponent},
+  {path: "statistiques", component: StatistiquesComponent},
+  {path: "", canActivateChild: [AuthEleveGuard], children: [
+      {path: "eleve", component: EleveComponent}
+    ]},
+  {path: "", canActivateChild: [AuthEnseignantGuard], children: [
+
+    ]},
+  {path: "", canActivateChild: [AuthTuteurGuard], children: [
+      {path: "tuteur", component: TuteurComponent}
+    ]},
+];
+
+/*
+const routes: Routes =  [
+  {path: "", pathMatch: "full", redirectTo: "login"},
+  {path: "login", component: LoginComponent},
+  {path: "register", component: RegisterComponent},
   {path: "", canActivateChild: [AuthEleveGuard], children: [
       {path: "eleve", component: EleveComponent}
     ]},
@@ -32,6 +53,7 @@ const routes: Routes =  [
       {path: "tuteur", component: TuteurComponent}
     ]},
 ];
+*/
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

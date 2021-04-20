@@ -10,27 +10,27 @@
     <li class="menu">
       <ul class="collapsible collapsible-accordion mt-0">
         <li *ngIf="displayAccueil">
-          <a class="collapsible-header waves-effect arrow-r" href="/home">
+          <a class="collapsible-header waves-effect arrow-r" href="" (click)="navigate('/home')">
             <i class="fa fa-home text-primary"></i> &nbsp; Accueil
           </a>
         </li>
         <li *ngIf="displayAdministration">
-          <a class="collapsible-header waves-effect arrow-r" href="/administration">
+          <a class="collapsible-header waves-effect arrow-r" href="" (click)="navigate('/administration')">
             <i class="fa fa-cogs text-primary"></i> &nbsp;Administration
           </a>
         </li>
         <li *ngIf="displayAjoutStage">
-          <a class="collapsible-header waves-effect arrow-r" href="/ajouterStage">
+          <a class="collapsible-header waves-effect arrow-r" href="" (click)="navigate('/ajouterStage')">
             <i class="fa fa-plus-square-o text-primary"></i> &nbsp; Ajouter des stages
           </a>
         </li>
         <li *ngIf="displayRechercheStage">
-          <a class="collapsible-header waves-effect arrow-r" href="/rechercherStage">
+          <a class="collapsible-header waves-effect arrow-r" href="" (click)="navigate('/rechercherStage')">
             <i class="fa fa-search text-primary"></i> &nbsp;Rechercher un stage
           </a>
         </li>
         <li *ngIf="displayStatistiques">
-          <a class="collapsible-header waves-effect arrow-r" href="/statistiques">
+          <a class="collapsible-header waves-effect arrow-r" href="" (click)="navigate('/statistiques')">
             <i class="fa fa-bar-chart text-primary"></i> &nbsp;Statistiques
           </a>
         </li>

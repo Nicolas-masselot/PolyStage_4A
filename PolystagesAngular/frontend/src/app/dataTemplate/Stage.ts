@@ -6,6 +6,7 @@ export interface Stage
   titrestage: string;
   nomcomplet: string;
   chemineval: string;
+  chemincomp: string;
   datedebut: string;
   datefin: string;
 }
