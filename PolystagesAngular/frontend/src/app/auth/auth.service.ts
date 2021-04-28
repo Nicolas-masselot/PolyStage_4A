@@ -39,17 +39,6 @@ export class AuthService
     this.admin = message[0]["admin"] ;
   }
 
-  keepAuthenticated(): Observable<any>
-  {
-    let data = {username: "nicolas.baudru@univ-amu.fr", password: sha512.create().update("prof").hex()};
-    let response = this.service.sendGetMessageQuery("authentification", data);
-    response.subscribe(
-      r => {this.finalizeAuthentication(r);},
-      error => {this.authenticated = false;}
-    );
-    return response;
-  }
-
   isAuthenticated(): boolean
   {
     return this.authenticated;
