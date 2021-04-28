@@ -20,7 +20,7 @@ export class AuthService
 
   sendAuthentication(login: string, password: string): Observable<any>
   {
-    let data = {username: login, password: sha512.create().update(password).hex()}; // TODO : sha512 le mot de passe
+    let data = {username: login, password: sha512.create().update(password).hex()};
     let response = this.service.sendGetMessageQuery("authentification", data);
     response.subscribe(
       r => {this.finalizeAuthentication(r);},

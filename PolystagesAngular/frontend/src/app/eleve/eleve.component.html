@@ -1,3 +1,131 @@
-<main>
-  <p>eleve works!</p>
-</main>
+<h1 class="mt-2">Accueil</h1>
+<div class="row">
+  <div class="col-md-6 mb-4" ng-if="currentStage.length == 0">
+    <div
+      class="card grey lighten-2 h-100 mh-card card-ajouter-stage hoverable mouse-cursor"
+      ng-click="ajouterUnStage()"
+    >
+      <div
+        class="text-white text-center d-flex align-items-center rgba-black-light h-100"
+      >
+        <div class="mx-auto">
+          <h3 class="card-title pt-2 mb-0">
+            <strong>Ajouter un stage</strong>
+          </h3>
+          <a class="btn-floating btn-lg primary-color"
+          ><i class="fa fa-plus"></i
+          ></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 mb-4" ng-repeat="stage in stages">
+    <div
+      class="card h-100"
+      ng-class="{'card-disabled': $root.annee != stage.annee}"
+    >
+      <div class="" ng-init="myRandomImg = random()">
+        <img
+          class="card-img-top"
+          src="assets/img/stage-{{myRandomImg}}.jpg"
+          alt="Card image cap"
+        />
+        <a>
+          <div class="mask rgba-white-slight"></div>
+        </a>
+      </div>
+      <a
+        class="btn-floating btn-action ml-auto mr-4 primary-color"
+        href="#!/modifier/stage/{{stage.idstage}}"
+      ><i class="fa fa-edit pl-1"></i
+      ></a>
+      <div class="card-body">
+        <p class="mb-0 card-text">
+          Annee {{ stage.annee }} - {{ stage.niveau }}A
+        </p>
+        <h4 class="card-title mb-0">{{ stage.titrestage }}</h4>
+        <p class="mb-0 card-text">{{ stage.nomcomplet }}</p>
+        <hr />
+        <p class="card-text">{{ stage.description }}</p>
+        <div class="row">
+          <div class="col-md-6 mb-2">
+            <div class="file-field">
+              <div
+                class="btn btn-outline-primary w-100 m-0 py-1 px-2 h-100 waves-effect uploadRapport"
+              >
+                <!-- Ajouter la possibilité de retélécharger un autre stage -->
+                <span ng-if="stage.cheminrapport == null"
+                >Télécharger rapport</span
+                >
+                <span ng-if="stage.cheminrapport != null"
+                >ReTélécharger rapport</span
+                >
+                <input
+                  type="file"
+                  ng-model="rapportFile"
+                  ngf-select="uploadRapport(rapportFile, $root.annee, $root.niveau, $root.nom, $root.prenom, stage.idstage, $root.email)"
+                  name="file"
+                  accept=".pdf"
+                />
+              </div>
+              <a
+                href="{{ stage.cheminrapport }}"
+                class="btn btn-outline-primary w-100 m-0 py-1 px-2 h-100 waves-effect"
+                target="_blank"
+                ng-if="stage.cheminrapport != null"
+              >Visualiser rapport
+              </a>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="file-field">
+              <div
+                class="btn btn-outline-primary w-100 m-0 py-1 px-2 h-100 waves-effect uploadPres"
+              >
+                <span ng-if="stage.cheminpres == null"
+                >Télécharger présentation</span
+                >
+                <span ng-if="stage.cheminpres != null"
+                >ReTélécharger présentation</span
+                >
+                <input
+                  type="file"
+                  ng-model="presFile"
+                  ngf-select="uploadPres(presFile, $root.annee, $root.niveau, $root.nom, $root.prenom, stage.idstage, $root.email)"
+                  name="file"
+                  accept=".pdf, .pptx"
+                />
+              </div>
+              <a
+                href="{{ stage.cheminpres }}"
+                class="btn btn-outline-primary w-100 m-0 py-1 px-2 h-100 waves-effect"
+                target="_blank"
+                ng-if="stage.cheminpres != null"
+              >Visualiser présentation
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="rounded-bottom primary-color text-center">
+        <ul class="list-unstyled list-inline font-small mb-0 py-2">
+          <li class="list-inline-item pr-2 white-text">
+            <!-- TODO : fixe amDateFormat
+            <i class="far fa-clock pr-1"></i>{{ stage.datedebut |
+            amDateFormat:'DD/MM/YYYY' }}
+            -->
+          </li>
+          <li class="list-inline-item pr-2 white-text">
+            <i class="far fa-clock pr-1"></i>-
+          </li>
+          <li class="list-inline-item pr-2 white-text">
+            <!-- TODO : fixe amDateFormat
+            <i class="far fa-clock pr-1"></i>{{ stage.datefin |
+            amDateFormat:'DD/MM/YYYY' }}
+            -->
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

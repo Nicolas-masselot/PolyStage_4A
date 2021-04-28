@@ -1,3 +1,66 @@
-<main>
-  <p>tuteur works!</p>
-</main>
+<h1 class="mt-2">Accueil</h1>
+<div class="row" ng-if="$root.role == 'tuteur'">
+  <div class="col-md-12 mb-2" ng-repeat="stage in stages">
+    <div class="card w-100">
+      <div class="card-header custom-color-card text-center">
+        {{ stage.prenom + ' ' + stage.nom }}
+      </div>
+      <div class="card-body text-center">
+        <h5 class="card-title">{{ stage.titrestage }}</h5>
+        <p class="card-text mb-1">{{ stage.nomcomplet }}</p>
+        <div class="text-center">
+          <button
+            ng-click="evaluer(stage.idstage)"
+            class="btn btn-outline-primary mx-0"
+            ng-disabled="stage.dateeval"
+          >
+            Évaluer le stage
+          </button>
+          <button
+            ng-click="evaluerCompetences(stage.idstage)"
+            class="btn btn-outline-primary mx-0"
+            ng-disabled="stage.datecomp"
+          >
+            Évaluer les compétences
+          </button>
+        </div>
+        <div class="text-center">
+          <a
+            href="{{stage.chemineval}}"
+            ng-if="stage.dateeval"
+            target="_blank"
+            class="btn btn-outline-primary mx-0"
+          >Visualiser l'évaluation du stage</a
+          >
+          <a
+            href="{{stage.chemincomp}}"
+            ng-if="stage.datecomp"
+            target="_blank"
+            class="btn btn-outline-primary mx-0"
+          >Visualiser l'évaluation des compétences</a
+          >
+        </div>
+        <p
+          class="text-center text-primary mb-0"
+          ng-if="!stage.dateeval || !stage.datecomp"
+        >
+          L' évaluation est disponible
+        </p>
+        <p class="text-center text-primary mb-0" ng-if="stage.dateeval">
+          L'évaluation du stage a été faite
+          <span am-time-ago="stage.dateeval"></span>
+        </p>
+        <p class="text-center text-primary mb-0" ng-if="stage.datecomp">
+          L'évaluation des compétences a été faite
+          <span am-time-ago="stage.datecomp"></span>
+        </p>
+      </div>
+      <!-- TODO : fixe amDateFormat
+      <div class="card-footer text-center">
+        {{ stage.datedebut | amDateFormat:'DD/MM/YYYY' }} - {{ stage.datefin |
+        amDateFormat:'DD/MM/YYYY' }}
+      </div>
+      -->
+    </div>
+  </div>
+</div>

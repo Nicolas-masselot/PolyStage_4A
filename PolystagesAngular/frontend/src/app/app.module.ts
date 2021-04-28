@@ -22,6 +22,10 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { EleveComponent } from './eleve/eleve.component';
 import { EnseignantComponent } from './enseignant/enseignant.component';
 import { TuteurComponent } from './tuteur/tuteur.component';
+import { AdministrationComponent } from './administration/administration.component';
+import { AjouterStageComponent } from './ajouter-stage/ajouter-stage.component';
+import { RechercherStageComponent } from './rechercher-stage/rechercher-stage.component';
+import { StatistiquesComponent } from './statistiques/statistiques.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatRippleModule} from "@angular/material/core";
@@ -35,7 +39,11 @@ import {MatRippleModule} from "@angular/material/core";
     RegisterComponent,
     EleveComponent,
     EnseignantComponent,
-    TuteurComponent
+    TuteurComponent,
+    AdministrationComponent,
+    AjouterStageComponent,
+    RechercherStageComponent,
+    StatistiquesComponent
   ],
   imports: [
     BrowserModule,
