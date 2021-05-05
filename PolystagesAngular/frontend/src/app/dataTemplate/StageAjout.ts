@@ -11,4 +11,3 @@ export interface StageAjout
   Datedefin: string;
 }
 
-
