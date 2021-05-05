@@ -1,3 +1,4 @@
+
 export interface StageEleve
 {
   idstage: number;

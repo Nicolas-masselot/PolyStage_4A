@@ -8,7 +8,7 @@
   <h4 ng-if="stages.length == 0" class="col-12">
     Il n'y a aucun stage à afficher
   </h4>
-  <div class="col-md-6  " ng-repeat="stage in stages">
+  <div class="col-md-6  " *ngFor="let stage of stages">
     <div class="card  mb-3 ">
       <div class="card-header custom-color-card  text-center">
         {{ stage.prenom + ' ' + stage.nom }}

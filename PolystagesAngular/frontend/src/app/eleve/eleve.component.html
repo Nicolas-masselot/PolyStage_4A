@@ -19,7 +19,7 @@
       </div>
     </div>
   </div>
-  <div class="col-md-6 mb-4" ng-repeat="stage in stages">
+  <div class="col-md-6 mb-4" *ngFor="let stage of stages">
     <div
       class="card h-100"
       ng-class="{'card-disabled': $root.annee != stage.annee}"

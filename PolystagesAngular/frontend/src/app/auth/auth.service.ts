@@ -14,6 +14,7 @@ export class AuthService
   prenom: string = "";
   nom: string = "";
   admin: boolean = false;
+  id: number = 0;
 
   constructor(@Inject(MessageService) private service: MessageService)
   {}
@@ -37,6 +38,9 @@ export class AuthService
     this.nom = message[0]["nom"];
     this.prenom = message[0]["prenom"];
     this.admin = message[0]["admin"] ;
+    if (this.authAs == "eleve") this.id = message[0]["ideleve"];
+    else if (this.authAs == "enseignant") this.id = message[0]["idens"];
+    else if (this.authAs == "tuteur") this.id = message[0]["idtuteur"];
   }
 
   isAuthenticated(): boolean
