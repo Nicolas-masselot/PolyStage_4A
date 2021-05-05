@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {StageEleve} from "../dataTemplate/StageEleve";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-eleve',
@@ -13,9 +14,12 @@ export class EleveComponent implements OnInit {
 
   myRandomImg: string = "0"; // 0-10
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
+  AjouterStage(): void {
+      this.router.navigate(['/form-stage']) ;
+  }
 }

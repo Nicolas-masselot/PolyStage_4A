@@ -9,6 +9,7 @@ import {sha512} from "js-sha512";
 export class AuthService
 {
 
+  IdUtilisateur: number = 0 ;
   authenticated: boolean = false;
   authAs: string = ""; // eleve, enseignant ou tuteur
   prenom: string = "";
@@ -37,6 +38,13 @@ export class AuthService
     this.nom = message[0]["nom"];
     this.prenom = message[0]["prenom"];
     this.admin = message[0]["admin"] ;
+    if (this.authAs == 'eleve'){
+      this.IdUtilisateur = message[0]["ideleve"] ;
+    }else if (this.authAs == 'tuteur'){
+      this.IdUtilisateur = message[0]["idtuteur"] ;
+    }else if (this.authAs == 'enseignant'){
+      this.IdUtilisateur = message[0]["idens"] ;
+    }
   }
 
   isAuthenticated(): boolean

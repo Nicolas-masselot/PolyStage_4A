@@ -29,6 +29,8 @@ import { StatistiquesComponent } from './statistiques/statistiques.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatRippleModule} from "@angular/material/core";
+import { FormStageComponent } from './form-stage/form-stage.component';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,8 @@ import {MatRippleModule} from "@angular/material/core";
     AdministrationComponent,
     AjouterStageComponent,
     RechercherStageComponent,
-    StatistiquesComponent
+    StatistiquesComponent,
+    FormStageComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +61,8 @@ import {MatRippleModule} from "@angular/material/core";
     MatIconModule,
     MatListModule,
     MatToolbarModule,
-    MatRippleModule
+    MatRippleModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,9 +1,9 @@
-<h1 class="mt-2">Accueil</h1>
+<h1 id="titrePage">Accueil</h1>
 <div class="row">
   <div class="col-md-6 mb-4" ng-if="currentStage.length == 0">
     <div
       class="card grey lighten-2 h-100 mh-card card-ajouter-stage hoverable mouse-cursor"
-      ng-click="ajouterUnStage()"
+      (click)="AjouterStage()"
     >
       <div
         class="text-white text-center d-flex align-items-center rgba-black-light h-100"
