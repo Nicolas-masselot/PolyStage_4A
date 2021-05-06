@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from "../auth/auth.service";
-import {MessageService} from "../message/message.service";
-import {Data} from "../message/message.service";
+import {Data, MessageService} from "../message/message.service";
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-form-stage',
@@ -16,14 +16,35 @@ export class FormStageComponent implements OnInit {
   annee: string | undefined ;
   enseignants: any[] | undefined ;
   entreprises: any[] | undefined ;
-  constructor(private authservice: AuthService,private messageservice: MessageService) { }
+  etudiant: any;
+
+  formulaireAjout = this.formbuilder.group({
+    idenseignant : '', // id valeur dans le select
+    nomtuteur : '',
+    prenomtuteur : '',
+    emailtuteur : '',
+    identreprise : '', // id valeur dans le select
+    adresseentreprise : '',
+    titrestage : '',
+    descriptionstage : '',
+    emailstage : '',
+    debutstage : '',
+    finstage : '',
+    ville : '',
+    pays : ''
+
+  });
+
+  constructor(private authservice: AuthService,private messageservice: MessageService, private formbuilder: FormBuilder) { }
 
   ngOnInit(): void {
     if (this.authservice.authAs == 'eleve'){
       this.Role = this.authservice.authAs ;
       this.messageservice.sendGetMessagebyID('eleves/',this.authservice.IdUtilisateur).subscribe(
         response=> { // @ts-ignore
-          this.annee = response[0].niveau ; }
+          this.annee = response[0].niveau ;
+          this.etudiant = response ;
+        }
       )
 
       this.messageservice.sendGetMessageQuery('enseignants/',{}).subscribe(
@@ -37,6 +58,10 @@ export class FormStageComponent implements OnInit {
 
   }
 
-  // TODO modal pour entreprises
-  // TODO submit du formulaire
+  ajouterStage(): void {
+      console.log(this.formulaireAjout.value) ;
+      this.formulaireAjout.reset() ;
+  }
+
+  //TODO refaire la page de 0 en recopiant les input uns par un les select sont normaux
 }

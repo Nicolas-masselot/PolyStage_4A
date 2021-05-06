@@ -1,127 +1,20 @@
-<div *ngIf="Role == 'tuteur'">
-  <h1 class="mt-2">Evaluation du stage de e année</h1>
-  <p>Ce questionnaire permet d'évaluer la posture du stagiaire de Polytech Marseille dans l'entreprise et les
-    compétences
-    apportées par la formation. <strong>Il doit être complété et retourné au plus tard le 1er septembre</strong>.
-  </p>
-<!--  <form name="formtuteur" novalidate>
-    <h4>{{ categorie1.title }}</h4>
-    <div class="md-form" ng-repeat="question in categorie1.questions" ng-if="question.question">
-      <input type="text" id="{{question}}" class="form-control">
-      <label for="{{question}}">{{ question.question }}</label>
-    </div>
-  </form> *ngIf="Role == 'eleve'" -->
-</div>
-
-<div>
-  <h1 class="mt-2">Enregistrement du stage de {{ annee }}e année</h1>
-  <form ng-submit="createStage($root.idEleve, $root.nom, $root.prenom, $root.annee, $root.niveau, idenseignant, nomtuteur, prenomtuteur, emailtuteur, identreprise,
-    adresseentreprise, titrestage, descriptionstage, emailstage, debutstage, finstage, ville, pays)" name="formeleve" novalidate>
-    <h3 class="title-form">Stagiaire</h3>
-    <div class="md-form my-3">
-      <input type="text" id="nomstagiaire" class="form-control" ng-model="$root.nom" disabled>
-      <label for="nomstagiaire" class="active">Nom</label>
-    </div>
-    <div class="md-form my-3">
-      <input type="text" id="prenomstagiaire" class="form-control" ng-model="$root.prenom" disabled>
-      <label for="prenomstagiaire" class="active">Prénom</label>
-    </div>
-
-    <h3 class="mt-4 title-form">Tuteur enseignant</h3>
-      <mat-form-field>
-        <mat-select placeholder="Nom" class="selections" >
-          <mat-option  *ngFor="let ens of enseignants" value="{{ ens.idens }}">{{ ens.prenom + ' ' + ens.nom }}</mat-option>
-        </mat-select>
-      </mat-form-field>
-
-    <h3 class="mt-4 title-form">Tuteur entreprise</h3>
-    <div class="md-form my-3">
-      <input type="text" id="nomtuteur" class="form-control" ng-model="nomtuteur">
-      <label for="nomtuteur">Nom</label>
-    </div>
-    <div class="md-form my-3">
-      <input type="text" id="prenomtuteur" class="form-control" ng-model="prenomtuteur">
-      <label for="prenomtuteur">Prénom</label>
-    </div>
-    <div class="md-form my-3">
-      <input type="email" id="emailtuteur" class="form-control" ng-model="emailtuteur">
-      <label for="emailtuteur">Email</label>
-    </div>
-
-    <h3 class="mt-4 title-form">Entreprise</h3>
-    <div class="md-form my-3">
-      <label class="mdb-main-label" ng-class="{'active': identreprise}">Nom <span
-        class="text-danger">*</span></label>
-      <mat-form-field [floatLabel]="'always'">
-        <mat-select placeholder="Nom" class="selections">
-          <mat-option  *ngFor="let ent of entreprises" value="{{ ent.identreprise}}">{{ ent.nomcomplet }}</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <p class="text-muted m-0 font-italic">Si votre entreprise n'apparaît pas dans la liste, <a
-        ng-click="modalAddEntreprise()"><span class="text-primary">cliquez ici</span></a></p>
-    </div>
-    <div class="md-form my-3">
-      <input type="text" id="adresseentreprise" class="form-control" ng-model="adresseentreprise">
-      <label for="adresseentreprise">Adresse</label>
-    </div>
-
-    <h3 class="mt-4 title-form">Stage</h3>
-    <div class="md-form my-3">
-      <input type="text" id="titrestage" class="form-control" ng-model="titrestage">
-      <label for="titrestage">Titre du stage <span class="text-danger">*</span></label>
-    </div>
-    <div class="md-form my-3">
-      <input type="text" id="descriptionstage" class="form-control" ng-model="descriptionstage">
-      <label for="descriptionstage">Description du stage</label>
-    </div>
-    <div class="md-form my-3">
-      <input type="email" id="emailstage" class="form-control" ng-model="emailstage">
-      <label for="emailstage">Email du stage</label>
-    </div>
-    <div class="md-form my-3">
-      <input placeholder="Selectionner la date" type="text" id="debutstage" class="form-control datepicker"
-             ng-model="debutstage">
-      <label for="debutstage" class="active">Début du stage <span class="text-danger">*</span></label>
-    </div>
-    <div class="md-form my-3">
-      <input placeholder="Selectionner la date" type="text" id="finstage" class="form-control datepicker"
-             ng-model="finstage">
-      <label for="finstage" class="active">Fin du stage <span class="text-danger">*</span></label>
-    </div>
-    <div class="md-form my-3">
-      <input type="text" id="ville" class="form-control" ng-model="ville">
-      <label for="ville">Ville du stage <span class="text-danger">*</span></label>
-    </div>
-    <div class="md-form my-3">
-      <input type="text" id="pays" class="form-control" ng-model="pays">
-      <label for="pays">Pays du stage <span class="text-danger">*</span></label>
-    </div>
-    <button type="submit" class="btn btn-primary float-right mx-0">Enregistrer mon stage</button>
-  </form>
-</div>
-
-<!-- Modal Add Entreprise -->
-<div class="modal fade" id="modalAddEntreprise" tabindex="-1" role="dialog" aria-labelledby="modalAddEntreprise"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content text-center">
-      <div class="modal-header d-flex justify-content-center primary-color">
-        <p class="heading text-white my-auto h5">Ajout d'entreprise</p>
-      </div>
-      <form ng-submit="addEntreprise(nouvelleentreprise)" novalidate>
-        <div class="modal-body my-auto">
-          <div class="md-form">
-            <input type="text" id="nouvelleentreprise" class="form-control text-uppercase"
-                   ng-model="nouvelleentreprise">
-            <label for="nouvelleentreprise">Nouvelle entreprise <span class="text-danger">*</span></label>
-          </div>
-        </div>
-        <div class="modal-footer flex-center">
-          <button class="btn btn-primary" type="submit">Ajouter</button>
-          <a type="button" class="btn btn-outline-primary waves-effect" data-dismiss="modal">Annuler</a>
-        </div>
-      </form>
-    </div>
+<form [formGroup]="formulaireAjout"  (ngSubmit)="ajouterStage()">
+  <h3 class="title-form">Stagiaire</h3>
+  <div class="md-form my-3">
+    <input type="text" id="nomstagiaire" class="form-control" value="{{etudiant[0].nom}}" disabled>
+    <label for="nomstagiaire" class="active">Nom</label>
   </div>
-</div>
-<!-- Fin Modal Add Entreprise -->
+  <div class="md-form my-3">
+    <input type="text" id="prenomstagiaire" class="form-control" value="{{etudiant[0].prenom}}" disabled>
+    <label for="prenomstagiaire" class="active">Prénom</label>
+  </div>
+
+  <h3 class="mt-4 title-form">Tuteur entreprise</h3>
+
+  <div class="md-form my-3">
+    <input type="text" id="nomtuteur" class="form-control" formControlName="nomtuteur" mdbInput>
+    <label for="nomtuteur" >Nom</label>
+  </div>
+  <button type="submit" class="btn btn-primary float-right mx-0">Enregistrer mon stage</button>
+
+</form>
