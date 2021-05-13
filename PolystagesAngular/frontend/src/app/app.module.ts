@@ -32,6 +32,7 @@ import {MatRippleModule} from "@angular/material/core";
 import { FormStageComponent } from './form-stage/form-stage.component';
 import {MatSelectModule} from '@angular/material/select';
 import { InputsModule } from 'angular-bootstrap-md'
+import {MdbModalModule} from "mdb-angular-ui-kit";
 
 @NgModule({
   declarations: [
@@ -48,6 +49,23 @@ import { InputsModule } from 'angular-bootstrap-md'
     RechercherStageComponent,
     StatistiquesComponent,
     FormStageComponent
+    StatistiquesComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
+    MDBBootstrapModule.forRoot(),
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule,
+    MatToolbarModule,
+    MatRippleModule,
+    MdbModalModule
   ],
     imports: [
         BrowserModule,

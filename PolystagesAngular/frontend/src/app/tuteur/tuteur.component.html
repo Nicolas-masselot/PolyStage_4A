@@ -1,6 +1,6 @@
 <h1 class="mt-2">Accueil</h1>
 <div class="row" ng-if="$root.role == 'tuteur'">
-  <div class="col-md-12 mb-2" ng-repeat="stage in stages">
+  <div class="col-md-12 mb-2" *ngFor="let stage of stages">
     <div class="card w-100">
       <div class="card-header custom-color-card text-center">
         {{ stage.prenom + ' ' + stage.nom }}
@@ -55,12 +55,10 @@
           <span am-time-ago="stage.datecomp"></span>
         </p>
       </div>
-      <!-- TODO : fixe amDateFormat
       <div class="card-footer text-center">
-        {{ stage.datedebut | amDateFormat:'DD/MM/YYYY' }} - {{ stage.datefin |
-        amDateFormat:'DD/MM/YYYY' }}
+        {{ stage.datedebut | date:'dd/MM/YYYY' }} - {{ stage.datefin |
+        date:'dd/MM/YYYY' }}
       </div>
-      -->
     </div>
   </div>
 </div>

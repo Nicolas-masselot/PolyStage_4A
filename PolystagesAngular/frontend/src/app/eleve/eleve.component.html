@@ -19,7 +19,7 @@
       </div>
     </div>
   </div>
-  <div class="col-md-6 mb-4" ng-repeat="stage in stages">
+  <div class="col-md-6 mb-4" *ngFor="let stage of stages">
     <div
       class="card h-100"
       ng-class="{'card-disabled': $root.annee != stage.annee}"
@@ -110,19 +110,15 @@
       <div class="rounded-bottom primary-color text-center">
         <ul class="list-unstyled list-inline font-small mb-0 py-2">
           <li class="list-inline-item pr-2 white-text">
-            <!-- TODO : fixe amDateFormat
             <i class="far fa-clock pr-1"></i>{{ stage.datedebut |
-            amDateFormat:'DD/MM/YYYY' }}
-            -->
+            date:'dd/MM/YYYY' }}
           </li>
           <li class="list-inline-item pr-2 white-text">
             <i class="far fa-clock pr-1"></i>-
           </li>
           <li class="list-inline-item pr-2 white-text">
-            <!-- TODO : fixe amDateFormat
             <i class="far fa-clock pr-1"></i>{{ stage.datefin |
-            amDateFormat:'DD/MM/YYYY' }}
-            -->
+            date:'dd/MM/YYYY' }}
           </li>
         </ul>
       </div>
