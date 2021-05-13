@@ -26,13 +26,11 @@
           </button>
         </div>
         <div class="text-center" ng-if="stage.dateeval">
-          <!-- TODO : fixe ng-href
           <a
-            ng-href="{{stage.chemineval}}"
+            (click)="goToEval(stage.chemineval)"
             target="_blank"
             class="btn btn-outline-primary mx-0"
           >Visualiser l'évaluation</a
-          -->
           >
         </div>
         <p class="text-center text-danger mb-0" ng-if="!stage.idtuteur">
@@ -43,10 +41,8 @@
         </p>
       </div>
       <div class="card-footer custom-color-card text-center">
-        <!-- TODO : fixe amDateFormat
-        {{ stage.datedebut | amDateFormat:'DD/MM/YYYY' }} - {{ stage.datefin |
-        amDateFormat:'DD/MM/YYYY' }}
-        -->
+        {{ stage.datedebut | date:'dd/MM/YYYY' }} - {{ stage.datefin |
+        date:'dd/MM/YYYY' }}
       </div>
     </div>
   </div>
