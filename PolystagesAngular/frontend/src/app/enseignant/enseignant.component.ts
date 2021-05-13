@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {MessageService} from "../message/message.service";
 import {AuthService} from "../auth/auth.service";
 import {ToastrService} from "ngx-toastr";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-enseignant',
@@ -14,6 +15,7 @@ export class EnseignantComponent implements OnInit {
 
   constructor(private service: MessageService,
               private auth: AuthService,
+              private router: Router,
               private toastr: ToastrService) {}
 
   ngOnInit(): void
@@ -55,6 +57,11 @@ export class EnseignantComponent implements OnInit {
   lancerAllEvaluation(): void
   {
     // TODO
+  }
+
+  goToEval(chemin: string): void
+  {
+    this.router.navigateByUrl(chemin);
   }
 
 }
