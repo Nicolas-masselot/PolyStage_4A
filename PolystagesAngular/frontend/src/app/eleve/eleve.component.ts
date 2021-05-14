@@ -3,6 +3,7 @@ import {StageEleve} from "../dataTemplate/StageEleve";
 import {MessageService} from "../message/message.service";
 import {AuthService} from "../auth/auth.service";
 import {ToastrService} from "ngx-toastr";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-eleve',
@@ -17,7 +18,8 @@ export class EleveComponent implements OnInit {
 
   constructor(private service: MessageService,
               private auth: AuthService,
-              private toastr: ToastrService) {}
+              private toastr: ToastrService,
+              private router: Router) {}
 
   ngOnInit(): void
   {

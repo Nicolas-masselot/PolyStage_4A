@@ -48,24 +48,8 @@ import {MdbModalModule} from "mdb-angular-ui-kit";
     AjouterStageComponent,
     RechercherStageComponent,
     StatistiquesComponent,
-    FormStageComponent
+    FormStageComponent,
     StatistiquesComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    ToastrModule.forRoot(),
-    MDBBootstrapModule.forRoot(),
-    MatButtonModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule,
-    MatToolbarModule,
-    MatRippleModule,
-    MdbModalModule
   ],
     imports: [
         BrowserModule,
@@ -83,7 +67,8 @@ import {MdbModalModule} from "mdb-angular-ui-kit";
         MatRippleModule,
         MatSelectModule,
         ReactiveFormsModule,
-        InputsModule.forRoot()
+        InputsModule.forRoot(),
+        MdbModalModule
     ],
   providers: [],
   bootstrap: [AppComponent]
