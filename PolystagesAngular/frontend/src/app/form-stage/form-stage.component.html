@@ -1,12 +1,23 @@
+<h1 class="mt-2">Enregistrement du stage de {{ annee }}e année</h1>
 <form [formGroup]="formulaireAjout"  (ngSubmit)="ajouterStage()">
   <h3 class="title-form">Stagiaire</h3>
   <div class="md-form my-3">
-    <input type="text" id="nomstagiaire" class="form-control" value="{{etudiant[0].nom}}" disabled>
+    <input type="text" id="nomstagiaire" class="form-control" value="{{etudiant ? etudiant.nom : ''}}" disabled>
     <label for="nomstagiaire" class="active">Nom</label>
   </div>
   <div class="md-form my-3">
-    <input type="text" id="prenomstagiaire" class="form-control" value="{{etudiant[0].prenom}}" disabled>
+    <input type="text" id="prenomstagiaire" class="form-control" value="{{etudiant ? etudiant.prenom : ''}}" disabled>
     <label for="prenomstagiaire" class="active">Prénom</label>
+  </div>
+
+  <h3 class="mt-4 title-form">Tuteur enseignant</h3>
+  <div class="md-form my-3">
+    <mat-form-field style="width: 100%">
+      <mat-select placeholder="Nom" formControlName="idenseignant">
+        <mat-option>--</mat-option>
+        <mat-option *ngFor="let ens of enseignants" [value]="ens.idens">{{ ens.prenom+' '+ens.nom }}</mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
 
   <h3 class="mt-4 title-form">Tuteur entreprise</h3>
@@ -15,6 +26,81 @@
     <input type="text" id="nomtuteur" class="form-control" formControlName="nomtuteur" mdbInput>
     <label for="nomtuteur" >Nom</label>
   </div>
+  <div class="md-form my-3">
+    <input type="text" id="prenomtuteur" class="form-control" formControlName="prenomtuteur" mdbInput>
+    <label for="prenomtuteur" >Prénom</label>
+  </div>
+  <div class="md-form my-3">
+    <input type="text" id="emailtuteur" class="form-control" formControlName="emailtuteur" mdbInput>
+    <label for="emailtuteur" >Email</label>
+  </div>
+
+  <h3 class="mt-4 title-form">Entreprise</h3>
+  <div class="md-form my-3">
+    <mat-form-field style="width: 100%">
+      <mat-select placeholder="Nom" formControlName="IdEntreprise" required>
+        <mat-option>--</mat-option>
+        <mat-option *ngFor="let entreprise of entreprises" [value]="entreprise.identreprise">{{ entreprise.nomcomplet }}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="identreprise.hasError('required')">Veuillez choisir une entreprise</mat-error>
+    </mat-form-field>
+
+    <p class="text-muted m-0 font-italic">Si votre entreprise n'apparaît pas dans la liste, <a
+      (click)="OpenDialog()"><span class="text-primary">cliquez ici</span></a></p>
+  </div>
+
+  <div class="md-form my-3">
+    <input type="text" id="adresseentreprise" class="form-control" formControlName="adresseentreprise" mdbInput>
+    <label for="adresseentreprise">Adresse</label>
+  </div>
+
+  <h3 class="mt-4 title-form">Stage</h3>
+  <div class="md-form my-3">
+    <input type="text" id="titrestage" class="form-control" formControlName="titrestage" mdbInput>
+    <label for="titrestage" >Titre du stage <span class="text-danger">*</span></label>
+  </div>
+
+  <div class="md-form my-3">
+    <input type="text" id="descriptionstage" class="form-control" formControlName="descriptionstage" mdbInput>
+    <label for="descriptionstage" >Description du stage <span class="text-danger">*</span></label>
+  </div>
+
+  <div class="md-form my-3">
+    <input type="text" id="emailstage" class="form-control" formControlName="emailstage" mdbInput>
+    <label for="emailstage" >Email du stage <span class="text-danger">*</span></label>
+  </div>
+
+
+  <div class="md-form my-3">
+
+    <mat-form-field style="width: 100%" floatLabel="always">
+      <mat-label style="font-size: 20px">Début du stage <span class="text-danger">*</span></mat-label>
+      <input (click)="debutpicker.open()" matInput class="form-control" [matDatepicker]="debutpicker" id="debutstage" formControlName="debutstage" placeholder="Sélectionnez une date">
+      <mat-datepicker-toggle matSuffix [for]="debutpicker"></mat-datepicker-toggle>
+      <mat-datepicker touchUi="true" #debutpicker disabled="false"></mat-datepicker>
+    </mat-form-field>
+
+  </div>
+
+  <div class="md-form my-3">
+    <mat-form-field style="width: 100%" floatLabel="always">
+      <mat-label style="font-size: 20px">Fin du stage <span class="text-danger">*</span></mat-label>
+      <input (click)="finpicker.open()" matInput class="form-control" [matDatepicker]="finpicker" id="finstage" formControlName="finstage" placeholder="Sélectionnez une date">
+      <mat-datepicker-toggle matSuffix [for]="finpicker"></mat-datepicker-toggle>
+      <mat-datepicker touchUi="true" #finpicker disabled="false"></mat-datepicker>
+    </mat-form-field>
+  </div>
+
+  <div class="md-form my-3">
+    <input type="text" id="ville" class="form-control" formControlName="ville" mdbInput>
+    <label for="ville" >Ville du stage <span class="text-danger">*</span></label>
+  </div>
+
+  <div class="md-form my-3">
+    <input type="text" id="pays" class="form-control" formControlName="pays" mdbInput>
+    <label for="pays" >Pays du stage <span class="text-danger">*</span></label>
+  </div>
+
   <button type="submit" class="btn btn-primary float-right mx-0">Enregistrer mon stage</button>
 
 </form>

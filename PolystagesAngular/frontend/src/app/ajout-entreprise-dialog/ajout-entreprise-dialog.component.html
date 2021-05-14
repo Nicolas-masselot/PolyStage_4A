@@ -1,0 +1,13 @@
+<mat-toolbar role="toolbar" class="titremodal">
+    <p class="heading text-white my-auto h5">Ajout d'entreprise</p>
+  </mat-toolbar>
+<div class="md-form" style="margin: 5%">
+  <input type="text" id="nouvelleentreprise" class="form-control text-uppercase"
+         [(ngModel)]="nouvelleentreprise" mdbInput>
+  <label for="nouvelleentreprise">Nouvelle entreprise <span class="text-danger">*</span></label>
+</div>
+
+<div style="margin-left: 4%">
+  <button class="btn btn-outline-primary waves-effect" (click)="onNoClick()" style="margin-right: 20px">Annuler</button>
+  <button class="btn btn-primary" (click)="AjouterEntreprise()" >Ajouter</button>
+</div>
