@@ -9,39 +9,56 @@ import {Router} from "@angular/router";
 })
 export class MenuComponent implements OnInit {
 
-  displayAccueil: boolean = false;
+  displayAccueilEleve: boolean = false;
+  displayAccueilEnseignant: boolean = false;
+  displayAccueilTuteur: boolean = false;
   displayAdministration: boolean = false;
   displayAjoutStage: boolean = false;
   displayRechercheStage: boolean = false;
   displayStatistiques: boolean = false;
 
   constructor(private authservice: AuthService, private router: Router)
-  {
-    this.router.events.subscribe((ev) => {
+  {}
 
-      if (this.authservice.isAuthenticated()){
-        this.displayAccueil = true;
-        if (this.authservice.admin) this.displayAdministration = true;
-        if (this.authservice.admin) this.displayAjoutStage = true;
-        if (this.authservice.admin) this.displayRechercheStage = true;
-        if (this.authservice.admin) this.displayStatistiques = true;
-      } else {
-        this.displayAccueil = false;
-        this.displayAdministration = false;
-        this.displayAjoutStage = false;
-        this.displayRechercheStage = false;
-        this.displayStatistiques = false;
+  ngOnInit(): void
+  {
+    this.router.events.subscribe((ev) =>
+    {
+      this.displayAccueilEleve = false;
+      this.displayAccueilEnseignant = false;
+      this.displayAdministration = false;
+      this.displayAjoutStage = false;
+      this.displayRechercheStage = false;
+      this.displayStatistiques = false;
+      this.displayAccueilTuteur = false;
+
+      if (this.authservice.isAuthenticated())
+      {
+        if (this.authservice.authAs == "eleve")
+        {
+          this.displayAccueilEleve = true;
+        }
+        else if (this.authservice.authAs == "enseignant")
+        {
+          this.displayAccueilEnseignant = true;
+          this.displayAdministration = true;
+          this.displayAjoutStage = true;
+          this.displayRechercheStage = true;
+          this.displayStatistiques = true;
+        }
+        else if (this.authservice.authAs == "tuteur")
+        {
+          this.displayAccueilTuteur = true;
+        }
       }
     });
-
   }
 
+  /*
   navigate(chemin: string)
   {
       this.router.navigateByUrl(chemin);
   }
-
-  ngOnInit(): void
-  {}
+  */
 
 }

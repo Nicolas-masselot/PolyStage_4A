@@ -1,7 +1,9 @@
 'use strict';
 
+/*
 const sessionJwt = require ('./sessionJWT');
 const auth = require ('./authentificationController.js');
+*/
 
 const Eleve = require('../models/EleveModel.js');
 const Enseignant = require('../models/EnseignantModel.js');
@@ -14,7 +16,7 @@ exports.authentification = function (req, res) {
     if (result && result.length) {
       Eleve.getEleveById(result[0].ideleve, function (err, eleve) {
 
-        auth.setSessionCookie(req, res, {login: req.query.username, role: "eleve"});
+        //auth.setSessionCookie(req, res, {login: req.query.username, role: "eleve"});
 
         eleve[0].role = "eleve";
         res.status(200).send(eleve);
@@ -25,7 +27,7 @@ exports.authentification = function (req, res) {
           res.status(500).send(err);
         if (resEns && resEns.length) {
 
-          auth.setSessionCookie(req, res, {login: req.query.username, role: "enseignant"});
+          //auth.setSessionCookie(req, res, {login: req.query.username, role: "enseignant"});
 
           resEns[0].role = "enseignant";
           res.status(200).send(resEns);
@@ -35,7 +37,7 @@ exports.authentification = function (req, res) {
               res.status(500).send(err);
             if (resTuteur && resTuteur.length) {
 
-              auth.setSessionCookie(req, res, {login: req.query.username, role: "tuteur"});
+              //auth.setSessionCookie(req, res, {login: req.query.username, role: "tuteur"});
 
               resTuteur[0].role = "tuteur";
               res.status(200).send(resTuteur);
@@ -49,6 +51,7 @@ exports.authentification = function (req, res) {
   });
 }
 
+/*
 function getSession (req) {
   return sessionJwt.decodeSessionCookie(req);
 }
@@ -58,3 +61,4 @@ function setSessionCookie (req, res, session) {
   sessionJwt.createSessionCookie(req, res, session);
 }
 module.exports.setSessionCookie = setSessionCookie;
+*/

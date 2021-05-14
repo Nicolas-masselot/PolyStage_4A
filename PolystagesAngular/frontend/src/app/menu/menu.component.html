@@ -1,4 +1,5 @@
 
+
 <div id="menu_content" class="side-nav sn-bg-4 fixed">
   <ul class="custom-scrollbar">
     <li>
@@ -9,28 +10,38 @@
     </li>
     <li class="menu">
       <ul class="collapsible collapsible-accordion mt-0">
-        <li *ngIf="displayAccueil">
-          <a class="collapsible-header waves-effect arrow-r" href="" (click)="navigate('/home')">
+        <li *ngIf="displayAccueilEleve">
+          <a class="collapsible-header waves-effect arrow-r" routerLink="/eleve">
+            <i class="fa fa-home text-primary"></i> &nbsp; Accueil
+          </a>
+        </li>
+        <li *ngIf="displayAccueilEnseignant">
+          <a class="collapsible-header waves-effect arrow-r" routerLink="/enseignant">
+            <i class="fa fa-home text-primary"></i> &nbsp; Accueil
+          </a>
+        </li>
+        <li *ngIf="displayAccueilTuteur">
+          <a class="collapsible-header waves-effect arrow-r" routerLink="/tuteur">
             <i class="fa fa-home text-primary"></i> &nbsp; Accueil
           </a>
         </li>
         <li *ngIf="displayAdministration">
-          <a class="collapsible-header waves-effect arrow-r" href="" (click)="navigate('/administration')">
+          <a class="collapsible-header waves-effect arrow-r" routerLink="/administration">
             <i class="fa fa-cogs text-primary"></i> &nbsp;Administration
           </a>
         </li>
         <li *ngIf="displayAjoutStage">
-          <a class="collapsible-header waves-effect arrow-r" href="" (click)="navigate('/ajouterStage')">
+          <a class="collapsible-header waves-effect arrow-r" routerLink="/ajouterStage">
             <i class="fa fa-plus-square-o text-primary"></i> &nbsp; Ajouter des stages
           </a>
         </li>
         <li *ngIf="displayRechercheStage">
-          <a class="collapsible-header waves-effect arrow-r" href="" (click)="navigate('/rechercherStage')">
+          <a class="collapsible-header waves-effect arrow-r" routerLink="/rechercherStage">
             <i class="fa fa-search text-primary"></i> &nbsp;Rechercher un stage
           </a>
         </li>
         <li *ngIf="displayStatistiques">
-          <a class="collapsible-header waves-effect arrow-r" href="" (click)="navigate('/statistiques')">
+          <a class="collapsible-header waves-effect arrow-r" routerLink="/statistiques">
             <i class="fa fa-bar-chart text-primary"></i> &nbsp;Statistiques
           </a>
         </li>
