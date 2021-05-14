@@ -40,7 +40,7 @@ export class FormStageComponent implements OnInit {
   ngOnInit(): void {
     if (this.authservice.authAs == 'eleve'){
       this.Role = this.authservice.authAs ;
-      this.messageservice.sendGetMessagebyID('eleves/',this.authservice.IdUtilisateur).subscribe(
+      this.messageservice.sendGetMessagebyID('eleves/',this.authservice.id).subscribe(
         response=> { // @ts-ignore
           this.annee = response[0].niveau ;
           this.etudiant = response ;

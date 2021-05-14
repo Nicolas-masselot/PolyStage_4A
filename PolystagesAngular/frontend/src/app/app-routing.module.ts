@@ -19,17 +19,16 @@ const routes: Routes =  [
   {path: "", pathMatch: "full", redirectTo: "login"},
   {path: "login", component: LoginComponent},
   {path: "register", component: RegisterComponent},
-  {path: "enseignant", component: EnseignantComponent},
-  {path: "administration", component: AdministrationComponent},
-  {path: "ajouterStage", component: AjouterStageComponent},
-  {path: "rechercherStage", component: RechercherStageComponent},
-  {path: "statistiques", component: StatistiquesComponent},
   {path: "form-stage", component: FormStageComponent},
   {path: "", canActivateChild: [AuthEleveGuard], children: [
       {path: "eleve", component: EleveComponent}
     ]},
   {path: "", canActivateChild: [AuthEnseignantGuard], children: [
-
+      {path: "enseignant", component: EnseignantComponent},
+      {path: "administration", component: AdministrationComponent},
+      {path: "ajouterStage", component: AjouterStageComponent},
+      {path: "rechercherStage", component: RechercherStageComponent},
+      {path: "statistiques", component: StatistiquesComponent}
     ]},
   {path: "", canActivateChild: [AuthTuteurGuard], children: [
       {path: "tuteur", component: TuteurComponent}
