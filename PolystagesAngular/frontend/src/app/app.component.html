@@ -9,7 +9,7 @@
     <app-entete></app-entete>
 
   </mat-toolbar>
-  <div *ngIf="!sidenav.opened" class="ombre"></div>
+  <div *ngIf="!sidenav.opened || !mobileQuery.matches" class="ombre"></div>
   <mat-sidenav-container class="conteneurSideNav">
     <mat-sidenav #sidenav [mode]="mobileQuery.matches ? 'over': 'side'" [opened]="!mobileQuery.matches"
                  [fixedInViewport]="true" class="menu_appli" style="">

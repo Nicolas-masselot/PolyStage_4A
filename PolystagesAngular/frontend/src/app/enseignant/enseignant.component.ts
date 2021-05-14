@@ -49,19 +49,36 @@ export class EnseignantComponent implements OnInit {
     this.stages = data;
   }
 
-  lancerEvaluation(): void
+  lancerEvaluation(idstage: number, idtuteur: number, nom: string, prenom: string): void
   {
-    // TODO
+    const datetime = new Date().toLocaleString('fr-FR');
+    let data = {idstage: idstage, idtuteur: idtuteur, nom: nom, prenom: prenom, datetime: datetime};
+
+    let response = this.service.sendGetMessageQuery("mail/evaluation", data);
+    response.subscribe(
+      r => {
+          this.toastr.success("L'évaluation a bien été lancée");
+        },
+      error => {this.toastr.error('Une erreur est survenue');}
+    );
+
   }
 
   lancerAllEvaluation(): void
   {
-    // TODO
+    this.stages.forEach(stage => {
+      if(!stage.evallancee)
+      {
+        this.lancerEvaluation(stage.idstage, stage.idtuteur, stage.nom, stage.prenom);
+      }
+    });
   }
+
 
   goToEval(chemin: string): void
   {
     this.router.navigateByUrl(chemin);
   }
+
 
 }
