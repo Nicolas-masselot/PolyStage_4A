@@ -1,0 +1,20 @@
+<form [formGroup]="formulaireAjout"  (ngSubmit)="ajouterStage()">
+  <h3 class="title-form">Stagiaire</h3>
+  <div class="md-form my-3">
+    <input type="text" id="nomstagiaire" class="form-control" value="{{etudiant[0].nom}}" disabled>
+    <label for="nomstagiaire" class="active">Nom</label>
+  </div>
+  <div class="md-form my-3">
+    <input type="text" id="prenomstagiaire" class="form-control" value="{{etudiant[0].prenom}}" disabled>
+    <label for="prenomstagiaire" class="active">Prénom</label>
+  </div>
+
+  <h3 class="mt-4 title-form">Tuteur entreprise</h3>
+
+  <div class="md-form my-3">
+    <input type="text" id="nomtuteur" class="form-control" formControlName="nomtuteur" mdbInput>
+    <label for="nomtuteur" >Nom</label>
+  </div>
+  <button type="submit" class="btn btn-primary float-right mx-0">Enregistrer mon stage</button>
+
+</form>

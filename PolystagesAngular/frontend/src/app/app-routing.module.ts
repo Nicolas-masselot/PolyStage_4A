@@ -13,11 +13,13 @@ import {AjouterStageComponent} from "./ajouter-stage/ajouter-stage.component";
 import {RechercherStageComponent} from "./rechercher-stage/rechercher-stage.component";
 import {AdministrationComponent} from "./administration/administration.component";
 import {StatistiquesComponent} from "./statistiques/statistiques.component";
+import {FormStageComponent} from "./form-stage/form-stage.component";
 
 const routes: Routes =  [
   {path: "", pathMatch: "full", redirectTo: "login"},
   {path: "login", component: LoginComponent},
   {path: "register", component: RegisterComponent},
+  {path: "form-stage", component: FormStageComponent},
   {path: "", canActivateChild: [AuthEleveGuard], children: [
       {path: "eleve", component: EleveComponent}
     ]},
