@@ -22,8 +22,7 @@ export class AuthEleveGuard implements CanActivateChild
     }
     else
     {
-      this.router.navigateByUrl("/login");
-      return false;
+      return this.router.parseUrl('/login');
     }
   }
 
