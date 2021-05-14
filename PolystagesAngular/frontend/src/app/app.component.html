@@ -1,28 +1,25 @@
-<div class="conteneurAppli" [class.appli-is-mobile]="mobileQuery.matches">
+<div style="height: 100vh;">
 
+  <mat-toolbar class="entetebar">
 
-  <mat-sidenav-container class="conteneurAppliSideNav" [hasBackdrop]="mobileQuery.matches">
-    <mat-sidenav #sidenav [mode]="'over'" [opened]="!mobileQuery.matches"
-                 [fixedInViewport]="mobileQuery.matches" class="menu_appli">
+    <button mat-icon-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
+    <span class="text-uppercase">Polystage</span>
+    <span class="spacer"></span>
+    <app-entete></app-entete>
+
+  </mat-toolbar>
+  <div *ngIf="!sidenav.opened" class="ombre"></div>
+  <mat-sidenav-container class="conteneurSideNav">
+    <mat-sidenav #sidenav [mode]="mobileQuery.matches ? 'over': 'side'" [opened]="!mobileQuery.matches"
+                 [fixedInViewport]="true" class="menu_appli" style="">
         <app-menu></app-menu>
     </mat-sidenav>
 
-    <mat-sidenav-content>
+    <div class="contenuprincipal">
+      <router-outlet></router-outlet>
+    </div>
 
-        <mat-toolbar color="primary" class="entetebar">
-
-          <button mat-icon-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
-          <span class="text-uppercase">Polystage</span>
-          <span class="spacer"></span>
-          <app-entete></app-entete>
-        </mat-toolbar>
-
-        <router-outlet></router-outlet>
-
-    </mat-sidenav-content>
-
-
-</mat-sidenav-container>
+  </mat-sidenav-container>
 
 </div>
 

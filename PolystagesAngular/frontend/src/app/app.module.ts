@@ -7,7 +7,7 @@ import { EnteteComponent } from './entete/entete.component';
 import { MenuComponent } from './menu/menu.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 // @ts-ignore
 import { MatButtonModule } from '@angular/material/button';
@@ -29,6 +29,9 @@ import { StatistiquesComponent } from './statistiques/statistiques.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatRippleModule} from "@angular/material/core";
+import { FormStageComponent } from './form-stage/form-stage.component';
+import {MatSelectModule} from '@angular/material/select';
+import { InputsModule } from 'angular-bootstrap-md'
 import {MdbModalModule} from "mdb-angular-ui-kit";
 
 @NgModule({
@@ -44,6 +47,8 @@ import {MdbModalModule} from "mdb-angular-ui-kit";
     AdministrationComponent,
     AjouterStageComponent,
     RechercherStageComponent,
+    StatistiquesComponent,
+    FormStageComponent
     StatistiquesComponent
   ],
   imports: [
@@ -62,6 +67,24 @@ import {MdbModalModule} from "mdb-angular-ui-kit";
     MatRippleModule,
     MdbModalModule
   ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        ToastrModule.forRoot(),
+        MDBBootstrapModule.forRoot(),
+        MatButtonModule,
+        MatSidenavModule,
+        MatIconModule,
+        MatListModule,
+        MatToolbarModule,
+        MatRippleModule,
+        MatSelectModule,
+        ReactiveFormsModule,
+        InputsModule.forRoot()
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
