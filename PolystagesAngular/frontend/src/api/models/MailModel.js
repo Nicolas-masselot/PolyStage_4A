@@ -24,7 +24,7 @@ exports.getcurrentDate = function () {
 exports.send_mail_attach = function (destinataire, sujet, corps, nomfich, path) {
   const mailOptions = {
     from: config.gmail.user,
-    to: destinataire,
+    to: config.gmail.user, //destinataire, // Sécurité pour n'envoyer le mail qu'au compte test
     subject: sujet,
     html: corps,
     attachments: [{
@@ -46,7 +46,7 @@ exports.send_mail_attach = function (destinataire, sujet, corps, nomfich, path) 
 exports.send_mail = function (destinataire, sujet, corps) {
   const mailOptions = {
     from: config.gmail.user,
-    to: destinataire,
+    to: config.gmail.user, //destinataire, // Sécurité pour n'envoyer le mail qu'au compte test
     subject: sujet,
     html: corps
   };

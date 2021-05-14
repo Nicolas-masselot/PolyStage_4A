@@ -1,7 +1,7 @@
 
 <h1 class="mt-2">Accueil</h1>
 
-<button ng-if="$root.role == 'enseignant' && stages.length != 0" ng-click="lancerAllEvaluation()" class="btn btn-outline-primary mx-0" ng-disabled="isAllEvaluated==true" >
+<button ng-if="$root.role == 'enseignant' && stages.length != 0" (click)="lancerAllEvaluation()" class="btn btn-outline-primary mx-0" ng-disabled="isAllEvaluated==true" >
   Lancer toutes les évaluations
 </button>
 <div class="row">
@@ -18,7 +18,7 @@
         <p class="card-text mb-1">{{ stage.nomcomplet }}</p>
         <div class="text-center">
           <button
-            ng-click="lancerEvaluation(stage.idstage, stage.idtuteur, stage.nom, stage.prenom)"
+            (click)="lancerEvaluation(stage.idstage, stage.idtuteur, stage.nom, stage.prenom)"
             class="btn btn-outline-primary mx-0"
             ng-disabled="stage.evallancee || !stage.idtuteur"
           >
@@ -27,11 +27,11 @@
         </div>
         <div class="text-center" ng-if="stage.dateeval">
           <a
-            (click)="goToEval(stage.chemineval)"
-            target="_blank"
+          routerLink="stage.chemineval"
+          target="_blank"
             class="btn btn-outline-primary mx-0"
           >Visualiser l'évaluation</a
-          >
+          > <!-- (click)="goToEval(stage.chemineval)" -->
         </div>
         <p class="text-center text-danger mb-0" ng-if="!stage.idtuteur">
           L'élève n'a toujours pas renseigné de tuteur
