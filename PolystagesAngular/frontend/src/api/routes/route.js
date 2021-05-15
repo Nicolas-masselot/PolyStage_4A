@@ -129,7 +129,7 @@ module.exports = function (app) {
     .post(FormControlleur.FormEleveCsv);
 
   app.route('/mail/evaluation')
-    .post(MailControlleur.proced_eval)
+    .get(MailControlleur.proced_eval)
 
   app.route('/mail/rappel')
     .post(MailControlleur.send_rappels)
