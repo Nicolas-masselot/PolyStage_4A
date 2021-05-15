@@ -56,3 +56,4 @@ export class EleveComponent implements OnInit {
       this.router.navigate(['/form-stage']) ;
   }
 }
+// TODO corriger menu

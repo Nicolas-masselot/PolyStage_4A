@@ -39,6 +39,7 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatInputModule} from "@angular/material/input";
 import { AjoutEntrepriseDialogComponent } from './ajout-entreprise-dialog/ajout-entreprise-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
+import { AjoutEntrepriseComponent } from './ajout-entreprise/ajout-entreprise.component';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import {MatDialogModule} from "@angular/material/dialog";
     StatistiquesComponent,
     FormStageComponent,
     StatistiquesComponent,
-    AjoutEntrepriseDialogComponent
+    AjoutEntrepriseDialogComponent,
+    AjoutEntrepriseComponent
   ],
     imports: [
         BrowserModule,

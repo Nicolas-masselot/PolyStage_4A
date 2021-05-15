@@ -1,4 +1,4 @@
-<h1 class="mt-2">Enregistrement du stage de {{ annee }}e année</h1>
+<h1 class="mt-2">Enregistrement du stage de {{ niveau }}e année</h1>
 <form [formGroup]="formulaireAjout"  (ngSubmit)="ajouterStage()">
   <h3 class="title-form">Stagiaire</h3>
   <div class="md-form my-3">
@@ -31,8 +31,9 @@
     <label for="prenomtuteur" >Prénom</label>
   </div>
   <div class="md-form my-3">
-    <input type="text" id="emailtuteur" class="form-control" formControlName="emailtuteur" mdbInput>
+    <input type="email" id="emailtuteur" class="form-control" formControlName="emailtuteur" mdbInput>
     <label for="emailtuteur" >Email</label>
+    <mat-error *ngIf="mailtuteur.hasError('pattern')">Veuillez entrer une adresse mail valide</mat-error>
   </div>
 
   <h3 class="mt-4 title-form">Entreprise</h3>
@@ -45,8 +46,7 @@
       <mat-error *ngIf="identreprise.hasError('required')">Veuillez choisir une entreprise</mat-error>
     </mat-form-field>
 
-    <p class="text-muted m-0 font-italic">Si votre entreprise n'apparaît pas dans la liste, <a
-      (click)="OpenDialog()"><span class="text-primary">cliquez ici</span></a></p>
+    <app-ajout-entreprise (AjoutEntreprise)="onCreateEntreprise()"></app-ajout-entreprise>
   </div>
 
   <div class="md-form my-3">
@@ -66,8 +66,9 @@
   </div>
 
   <div class="md-form my-3">
-    <input type="text" id="emailstage" class="form-control" formControlName="emailstage" mdbInput>
+    <input type="email" id="emailstage" class="form-control" formControlName="emailstage" mdbInput>
     <label for="emailstage" >Email du stage <span class="text-danger">*</span></label>
+    <mat-error *ngIf="mailstage.hasError('pattern')">Veuillez entrer une adresse mail valide</mat-error>
   </div>
 
 
