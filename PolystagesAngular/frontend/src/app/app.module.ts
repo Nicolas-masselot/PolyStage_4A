@@ -1,4 +1,5 @@
 import { NgModule} from '@angular/core';
+// @ts-ignore
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -18,6 +19,7 @@ import { MatListModule } from '@angular/material/list';
 // @ts-ignore
 import { MatSidenavModule } from '@angular/material/sidenav';
 import {ToastrModule} from "ngx-toastr";
+// @ts-ignore
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { EleveComponent } from './eleve/eleve.component';
 import { EnseignantComponent } from './enseignant/enseignant.component';
@@ -28,11 +30,17 @@ import { RechercherStageComponent } from './rechercher-stage/rechercher-stage.co
 import { StatistiquesComponent } from './statistiques/statistiques.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import {MatToolbarModule} from "@angular/material/toolbar";
-import {MatRippleModule} from "@angular/material/core";
+import {MatNativeDateModule, MatRippleModule} from "@angular/material/core";
 import { FormStageComponent } from './form-stage/form-stage.component';
 import {MatSelectModule} from '@angular/material/select';
 import { InputsModule } from 'angular-bootstrap-md'
 import {MdbModalModule} from "mdb-angular-ui-kit";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatInputModule} from "@angular/material/input";
+import { AjoutEntrepriseDialogComponent } from './ajout-entreprise-dialog/ajout-entreprise-dialog.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import { AjoutEntrepriseComponent } from './ajout-entreprise/ajout-entreprise.component';
+
 
 @NgModule({
   declarations: [
@@ -49,7 +57,9 @@ import {MdbModalModule} from "mdb-angular-ui-kit";
     RechercherStageComponent,
     StatistiquesComponent,
     FormStageComponent,
-    StatistiquesComponent
+    StatistiquesComponent,
+    AjoutEntrepriseDialogComponent,
+    AjoutEntrepriseComponent
   ],
     imports: [
         BrowserModule,
@@ -68,9 +78,13 @@ import {MdbModalModule} from "mdb-angular-ui-kit";
         MatSelectModule,
         ReactiveFormsModule,
         InputsModule.forRoot(),
-        MdbModalModule
+        MdbModalModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatInputModule,
+        MatDialogModule
     ],
-  providers: [],
+  providers: [MatDatepickerModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
