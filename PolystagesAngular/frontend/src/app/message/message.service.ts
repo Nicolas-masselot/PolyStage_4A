@@ -26,7 +26,6 @@ export class MessageService implements Data
   {
     let fullUrl : string = environment.baseUrl + url;
 
-    //return fullUrl;
     return this.http.post<Data>
     (
       fullUrl,
@@ -53,5 +52,12 @@ export class MessageService implements Data
     )
   }
 
-// faire si besoin une fonction pour les requêtes put
+  sendPutMessage(url: string , data: any) : Observable<Data>{
+    let fullUrl : string = environment.baseUrl + url;
+
+    return this.http.put<Data>(
+      fullUrl,
+      { body: data }
+    )
+  }
 }

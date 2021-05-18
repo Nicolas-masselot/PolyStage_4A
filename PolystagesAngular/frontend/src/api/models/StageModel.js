@@ -7,7 +7,7 @@ function formatDateForSQL(date) {
 
 //Task object constructor
 let Stage = function (stage, idtuteur) {
-  console.log('stage')
+  console.log('stage') ;
   this.ideleve = stage.idEleve;
   this.niveau = stage.niveau;
   this.annee = stage.annee;

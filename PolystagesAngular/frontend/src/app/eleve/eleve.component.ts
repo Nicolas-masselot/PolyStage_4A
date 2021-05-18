@@ -4,6 +4,7 @@ import {MessageService} from "../message/message.service";
 import {AuthService} from "../auth/auth.service";
 import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
+import {ModifStageService} from "../modifStage/modif-stage.service";
 
 @Component({
   selector: 'app-eleve',
@@ -19,7 +20,8 @@ export class EleveComponent implements OnInit {
   constructor(private service: MessageService,
               private auth: AuthService,
               private toastr: ToastrService,
-              private router: Router) {}
+              private router: Router,
+              private editStage: ModifStageService) {}
 
   ngOnInit(): void
   {
@@ -55,5 +57,11 @@ export class EleveComponent implements OnInit {
   AjouterStage(): void {
       this.router.navigate(['/form-stage']) ;
   }
+
+  async ModifierStage(Stage : any) : Promise<void> {
+    await this.editStage.affecterStage(Stage) ;
+    this.router.navigate(['/form-stage']) ;
+  }
 }
-// TODO corriger menu
+
+// TODO faire upload de rapport et de présentation et à la fin l'affichage des stages selon le nombre et les images random
