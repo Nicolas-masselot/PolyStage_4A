@@ -44,14 +44,14 @@ exports.uploadFile = function (req, res) {
     const newStage = {};
 
     const currentDate = Mail.getcurrentDate();
-    if (req.query.type == "rapport") {
+    if (req.query.type === "rapport") {
       newStage.daterapport = currentDate;
       newStage.cheminrapport = './' + req.file.path;
     } else {
       newStage.datepres = currentDate;
       newStage.cheminpres = './' + req.file.path;
     }
-    send_confirmation(req.query.type, req.query.mail);
+    send_confirmation(req.query.type, req.query.mail);      // erreur lors de l'envoi du mail mdp non accepté
     Stage.updateStage(req.query.idstage, newStage, function (err, stage) {
       if (err)
         res.send(err);

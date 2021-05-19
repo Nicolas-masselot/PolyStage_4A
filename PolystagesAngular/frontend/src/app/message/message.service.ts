@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpResponse} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {environment} from "../../environments/environment";
 
@@ -33,6 +33,15 @@ export class MessageService implements Data
       {withCredentials: true}
     );
 
+  }
+
+  uploadFile(data: FormData, parametres :any): Observable<Data>{
+    let fullUrl : string = environment.baseUrl + 'upload';
+    return this.http.post<Data>(
+      fullUrl ,
+      data,
+      {withCredentials:true , params: parametres , reportProgress: true }
+    );
   }
 
   sendGetMessagebyID(url: string, id_param: number): Observable<Data>

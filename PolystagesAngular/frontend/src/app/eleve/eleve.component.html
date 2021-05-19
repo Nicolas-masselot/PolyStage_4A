@@ -49,19 +49,17 @@
                 <!-- Ajouter la possibilité de retélécharger un autre stage -->
                 <label mdbBtn class="btn-outline-primary w-100 m-0 py-1 px-2 h-100" mdbWavesEffect>
                   <input type="file"
-                         ng-model="rapportFile"
-                         ngf-select="uploadRapport(rapportFile, $root.annee, $root.niveau, $root.nom, $root.prenom, stage.idstage, $root.email)"
                          name="file"
-                         accept=".pdf"/>
+                         accept=".pdf" (change)="uploadRapport($event,stage.idstage)"/>
                   <span *ngIf="stage.cheminrapport == null">Télécharger rapport</span>
                   <span *ngIf="stage.cheminrapport != null">ReTélécharger rapport</span>
                 </label>
 
               </div>
-              <a href="{{ stage.cheminrapport }}"
+              <a href="{{ UrlBase+stage.cheminrapport.slice(1) }}"
                 class="btn btn-outline-primary w-100 m-0 py-1 px-2 h-100"
                 target="_blank"
-                 *ngIf="stage.cheminrapport != null" mdbWavesEffect>Visualiser rapport
+                 *ngIf="stage.cheminrapport != null" mdbWavesEffect download>Visualiser rapport
               </a>
             </div>
           </div>
@@ -71,16 +69,14 @@
                 <label class="btn btn-outline-primary w-100 m-0 py-1 px-2 h-100" mdbWavesEffect>
                   <input
                     type="file"
-                    ng-model="presFile"
-                    ngf-select="uploadPres(presFile, $root.annee, $root.niveau, $root.nom, $root.prenom, stage.idstage, $root.email)"
                     name="file"
-                    accept=".pdf, .pptx"/>
+                    accept=".pdf, .pptx" (change)="uploadPresentation($event,stage.idstage)" />
                   <span *ngIf="stage.cheminpres == null">Télécharger présentation</span>
                   <span *ngIf="stage.cheminpres != null">ReTélécharger présentation</span>
                 </label>
 
               </div>
-              <a href="{{ stage.cheminpres }}"
+              <a href="{{ UrlBase+stage.cheminpres.slice(1) }}"
                 class="btn btn-outline-primary w-100 m-0 py-1 px-2 h-100"
                 target="_blank"
                  *ngIf="stage.cheminpres != null" mdbWavesEffect>Visualiser présentation
