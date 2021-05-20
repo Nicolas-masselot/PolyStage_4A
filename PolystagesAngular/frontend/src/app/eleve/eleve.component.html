@@ -1,6 +1,6 @@
 <h1 id="titrePage">Accueil</h1>
 <div class="row">
-  <div class="col-md-6 mb-4" ng-if="currentStage.length == 0">
+  <div class="col-md-6 mb-4" *ngIf="currentStages.length == 0">
     <div
       class="card grey lighten-2 h-100 mh-card card-ajouter-stage hoverable mouse-cursor"
       (click)="AjouterStage()"
@@ -19,26 +19,21 @@
       </div>
     </div>
   </div>
-  <div class="col-md-6 mb-4" *ngFor="let stage of stages">
-    <div
-      class="card h-100"
-      ng-class="{'card-disabled': $root.annee != stage.annee}"
-    >
-      <div class="" ng-init="myRandomImg = random()">
+  <div class="col-md-6 mb-4" *ngFor="let stage of stages ; let i = index ;">
+    <div class="card h-100"
+         [ngClass]="{'card-disabled': annee != stage.annee}">
+      <div class="" >
         <img
           class="card-img-top"
-          src="assets/img/stage-{{myRandomImg}}.jpg"
-          alt="Card image cap"
-        />
+          src="assets/img/stage-{{ImgRandoms[i]}}.jpg"
+          alt="Card image cap"/>
         <a>
           <div class="mask rgba-white-slight"></div>
         </a>
       </div>
-      <a
-        class="btn-floating btn-action ml-auto mr-4 primary-color"
-        href="#!/modifier/stage/{{stage.idstage}}"
-      ><i class="fa fa-edit pl-1"></i
-      ></a>
+      <div class="divbouton">
+        <a mat-mini-fab class="primary-color boutonModif" (click)="ModifierStage(stage)"><i class="fa fa-edit pl-1 iconeModif" style="color: white"></i></a>
+      </div>
       <div class="card-body">
         <p class="mb-0 card-text">
           Annee {{ stage.annee }} - {{ stage.niveau }}A
@@ -50,58 +45,41 @@
         <div class="row">
           <div class="col-md-6 mb-2">
             <div class="file-field">
-              <div
-                class="btn btn-outline-primary w-100 m-0 py-1 px-2 h-100 waves-effect uploadRapport"
-              >
+              <div class="uploadRapport">
                 <!-- Ajouter la possibilité de retélécharger un autre stage -->
-                <span ng-if="stage.cheminrapport == null"
-                >Télécharger rapport</span
-                >
-                <span ng-if="stage.cheminrapport != null"
-                >ReTélécharger rapport</span
-                >
-                <input
-                  type="file"
-                  ng-model="rapportFile"
-                  ngf-select="uploadRapport(rapportFile, $root.annee, $root.niveau, $root.nom, $root.prenom, stage.idstage, $root.email)"
-                  name="file"
-                  accept=".pdf"
-                />
+                <label mdbBtn class="btn-outline-primary w-100 m-0 py-1 px-2 h-100" mdbWavesEffect>
+                  <input type="file"
+                         name="file"
+                         accept=".pdf" (change)="uploadRapport($event,stage.idstage)"/>
+                  <span *ngIf="stage.cheminrapport == null">Télécharger rapport</span>
+                  <span *ngIf="stage.cheminrapport != null">ReTélécharger rapport</span>
+                </label>
+
               </div>
-              <a
-                href="{{ stage.cheminrapport }}"
-                class="btn btn-outline-primary w-100 m-0 py-1 px-2 h-100 waves-effect"
+              <a href="{{ UrlBase+stage.cheminrapport.slice(1) }}"
+                class="btn btn-outline-primary w-100 m-0 py-1 px-2 h-100"
                 target="_blank"
-                ng-if="stage.cheminrapport != null"
-              >Visualiser rapport
+                 *ngIf="stage.cheminrapport != null" mdbWavesEffect download>Visualiser rapport
               </a>
             </div>
           </div>
           <div class="col-md-6">
             <div class="file-field">
-              <div
-                class="btn btn-outline-primary w-100 m-0 py-1 px-2 h-100 waves-effect uploadPres"
-              >
-                <span ng-if="stage.cheminpres == null"
-                >Télécharger présentation</span
-                >
-                <span ng-if="stage.cheminpres != null"
-                >ReTélécharger présentation</span
-                >
-                <input
-                  type="file"
-                  ng-model="presFile"
-                  ngf-select="uploadPres(presFile, $root.annee, $root.niveau, $root.nom, $root.prenom, stage.idstage, $root.email)"
-                  name="file"
-                  accept=".pdf, .pptx"
-                />
+              <div>
+                <label class="btn btn-outline-primary w-100 m-0 py-1 px-2 h-100" mdbWavesEffect>
+                  <input
+                    type="file"
+                    name="file"
+                    accept=".pdf, .pptx" (change)="uploadPresentation($event,stage.idstage)" />
+                  <span *ngIf="stage.cheminpres == null">Télécharger présentation</span>
+                  <span *ngIf="stage.cheminpres != null">ReTélécharger présentation</span>
+                </label>
+
               </div>
-              <a
-                href="{{ stage.cheminpres }}"
-                class="btn btn-outline-primary w-100 m-0 py-1 px-2 h-100 waves-effect"
+              <a href="{{ UrlBase+stage.cheminpres.slice(1) }}"
+                class="btn btn-outline-primary w-100 m-0 py-1 px-2 h-100"
                 target="_blank"
-                ng-if="stage.cheminpres != null"
-              >Visualiser présentation
+                 *ngIf="stage.cheminpres != null" mdbWavesEffect>Visualiser présentation
               </a>
             </div>
           </div>
@@ -109,14 +87,14 @@
       </div>
       <div class="rounded-bottom primary-color text-center">
         <ul class="list-unstyled list-inline font-small mb-0 py-2">
-          <li class="list-inline-item pr-2 white-text">
+          <li class="list-inline-item pr-2 white-text" *ngIf="stage.datedebut != 'Invalid date'">
             <i class="far fa-clock pr-1"></i>{{ stage.datedebut |
             date:'dd/MM/YYYY' }}
           </li>
           <li class="list-inline-item pr-2 white-text">
             <i class="far fa-clock pr-1"></i>-
           </li>
-          <li class="list-inline-item pr-2 white-text">
+          <li class="list-inline-item pr-2 white-text"  *ngIf="stage.datefin != 'Invalid date'">
             <i class="far fa-clock pr-1"></i>{{ stage.datefin | date:'dd/MM/YYYY' }}
           </li>
         </ul>

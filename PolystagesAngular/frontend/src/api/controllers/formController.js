@@ -56,11 +56,11 @@ exports.FormEleve = function (req, res) {
       var idtuteur = result
       //Crée le stage
       var new_stage = new Stage(req.body, idtuteur);
-      Stage.createStage(new_stage, function (err, result) {
+      Stage.createStage(new_stage, function (err, resultat) {
         if (err)
           res.status(500).send(err);
-        if (result && result.length) {
-          res.status(200).send(result);
+        if (resultat) {
+          res.status(resultat).send();
         }
       })
     })
@@ -160,7 +160,7 @@ exports.FormComp = function (req, res) {
 }
 
 exports.update_stage_byId = function (req, res) {
-  var newStage = new Stage(req.body);
+  var newStage = new Stage(req.body.body,req.body.body.idtuteur);
   console.log(newStage)
   if (req.body.adresseentreprise) {
     Entreprise.updateEntreprise(req.body, function (res) { })
