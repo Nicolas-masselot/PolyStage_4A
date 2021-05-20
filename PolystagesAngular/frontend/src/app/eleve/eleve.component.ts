@@ -16,9 +16,12 @@ export class EleveComponent implements OnInit {
 
   stages: any[] = [];
 
+  currentStages: any[] = [] ;
   UrlBase : string = environment.baseUrl ;
 
   myRandomImg: string = "0"; // 0-10
+  ImgRandoms: string[] = [] ;
+  annee: number = 0  ;
 
   constructor(private service: MessageService,
               private auth: AuthService,
@@ -29,6 +32,17 @@ export class EleveComponent implements OnInit {
   ngOnInit(): void
   {
     this.getEleveStages();
+    this.service.sendGetMessagebyID('eleves/',this.auth.id).subscribe( res => {
+      // @ts-ignore
+      this.annee = res[0].annee ;
+      this.getCurrentEleveStages(this.annee) ;
+    })
+
+  }
+
+  randomImage() : string {
+    let resultat = Math.floor(Math.random() * (10 + 1)) ;
+    return  resultat.toString();
   }
 
   getEleveStages(): void
@@ -44,10 +58,10 @@ export class EleveComponent implements OnInit {
 
   getCurrentEleveStages(annee1: number): void
   {
-    let data = {annee: annee1, endID: this.auth.id};
-    let response = this.service.sendGetMessageQuery("stages/eleve/stage", data);
+    let data = {annee: annee1, eleveId: this.auth.id};
+    let response = this.service.sendGetMessageQuery("current/eleve/stage", data);
     response.subscribe(
-      r => {this.recupererStages(r);},
+      r => {this.recupStagesCourants(r) ;},
       error => {console.log(error);}
     );
   }
@@ -55,6 +69,14 @@ export class EleveComponent implements OnInit {
   recupererStages(data: any): void
   {
     this.stages = data;
+    for (let stage of this.stages) {
+      this.ImgRandoms.push(this.randomImage()) ;
+    }
+  }
+
+  recupStagesCourants(data: any): void
+  {
+    this.currentStages = data ;
   }
 
   AjouterStage(): void {

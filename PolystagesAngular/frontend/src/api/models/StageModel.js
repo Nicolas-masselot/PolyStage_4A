@@ -208,7 +208,7 @@ Stage.getCurrentStageByEleveId = function (annee, ideleve, result) {
             result(null, err);
         }
         else {
-            result(null, res)
+            result(null, res);
         }
     });
 }
