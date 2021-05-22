@@ -78,17 +78,17 @@ exports.verif_dates_stage = function (req, res) {
 exports.proced_eval = function (req, res) {
   var pw = generate_randompw();
   var pwhash = sha512(pw);
-  Tuteur.getTuteurById(req.query.idtuteur, function (err, tuteurtrouve) {
+  Tuteur.getTuteurById(req.body.idtuteur, function (err, tuteurtrouve) {
     if (err) {
       res.status(500).send(err);
     } else {
       var newStage = {}
-      newStage.evallancee = moment(req.query.datetime, "DD/MM/YYYY à HH:mm:ss").format("YYYY/MM/DD HH:mm:ss");
-      Stage.updateStage(req.query.idstage, newStage, function (req, res) { })
+      newStage.evallancee = moment(req.body.datetime, "DD/MM/YYYY à HH:mm:ss").format("YYYY/MM/DD HH:mm:ss");
+      Stage.updateStage(req.body.idstage, newStage, function (req, res) { })
       var mailtuteur = tuteurtrouve[0].emailtuteur;
       Tuteur.updateTuteurAccById(mailtuteur, pwhash, function (err, res) { });
-      var prenomeleve = req.query.prenom;
-      var nomeleve = req.query.nom;
+      var prenomeleve = req.body.prenom;
+      var nomeleve = req.body.nom;
       var sujet = "Evaluation de stage de l'élève " + prenomeleve + " " + nomeleve + " disponible"
       var corps = "Bonjour,</br></br>Merci de bien vouloir compléter l'évaluation du stage de " + prenomeleve + " " + nomeleve + ".</br>"
         + 'Voici vos informations pour accéder à votre <a href="http://localhost:8080/#!/home" target="_blank">espace personnel</a> : </br></br>'
@@ -106,8 +106,8 @@ exports.proced_eval = function (req, res) {
 };
 
 exports.send_rappels = function (req, res) {
-  var retardsEleves = req.query.retardsEleves
-  var retardsTuteurs = req.query.retardsTuteurs
+  var retardsEleves = req.body.retardsEleves
+  var retardsTuteurs = req.body.retardsTuteurs
   if (Array.isArray(retardsEleves)) {
     for (var eleve of retardsEleves) {
       send_mail_eleve(JSON.parse(eleve))

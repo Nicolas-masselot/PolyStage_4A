@@ -1,11 +1,11 @@
 
 <h1 class="mt-2">Accueil</h1>
 
-<button ng-if="$root.role == 'enseignant' && stages.length != 0" (click)="lancerAllEvaluation()" class="btn btn-outline-primary mx-0" ng-disabled="isAllEvaluated==true" >
+<button *ngIf="stages.length != 0" (click)="lancerAllEvaluation()" class="btn btn-outline-primary mx-0" ng-disabled="isAllEvaluated==true" >
   Lancer toutes les évaluations
 </button>
 <div class="row">
-  <h4 ng-if="stages.length == 0" class="col-12">
+  <h4 *ngIf="stages.length == 0" class="col-12">
     Il n'y a aucun stage à afficher
   </h4>
   <div class="col-md-6  " *ngFor="let stage of stages">
@@ -25,7 +25,7 @@
             Lancer évaluation
           </button>
         </div>
-        <div class="text-center" ng-if="stage.dateeval">
+        <div class="text-center" *ngIf="stage.dateeval">
           <a
           routerLink="stage.chemineval"
           target="_blank"
@@ -33,10 +33,10 @@
           >Visualiser l'évaluation</a
           > <!-- (click)="goToEval(stage.chemineval)" -->
         </div>
-        <p class="text-center text-danger mb-0" ng-if="!stage.idtuteur">
+        <p class="text-center text-danger mb-0" *ngIf="!stage.idtuteur">
           L'élève n'a toujours pas renseigné de tuteur
         </p>
-        <p class="text-center text-primary mb-0" ng-if="stage.evallancee">
+        <p class="text-center text-primary mb-0" *ngIf="stage.evallancee">
           L'évaluation a été lancée <span am-time-ago="stage.evallancee"></span>
         </p>
       </div>
