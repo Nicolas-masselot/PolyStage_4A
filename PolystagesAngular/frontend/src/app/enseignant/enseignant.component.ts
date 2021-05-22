@@ -54,7 +54,7 @@ export class EnseignantComponent implements OnInit {
     const datetime = new Date().toLocaleString('fr-FR');
     let data = {idstage: idstage, idtuteur: idtuteur, nom: nom, prenom: prenom, datetime: datetime};
 
-    let response = this.service.sendGetMessageQuery("mail/evaluation", data);
+    let response = this.service.sendMessage("mail/evaluation", data);
     response.subscribe(
       r => {
           this.toastr.success("L'évaluation a bien été lancée");
