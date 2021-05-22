@@ -40,8 +40,11 @@ import {MatInputModule} from "@angular/material/input";
 import { AjoutEntrepriseDialogComponent } from './ajout-entreprise-dialog/ajout-entreprise-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import { AjoutEntrepriseComponent } from './ajout-entreprise/ajout-entreprise.component';
+import { EvalComponent } from './eval/eval.component';
+import { CompetencesComponent } from './competences/competences.component';
 
 
+// @ts-ignore
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,7 +62,9 @@ import { AjoutEntrepriseComponent } from './ajout-entreprise/ajout-entreprise.co
     FormStageComponent,
     StatistiquesComponent,
     AjoutEntrepriseDialogComponent,
-    AjoutEntrepriseComponent
+    AjoutEntrepriseComponent,
+    EvalComponent,
+    CompetencesComponent
   ],
     imports: [
         BrowserModule,

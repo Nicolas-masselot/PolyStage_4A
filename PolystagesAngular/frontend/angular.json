@@ -53,7 +53,8 @@
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
               "node_modules/mdb-ui-kit/js/mdb.min.js",
               "node_modules/chart.js/dist/Chart.js",
-              "node_modules/hammerjs/hammer.min.js"
+              "node_modules/hammerjs/hammer.min.js",
+              "node_modules/moment/min/moment.min.js"
             ]
           },
           "configurations": {

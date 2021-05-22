@@ -161,5 +161,3 @@ export class EleveComponent implements OnInit {
     }
   }
 }
-
-// TODO faire l'affichage des stages selon le nombre et les images random

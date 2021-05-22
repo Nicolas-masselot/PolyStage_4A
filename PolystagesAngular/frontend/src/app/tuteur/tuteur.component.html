@@ -1,5 +1,5 @@
 <h1 class="mt-2">Accueil</h1>
-<div class="row" ng-if="$root.role == 'tuteur'">
+<div class="row">
   <div class="col-md-12 mb-2" *ngFor="let stage of stages">
     <div class="card w-100">
       <div class="card-header custom-color-card text-center">
@@ -8,51 +8,48 @@
       <div class="card-body text-center">
         <h5 class="card-title">{{ stage.titrestage }}</h5>
         <p class="card-text mb-1">{{ stage.nomcomplet }}</p>
-        <div class="text-center">
+        <div class="btn-group text-center" style="margin: 5px">
           <button
-            ng-click="evaluer(stage.idstage)"
-            class="btn btn-outline-primary mx-0"
-            ng-disabled="stage.dateeval"
-          >
+            (click)="evaluer(stage.idstage)"
+            class="btn btn-outline-primary mx-1"
+            [disabled]="stage.dateeval" mdbBtn>
             Évaluer le stage
           </button>
           <button
-            ng-click="evaluerCompetences(stage.idstage)"
-            class="btn btn-outline-primary mx-0"
-            ng-disabled="stage.datecomp"
-          >
+            (click)="evaluerCompetences(stage.idstage)"
+            class="btn btn-outline-primary mx-1"
+            [disabled]="stage.datecomp" mdbBtn>
             Évaluer les compétences
           </button>
+
         </div>
-        <div class="text-center">
+
+        <div class="btn-group text-center" style="margin: 5px">
           <a
             href="{{stage.chemineval}}"
-            ng-if="stage.dateeval"
+            *ngIf="stage.dateeval"
             target="_blank"
-            class="btn btn-outline-primary mx-0"
-          >Visualiser l'évaluation du stage</a
-          >
+            class="btn btn-outline-primary mx-1" mdbBtn>Visualiser l'évaluation du stage</a>
+
+          <!-- Utiliser l'url de base du serveur comme dans le home étudiant pour les chemins des PDF d'éval-->
           <a
             href="{{stage.chemincomp}}"
-            ng-if="stage.datecomp"
+            *ngIf="stage.datecomp"
             target="_blank"
-            class="btn btn-outline-primary mx-0"
-          >Visualiser l'évaluation des compétences</a
-          >
+            class="btn btn-outline-primary mx-1" mdbBtn>Visualiser l'évaluation des compétences</a>
         </div>
         <p
-          class="text-center text-primary mb-0"
-          ng-if="!stage.dateeval || !stage.datecomp"
-        >
+          class="text-center text-primary mb-1"
+          *ngIf="!stage.dateeval || !stage.datecomp">
           L' évaluation est disponible
         </p>
-        <p class="text-center text-primary mb-0" ng-if="stage.dateeval">
+        <p class="text-center text-primary mb-1" *ngIf="stage.dateeval">
           L'évaluation du stage a été faite
-          <span am-time-ago="stage.dateeval"></span>
+          <span>{{ moment(stage.dateeval).fromNow() }}</span>
         </p>
-        <p class="text-center text-primary mb-0" ng-if="stage.datecomp">
+        <p class="text-center text-primary mb-1" *ngIf="stage.datecomp">
           L'évaluation des compétences a été faite
-          <span am-time-ago="stage.datecomp"></span>
+          <span>{{ moment(stage.datecomp).fromNow() }}</span>
         </p>
       </div>
       <div class="card-footer text-center">
