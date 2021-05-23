@@ -1,0 +1,8 @@
+﻿idquest;question;type;choix
+22;Sur le stagiaire;text;NULL
+23;Sur le déroulé du stage;text;NULL
+24;Classement du stagiaire parmi les stagiaires du même niveau accueillis par votre entreprise;enum;classement
+25;Quels conseils donneriez-vous à ce futur ingénieur ?;text;NULL
+26;Sur la formation d'ingénieur de Polytech Marseille;text;NULL
+27;Sur l'accueil d'un stagiaire pour l'année prochaine ?;enum;ouinon
+28;Sur l'accueil d'un élève en contrat de professionnalisation pour l'année prochaine ?;enum;ouinon

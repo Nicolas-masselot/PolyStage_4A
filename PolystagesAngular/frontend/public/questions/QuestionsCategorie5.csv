@@ -1,0 +1,6 @@
+﻿idquest;question;type;is4a;is5a;choix;niveau
+35;Le rapport de stage est-il confidentiel ?;enum;1;1;ouinon;4
+36;Souhaitez-vous participer à la soutenance ?;enum;1;1;ouinon;4
+37;Si oui, seriez-vous disponible pour participer au repas le jeudi 12 septembre à midi ?;enum;0;1;ouinon;5
+38;Si oui, indiquez le nombre de personnes qui participeront;text;0;1;NULL;5
+39;Avez-vous des impératifs horaires éventuels ?;text;1;1;NULL;4

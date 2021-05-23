@@ -122,6 +122,12 @@ module.exports = function (app) {
   app.route('/competences/:idcompetence')
     .get(QuestionControlleur.list_AllChoixByIdcomp);
 
+  app.route('/recupQuestions')
+    .get(QuestionControlleur.RecupQuestionsCsv) ;
+
+  app.route('/recupCompetences')
+    .get(QuestionControlleur.RecupCompetencesCsv) ;
+
   app.route('/forms/eleve')
     .post(FormControlleur.FormEleve);
 
