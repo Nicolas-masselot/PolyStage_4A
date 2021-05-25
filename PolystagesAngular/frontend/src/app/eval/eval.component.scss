@@ -1,0 +1,12 @@
+.form-check-input {
+  margin-top: 0.9rem;
+  border-style: solid;
+  border-width: revert;
+  border-color: black;
+}
+
+input:checked {
+  border-style: solid;
+  border-width: thin;
+  border-color: black;
+}

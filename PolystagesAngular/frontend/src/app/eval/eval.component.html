@@ -1,1 +1,74 @@
-<p>eval works!</p>
+<h1 class="mt-2" *ngIf="stage">Évaluation de l'élève {{ stage.prenom + ' ' + stage.nom }}</h1>
+
+
+
+<form [formGroup]="FormEval" (ngSubmit)="submitQuestionnaire()" novalidate>
+  <div class="mb-4" *ngFor="let categorie of questions">
+    <h3 class="title-form">{{categorie.nomcat}}</h3>
+    <div class="row">
+      <div class="col-md-6 md-form" [ngClass]="{'my-2': categorie.nomcat == 'IDENTIFICATION' , 'my-3': categorie.nomcat !== 'IDENTIFICATION' }"
+           *ngFor="let question of categorie.questions " >
+        <div *ngIf="(question.idquest == '2' || question.idquest == '3' || question.idquest == '4' || question.idquest == '6') && QuestionBonNiveau(question.niveau); else defaultFormInput">
+          <input type="text" id="{{question.idquest+'id'}}"
+                 class="form-control" formControlName="{{question.idquest}}" mdbInput [attr.disabled]="true">
+          <label for="{{question.idquest+'id'}}" class="pl-3 active">{{ question.question }}</label>
+        </div>
+        <ng-template #defaultFormInput>
+          <div *ngIf="(question?.type == 'text' || categorie.nomcat == 'IDENTIFICATION')&& QuestionBonNiveau(question.niveau)" >
+            <input type="text" id="{{question.idquest+'text'}}"
+                   class="form-control" formControlName="{{question.idquest}}" mdbInput>
+            <label for="{{question.idquest+'text'}}" class="pl-3">{{ question.question }}</label>
+          </div>
+
+          <div *ngIf="QuestionBonNiveau(question.niveau)">
+            <p class="mb-0" *ngIf="question?.choix == 'ouinon'">{{ question.question }}</p>
+            <div *ngIf="question?.choix == 'ouinon'" class="mt--10">
+              <div class="form-check" *ngFor="let choix of choixOuiNon">
+                <input type="radio" class="form-check-input" formControlName="{{question.idquest}}" id="{{question.idquest+'ouinon'}}" value="{{choix}}">
+                <label for="{{question.idquest+'ouinon'}}" class="form-check-label" style="position: relative">{{ choix }}</label>
+              </div>
+
+            </div>
+
+            <div *ngIf="QuestionBonNiveau(question.niveau)">
+              <p class="mb-0" *ngIf="categorie.nomcat == 'ÉVALUATION DES COMPÉTENCES'">{{ question.question }}</p>
+              <div *ngIf="categorie.nomcat == 'ÉVALUATION DES COMPÉTENCES'" class="mt--10">
+                <div class="form-check" *ngFor="let choix of choixNotation">
+                  <input type="radio" class="form-check-input" formControlName="{{question.idquest}}" id="{{question.idquest+'comp'}}" value="{{choix}}">
+                  <label for="{{question.idquest+'comp'}}" class="form-check-label" style="position: relative">{{ choix }}</label>
+                </div>
+              </div>
+
+            </div>
+
+            <div  *ngIf="QuestionBonNiveau(question.niveau)">
+              <p class="mb-0" *ngIf="question?.choix == 'classement'">{{ question.question }}</p>
+              <div *ngIf="question?.choix == 'classement'" class="mt--10">
+                <div class="form-check" *ngFor="let choix of choixClassement">
+                  <input type="radio" class="form-check-input" formControlName="{{question.idquest}}" id="{{question.idquest+'rank'}}" value="{{choix}}">
+                  <label for="{{question.idquest+'rank'}}" class="form-check-label" style="position: relative">{{ choix }}</label>
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="QuestionBonNiveau(question.niveau)">
+              <p class="mb-0" *ngIf="question?.choix == 'contrat'">{{ question.question }}</p>
+              <div *ngIf="question?.choix == 'contrat'" class="mt--10">
+                <div class="form-check" *ngFor="let choix of choixContrat">
+                  <input type="radio" class="form-check-input" formControlName="{{question.idquest}}" id="{{question.idquest+'contrat'}}" value="{{choix}}">
+                  <label for="{{question.idquest+'contrat'}}" class="form-check-label" style="position: relative">{{ choix }}</label>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+
+        </ng-template>
+
+      </div>
+    </div>
+
+  </div>
+  <button type="submit" class="btn btn-primary float-right mx-0">Valider l'évaluation</button>
+</form>
