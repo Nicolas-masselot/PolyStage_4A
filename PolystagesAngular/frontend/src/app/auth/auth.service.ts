@@ -38,28 +38,28 @@ export class AuthService
     this.nom = message[0]["nom"];
     this.prenom = message[0]["prenom"];
     this.admin = message[0]["admin"] ;
-    localStorage.setItem('isConnected', String(this.authenticated)) ;
-    localStorage.setItem('prenom', this.prenom) ;
-    localStorage.setItem('nom', this.nom) ;
-    localStorage.setItem('role', this.authAs) ;
-    localStorage.setItem('admin',String(this.admin)) ;
+    sessionStorage.setItem('isConnected', String(this.authenticated)) ;
+    sessionStorage.setItem('prenom', this.prenom) ;
+    sessionStorage.setItem('nom', this.nom) ;
+    sessionStorage.setItem('role', this.authAs) ;
+    sessionStorage.setItem('admin',String(this.admin)) ;
 
 
     if (this.authAs == "eleve") this.id = message[0]["ideleve"];
     else if (this.authAs == "enseignant") this.id = message[0]["idens"];
     else if (this.authAs == "tuteur") this.id = message[0]["idtuteur"];
 
-    localStorage.setItem('idUser',String(this.id)) ;
+    sessionStorage.setItem('idUser',String(this.id)) ;
   }
 
   isAuthenticated(): boolean
   {
-    return (localStorage.getItem('isConnected')== "true") ;
+    return (sessionStorage.getItem('isConnected')== "true") ;
   }
 
   getId():string | null {
-    if (localStorage.getItem('idUser')&& localStorage.getItem('idUser') !== 'undefined') {
-      return <string>localStorage.getItem('idUser');
+    if (sessionStorage.getItem('idUser')&& sessionStorage.getItem('idUser') !== 'undefined') {
+      return <string>sessionStorage.getItem('idUser');
     } else {
       return null;
     }
@@ -67,8 +67,8 @@ export class AuthService
 
   getRole():string | null
   {
-    if (localStorage.getItem('role')&& localStorage.getItem('role') !== 'undefined'){
-      return <string>localStorage.getItem('role') ;
+    if (sessionStorage.getItem('role')&& sessionStorage.getItem('role') !== 'undefined'){
+      return <string>sessionStorage.getItem('role') ;
     }else {
       return null ;
     }
@@ -77,8 +77,8 @@ export class AuthService
 
   getNom() : string | null
   {
-    if (localStorage.getItem('nom') && localStorage.getItem('nom') !== 'undefined'){
-      return <string>localStorage.getItem('nom') ;
+    if (sessionStorage.getItem('nom') && sessionStorage.getItem('nom') !== 'undefined'){
+      return <string>sessionStorage.getItem('nom') ;
     } else {
       return  null ;
     }
@@ -86,8 +86,8 @@ export class AuthService
 
   getPrenom() : string | null
   {
-    if (localStorage.getItem('prenom') && localStorage.getItem('prenom') !== 'undefined'){
-      return <string>localStorage.getItem('prenom') ;
+    if (sessionStorage.getItem('prenom') && sessionStorage.getItem('prenom') !== 'undefined'){
+      return <string>sessionStorage.getItem('prenom') ;
     } else {
       return  null ;
     }
@@ -95,8 +95,8 @@ export class AuthService
 
   getAdmin() : string | null
   {
-    if (localStorage.getItem('admin')&& localStorage.getItem('admin') !== 'undefined'){
-      return <string>localStorage.getItem('admin') ;
+    if (sessionStorage.getItem('admin')&& sessionStorage.getItem('admin') !== 'undefined'){
+      return <string>sessionStorage.getItem('admin') ;
     } else {
       return  null ;
     }
@@ -110,7 +110,7 @@ export class AuthService
     this.prenom = '';
     this.admin = false;
 
-    localStorage.clear() ;
+    sessionStorage.clear() ;
   }
 
 }
