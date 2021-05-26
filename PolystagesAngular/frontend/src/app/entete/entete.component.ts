@@ -9,18 +9,18 @@ import {Router} from "@angular/router";
 })
 export class EnteteComponent implements OnInit {
 
-  nom_utilisateur : string | undefined ;
-  prenom_utilisateur : string | undefined ;
-  admin : boolean | undefined ;
+  nom_utilisateur : string | null | undefined ;
+  prenom_utilisateur : string | null | undefined ;
+  admin : string | null | undefined ;
   connected: boolean | undefined ;
 
   constructor(private authservice: AuthService, private router: Router) {
     this.router.events.subscribe((ev) => {
       this.connected = this.authservice.isAuthenticated() ;
       if(this.connected){
-        this.nom_utilisateur = this.authservice.nom ;
-        this.prenom_utilisateur = this.authservice.prenom;
-        this.admin = this.authservice.admin ;
+        this.nom_utilisateur = this.authservice.getNom() ;
+        this.prenom_utilisateur = this.authservice.getPrenom();
+        this.admin = this.authservice.getAdmin() ;
       } else {
       }
     });

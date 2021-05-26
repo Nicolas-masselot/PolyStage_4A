@@ -31,7 +31,7 @@ export class TuteurComponent implements OnInit {
   getTuteurStages(): void
   {
     let data = {};
-    let idTuteur = this.auth.id;
+    let idTuteur = Number(this.auth.getId());
     let response = this.service.sendGetMessageQuery("stages/tuteurs/"+idTuteur, data);
     response.subscribe(
       r => {this.recupererStages(r);},
@@ -41,7 +41,7 @@ export class TuteurComponent implements OnInit {
 
   getCurrentTuteurStages(annee1: number): void
   {
-    let data = {annee: annee1, endID: this.auth.id};
+    let data = {annee: annee1, endID: Number(this.auth.getId())};
     let response = this.service.sendGetMessageQuery("stages/tuteur/stage", data);
     response.subscribe(
       r => {this.recupererStages(r);},

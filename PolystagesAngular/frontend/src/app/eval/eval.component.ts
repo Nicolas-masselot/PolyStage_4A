@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {MessageService} from "../message/message.service";
 import {FormBuilder, FormControl} from "@angular/forms";
 import {AuthService} from "../auth/auth.service";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-eval',
@@ -32,7 +33,8 @@ export class EvalComponent implements OnInit {
   } ;
 
   questions : any ;
-  constructor(private route: ActivatedRoute, private message : MessageService, private auth: AuthService, private fb: FormBuilder) { }
+  constructor(private route: ActivatedRoute, private message : MessageService, private auth: AuthService, private fb: FormBuilder,
+              private toastr: ToastrService,private router: Router) { }
 
   ngOnInit(): void {
     this.idStage = Number(this.route.snapshot.paramMap.get('stageId')) ;
@@ -52,7 +54,7 @@ export class EvalComponent implements OnInit {
       this.fields[4] = this.stage.nomcomplet ;
 
       // @ts-ignore
-      this.fields[6] = this.auth.prenom+' '+this.auth.nom ;
+      this.fields[6] = this.auth.getPrenom()+' '+this.auth.getNom() ;
 
       this.fields.annee = this.stage.annee ;
       this.fields.niveau = this.stage.niveau ;
@@ -71,7 +73,7 @@ export class EvalComponent implements OnInit {
       this.FormEval.get('2')?.setValue(this.stage.nom) ;
       this.FormEval.get('3')?.setValue(this.stage.prenom) ;
       this.FormEval.get('4')?.setValue(this.stage.nomcomplet) ;
-      this.FormEval.get('6')?.setValue(this.auth.prenom+' '+this.auth.nom) ;
+      this.FormEval.get('6')?.setValue(this.auth.getPrenom()+' '+this.auth.getNom()) ;
 
 
     }) ;
@@ -97,7 +99,15 @@ export class EvalComponent implements OnInit {
 
     });
     console.log(this.fields) ;
-    //TODO envoyer en post fields
+
+    this.message.sendMessage('stages/eval/'+this.idStage,this.fields).subscribe( res => {
+      this.router.navigateByUrl("/tuteur").then(r => { console.log(r) ;}) ;
+      this.toastr.success("L'évaluation a bien été enregistrée") ;
+
+    }, error => {
+      console.log(error) ;
+      this.toastr.error("Une erreur s'est produite") ;
+    })
   }
 
 

@@ -16,7 +16,7 @@ export class AuthEleveGuard implements CanActivateChild
     childRoute: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree
   {
-    if (this.auth.isAuthenticated() && this.auth.authAs == "eleve")
+    if (this.auth.isAuthenticated() && this.auth.getRole() == 'eleve')
     {
       return true;
     }

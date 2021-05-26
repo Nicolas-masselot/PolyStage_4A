@@ -34,11 +34,11 @@ export class MenuComponent implements OnInit {
 
       if (this.authservice.isAuthenticated())
       {
-        if (this.authservice.authAs == "eleve")
+        if (this.authservice.getRole() == "eleve")
         {
           this.displayAccueilEleve = true;
         }
-        else if (this.authservice.authAs == "enseignant")
+        else if (this.authservice.getRole() == "enseignant")
         {
           this.displayAccueilEnseignant = true;
           this.displayAdministration = true;
@@ -46,7 +46,7 @@ export class MenuComponent implements OnInit {
           this.displayRechercheStage = true;
           this.displayStatistiques = true;
         }
-        else if (this.authservice.authAs == "tuteur")
+        else if (this.authservice.getRole() == "tuteur")
         {
           this.displayAccueilTuteur = true;
         }

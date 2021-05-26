@@ -115,12 +115,12 @@ exports.FormEval = function (req, res) {
   var dirresult = './public/' + req.body.annee + '/' + req.body.niveau + 'A/'
     + nomfich
   var template = './public/templates/';
-  if (req.body.niveau == 5) {
+  if (req.body.niveau === 5) {
     template = template + 'template5a.odt'
   } else {
     template = template + 'template4a.odt'
   }
-
+ // la conversion ne fonctionne pas erreur = Cannot find LibreOffice. Document conversion cannot be used
   carbone.render(template, req.body, options, function (err, result) {
     if (err) return console.log(err);
     var newStage = {}
@@ -146,7 +146,7 @@ exports.FormComp = function (req, res) {
     + nomfich
   var template = './public/templates/template_competences.odt';
 
-  carbone.render(template, req.body, options, function (err, result) {
+  carbone.render(template, req.body, options, function (err, result) { // idem
     if (err) return console.log(err);
     var newStage = {}
     newStage.chemincomp = dirresult;

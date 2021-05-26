@@ -16,7 +16,7 @@ export class AuthEnseignantGuard implements CanActivateChild
     childRoute: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree
   {
-    if (this.auth.isAuthenticated() && this.auth.authAs == "enseignant")
+    if (this.auth.isAuthenticated() && this.auth.getRole() =='enseignant')
     {
       return true;
     }

@@ -14,6 +14,9 @@ app.use(bodyParser.json());
 const cors = require ('cors');
 app.use(cors({origin: 'http://localhost:4200', credentials: true}));
 
+const cookieParser = require('cookie-parser');
+app.use(cookieParser()) ;
+
 
 /*
 app.use(function (req, res, next) {

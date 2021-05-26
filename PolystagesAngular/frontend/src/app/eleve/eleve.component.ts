@@ -32,7 +32,7 @@ export class EleveComponent implements OnInit {
   ngOnInit(): void
   {
     this.getEleveStages();
-    this.service.sendGetMessagebyID('eleves/',this.auth.id).subscribe( res => {
+    this.service.sendGetMessagebyID('eleves/',Number(this.auth.getId())).subscribe( res => {
       // @ts-ignore
       this.annee = res[0].annee ;
       this.getCurrentEleveStages(this.annee) ;
@@ -48,7 +48,7 @@ export class EleveComponent implements OnInit {
   getEleveStages(): void
   {
     let data = {};
-    let idEleve = this.auth.id;
+    let idEleve = Number(this.auth.getId());
     let response = this.service.sendGetMessageQuery("stages/eleves/"+idEleve, data);
     response.subscribe(
       r => {this.recupererStages(r);},
@@ -58,7 +58,7 @@ export class EleveComponent implements OnInit {
 
   getCurrentEleveStages(annee1: number): void
   {
-    let data = {annee: annee1, eleveId: this.auth.id};
+    let data = {annee: annee1, eleveId: Number(this.auth.getId())};
     let response = this.service.sendGetMessageQuery("current/eleve/stage", data);
     response.subscribe(
       r => {this.recupStagesCourants(r) ;},
@@ -94,7 +94,7 @@ export class EleveComponent implements OnInit {
       this.toastr.error("Le fichier est trop grand (>5MO)") ;
     }else {
       let eleve ;
-      this.service.sendGetMessagebyID('eleves/',this.auth.id).subscribe(
+      this.service.sendGetMessagebyID('eleves/',Number(this.auth.getId())).subscribe(
         response=> {
           // @ts-ignore
           eleve = response[0] ;
@@ -130,7 +130,7 @@ export class EleveComponent implements OnInit {
       this.toastr.error("Le fichier est trop grand (>10MO)") ;
     }else {
       let eleve ;
-      this.service.sendGetMessagebyID('eleves/',this.auth.id).subscribe(
+      this.service.sendGetMessagebyID('eleves/',Number(this.auth.getId())).subscribe(
         response=> {
           // @ts-ignore
           eleve = response[0] ;

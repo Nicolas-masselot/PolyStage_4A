@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {MessageService} from "../message/message.service";
 import {AuthService} from "../auth/auth.service";
 import {FormBuilder, FormControl} from "@angular/forms";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-competences',
@@ -30,7 +31,8 @@ export class CompetencesComponent implements OnInit {
 
   }
 
-  constructor( private route: ActivatedRoute, private message: MessageService, private auth : AuthService, private fb : FormBuilder) { }
+  constructor( private route: ActivatedRoute, private message: MessageService, private auth : AuthService, private fb : FormBuilder,
+               private toastr: ToastrService,private router: Router) { }
 
   ngOnInit(): void {
     this.idStage = Number(this.route.snapshot.paramMap.get('stageId')) ;
@@ -44,7 +46,7 @@ export class CompetencesComponent implements OnInit {
 
       this.fields.nomentreprise = this.stage.nomcomplet ;
       // @ts-ignore
-      this.fields.nomtuteur = this.auth.prenom + ' ' + this.auth.nom ;
+      this.fields.nomtuteur = this.auth.getPrenom() + ' ' + this.auth.getNom() ;
       this.fields.annee = this.stage.annee;
       this.fields.niveau = this.stage.niveau;
       this.fields.nom = this.stage.nom;
@@ -74,7 +76,14 @@ export class CompetencesComponent implements OnInit {
 
     });
     console.log(this.fields) ;
-    //TODO envoyer en post fields
+    this.message.sendMessage('stages/evalcompetences/'+this.idStage,this.fields).subscribe( res => {
+      this.router.navigateByUrl("/tuteur").then(r => { console.log(r) ;}) ;
+      this.toastr.success("L'évaluation a bien été enregistrée") ;
+
+    }, error => {
+      console.log(error) ;
+      this.toastr.error("Une erreur s'est produite") ;
+    })
   }
 
 }

@@ -26,7 +26,7 @@ export class EnseignantComponent implements OnInit {
   getEnsStages(): void
   {
     let data = {};
-    let idEns = this.auth.id;
+    let idEns = this.auth.getId();
     let response = this.service.sendGetMessageQuery("stages/ens/"+idEns, data);
     response.subscribe(
       r => {this.recupererStages(r);},
@@ -36,7 +36,7 @@ export class EnseignantComponent implements OnInit {
 
   getCurrentEnsStages(annee1: number): void
   {
-    let data = {annee: annee1, endID: this.auth.id};
+    let data = {annee: annee1, endID: this.auth.getId()};
     let response = this.service.sendGetMessageQuery("stages/ens/stage", data);
     response.subscribe(
       r => {this.recupererStages(r);},

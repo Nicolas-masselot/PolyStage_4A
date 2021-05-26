@@ -15,7 +15,7 @@ import {ModifStageService} from "../modifStage/modif-stage.service";
 
 export class FormStageComponent implements OnInit {
 
-  Role: string | undefined ;
+  Role: string | null | undefined ;
   niveau: string | undefined ;
   enseignants: any[] | undefined ;
   entreprises: any[] | undefined ;
@@ -50,9 +50,9 @@ export class FormStageComponent implements OnInit {
               private formbuilder: FormBuilder,private toastr: ToastrService, private router: Router , private modifservice : ModifStageService) { }
 
   ngOnInit(): void {
-    if (this.authservice.authAs == 'eleve'){
-      this.Role = this.authservice.authAs ;
-      this.messageservice.sendGetMessagebyID('eleves/',this.authservice.id).subscribe(
+    if (this.authservice.getRole() == 'eleve'){
+      this.Role = this.authservice.getRole() ;
+      this.messageservice.sendGetMessagebyID('eleves/',Number(this.authservice.getId())).subscribe(
         response=> { // @ts-ignore
           this.niveau = response[0].niveau ;
           // @ts-ignore
@@ -77,7 +77,7 @@ export class FormStageComponent implements OnInit {
     let Debut = new DatePipe('en-US').transform( this.formulaire.value.debutstage,'YYYY-MM-d') ;
     let Fin = new DatePipe('en-US').transform( this.formulaire.value.finstage,'YYYY-MM-d') ;
     const StageInfos = {
-      idEleve: this.authservice.id ,
+      idEleve: Number(this.authservice.getId()) ,
       nometu: this.etudiant.nom,
       prenometu: this.etudiant.prenom,
       annee: this.etudiant.annee,
