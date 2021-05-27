@@ -1,0 +1,40 @@
+<h1 class="mt-2" *ngIf="stage">Évaluation des compétences de l'élève {{ stage.prenom + ' ' + stage.nom }}</h1>
+
+<form [formGroup]="FormComp" (ngSubmit)="submitCompetences()" novalidate>
+  <div class="mb-4" *ngFor="let categorie of competences">
+    <h3 class="title-form mb-0">{{categorie.nomcat}}</h3>
+    <div class="row">
+      <div class="col-md-6 md-form my-3" *ngFor="let competence of categorie.questions">
+        <p class="mb-0">{{ competence.sigle + ': ' + competence.libelle }}</p>
+        <div class="form-check">
+          <input type="radio" class="form-check-input" id="{{competence.idcompetence+'1'}}" formControlName="{{competence.idcompetence}}"
+                 value="{{competence.niveauDebutant}}">
+          <label for="{{competence.idcompetence+'1'}}" class="form-check-label" style="position: relative">{{ competence.niveauDebutant }}</label>
+        </div>
+        <div class="form-check">
+          <input type="radio" class="form-check-input" id="{{competence.idcompetence+'2'}}" formControlName="{{competence.idcompetence}}"
+                 value="{{competence.niveauIntermediaire}}">
+          <label for="{{competence.idcompetence+'2'}}" class="form-check-label" style="position: relative">{{ competence.niveauIntermediaire }}</label>
+        </div>
+        <div class="form-check">
+          <input type="radio" class="form-check-input" id="{{competence.idcompetence+'3'}}" formControlName="{{competence.idcompetence}}"
+                 value="{{competence.niveauMaitrise}}">
+          <label for="{{competence.idcompetence+'3'}}" class="form-check-label" style="position: relative">{{ competence.niveauMaitrise }}</label>
+        </div>
+        <div class="form-check">
+          <input type="radio" class="form-check-input" id="{{competence.idcompetence+'4'}}" formControlName="{{competence.idcompetence}}"
+                 value="{{competence.niveauExpertise}}">
+          <label for="{{competence.idcompetence+'4'}}" class="form-check-label" style="position: relative">{{ competence.niveauExpertise }}</label>
+        </div>
+        <div class="form-check">
+          <input type="radio" class="form-check-input" id="{{competence.idcompetence+'5'}}" formControlName="{{competence.idcompetence}}"
+                 value="Sans objet">
+          <label for="{{competence.idcompetence+'5'}}" class="form-check-label" style="position: relative">Sans objet</label>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <button type="submit" class="btn btn-primary float-right mx-0">Valider l'évaluation</button>
+</form>
+

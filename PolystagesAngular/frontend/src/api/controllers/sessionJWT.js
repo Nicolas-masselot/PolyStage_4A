@@ -1,4 +1,4 @@
-/*
+
 const sessionJWT = require ('jsonwebtoken');
 const fs = require ('fs');
 const path = require('path');
@@ -56,4 +56,4 @@ function decodeSessionCookie(req) {
   }
 }
 module.exports.decodeSessionCookie = decodeSessionCookie;
-*/
+

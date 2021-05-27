@@ -1,0 +1,7 @@
+﻿idquest;question;type;choix
+29;L'entreprise a-t-elle fait une proposition d'emploi au stagiaire ?;enum;ouinon
+30;Si une proposition a été faite, quel est le type de contrat ?;enum;contrat
+31;L'entreprise ne recrute pas sur le profil du stagiaire;enum;ouinon
+32;Le stagiaire aurait pu être recruté si l'entreprise avait eu un poste à pourvoir;enum;ouinon
+33;Le stagiaire n'a pas été retenu pour un recrutement;enum;ouinon
+34;Autres:;text;NULL

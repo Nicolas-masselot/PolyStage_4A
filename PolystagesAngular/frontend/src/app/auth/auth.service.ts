@@ -9,12 +9,12 @@ import {sha512} from "js-sha512";
 export class AuthService
 {
 
-  authenticated: boolean = false;
-  authAs: string = ""; // eleve, enseignant ou tuteur
-  prenom: string = "";
-  nom: string = "";
-  admin: boolean = false;
-  id: number = 0;
+  private authenticated: boolean = false;
+  private authAs: string = ""; // eleve, enseignant ou tuteur
+  private prenom: string = "";
+  private nom: string = "";
+  private admin: boolean = false;
+  private id: number = 0;
 
   constructor(@Inject(MessageService) private service: MessageService)
   {}
@@ -38,15 +38,68 @@ export class AuthService
     this.nom = message[0]["nom"];
     this.prenom = message[0]["prenom"];
     this.admin = message[0]["admin"] ;
+    sessionStorage.setItem('isConnected', String(this.authenticated)) ;
+    sessionStorage.setItem('prenom', this.prenom) ;
+    sessionStorage.setItem('nom', this.nom) ;
+    sessionStorage.setItem('role', this.authAs) ;
+    sessionStorage.setItem('admin',String(this.admin)) ;
+
 
     if (this.authAs == "eleve") this.id = message[0]["ideleve"];
     else if (this.authAs == "enseignant") this.id = message[0]["idens"];
     else if (this.authAs == "tuteur") this.id = message[0]["idtuteur"];
+
+    sessionStorage.setItem('idUser',String(this.id)) ;
   }
 
   isAuthenticated(): boolean
   {
-    return this.authenticated;
+    return (sessionStorage.getItem('isConnected')== "true") ;
+  }
+
+  getId():string | null {
+    if (sessionStorage.getItem('idUser')&& sessionStorage.getItem('idUser') !== 'undefined') {
+      return <string>sessionStorage.getItem('idUser');
+    } else {
+      return null;
+    }
+  }
+
+  getRole():string | null
+  {
+    if (sessionStorage.getItem('role')&& sessionStorage.getItem('role') !== 'undefined'){
+      return <string>sessionStorage.getItem('role') ;
+    }else {
+      return null ;
+    }
+
+  }
+
+  getNom() : string | null
+  {
+    if (sessionStorage.getItem('nom') && sessionStorage.getItem('nom') !== 'undefined'){
+      return <string>sessionStorage.getItem('nom') ;
+    } else {
+      return  null ;
+    }
+  }
+
+  getPrenom() : string | null
+  {
+    if (sessionStorage.getItem('prenom') && sessionStorage.getItem('prenom') !== 'undefined'){
+      return <string>sessionStorage.getItem('prenom') ;
+    } else {
+      return  null ;
+    }
+  }
+
+  getAdmin() : string | null
+  {
+    if (sessionStorage.getItem('admin')&& sessionStorage.getItem('admin') !== 'undefined'){
+      return <string>sessionStorage.getItem('admin') ;
+    } else {
+      return  null ;
+    }
   }
 
   logout():void{
@@ -56,6 +109,8 @@ export class AuthService
     this.nom = '';
     this.prenom = '';
     this.admin = false;
+
+    sessionStorage.clear() ;
   }
 
 }
