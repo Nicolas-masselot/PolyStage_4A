@@ -26,14 +26,14 @@
 
         <div class="btn-group text-center" style="margin: 5px">
           <a
-            href="{{stage.chemineval}}"
+            href="{{UrlBase+stage.chemineval.slice(1)}}"
             *ngIf="stage.dateeval"
             target="_blank"
             class="btn btn-outline-primary mx-1" mdbBtn>Visualiser l'évaluation du stage</a>
 
           <!-- Utiliser l'url de base du serveur comme dans le home étudiant pour les chemins des PDF d'éval-->
           <a
-            href="{{stage.chemincomp}}"
+            href="{{UrlBase+stage.chemincomp.slice(1)}}"
             *ngIf="stage.datecomp"
             target="_blank"
             class="btn btn-outline-primary mx-1" mdbBtn>Visualiser l'évaluation des compétences</a>

@@ -4,6 +4,7 @@ import {AuthService} from "../auth/auth.service";
 import {ToastrService} from "ngx-toastr";
 import * as moment from 'moment';
 import {Router} from "@angular/router";
+import {environment} from "../../environments/environment";
 
 @Component({
   selector: 'app-tuteur',
@@ -14,6 +15,7 @@ export class TuteurComponent implements OnInit {
 
   stages: any[] = [];
   moment: any = moment ;
+  UrlBase : string = environment.baseUrl ;
 
   constructor(private service: MessageService,
               private auth: AuthService,
