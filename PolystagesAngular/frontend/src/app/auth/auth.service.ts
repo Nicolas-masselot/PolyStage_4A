@@ -9,12 +9,12 @@ import {sha512} from "js-sha512";
 export class AuthService
 {
 
-  authenticated: boolean = false;
-  authAs: string = ""; // eleve, enseignant ou tuteur
-  prenom: string = "";
-  nom: string = "";
-  admin: boolean = false;
-  id: number = 0;
+  private authenticated: boolean = false;
+  private authAs: string = ""; // eleve, enseignant ou tuteur
+  private prenom: string = "";
+  private nom: string = "";
+  private admin: boolean = false;
+  private id: number = 0;
 
   constructor(@Inject(MessageService) private service: MessageService)
   {}
