@@ -121,11 +121,12 @@ exports.FormEval = function (req, res) {
     template = template + 'template4a.odt'
   }
  // la conversion ne fonctionne pas erreur = Cannot find LibreOffice. Document conversion cannot be used
+  // si on enlève les options le fichier pdf produit est illisible
   carbone.render(template, req.body, options, function (err, result) {
     if (err) return console.log(err);
     var newStage = {}
     newStage.chemineval = dirresult;
-    newStage.dateeval = moment(req.body.datetime, "DD/MM/YYYY à HH:mm:ss").format("YYYY/MM/DD HH:mm:ss");
+    newStage.dateeval = moment(req.body.datetime).format("YYYY/MM/DD HH:mm:ss");
     Stage.updateStage(req.params.idstage, newStage, function (err, stage) { })
     sendConfirmation(req.body.nom, req.body.prenom, req.body.idens, req.body.idtuteur, nomfich, path);
     fs.writeFileSync(dirresult, result);
@@ -150,7 +151,7 @@ exports.FormComp = function (req, res) {
     if (err) return console.log(err);
     var newStage = {}
     newStage.chemincomp = dirresult;
-    newStage.datecomp = moment(req.body.datetime, "DD/MM/YYYY à HH:mm:ss").format("YYYY/MM/DD HH:mm:ss");
+    newStage.datecomp = moment(req.body.datetime).format("YYYY/MM/DD HH:mm:ss");
     Stage.updateStage(req.params.idstage, newStage, function (err, stage) { })
     sendConfirmationComp(req.body.nom, req.body.prenom, req.body.idens, req.body.idtuteur, nomfich, path);
     fs.writeFileSync(dirresult, result);

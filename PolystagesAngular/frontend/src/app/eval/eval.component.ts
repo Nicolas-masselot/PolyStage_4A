@@ -29,7 +29,8 @@ export class EvalComponent implements OnInit {
     nom: undefined,
     prenom: undefined,
     idtuteur: undefined,
-    idens: undefined
+    idens: undefined,
+    datetime: undefined
   } ;
 
   questions : any ;
@@ -62,7 +63,8 @@ export class EvalComponent implements OnInit {
       this.fields.prenom = this.stage.prenom ;
       this.fields.idtuteur = this.stage.idtuteur ;
       this.fields.idens = this.stage.idens ;
-
+      // @ts-ignore
+      this.fields.datetime = Date.now() ;
 
       for (let categorie of this.questions) {
         for (let quest of categorie.questions){
@@ -98,7 +100,6 @@ export class EvalComponent implements OnInit {
       }
 
     });
-    console.log(this.fields) ;
 
     this.message.sendMessage('stages/eval/'+this.idStage,this.fields).subscribe( res => {
       this.router.navigateByUrl("/tuteur").then(r => { console.log(r) ;}) ;

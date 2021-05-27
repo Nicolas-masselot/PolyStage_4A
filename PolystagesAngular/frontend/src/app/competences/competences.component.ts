@@ -27,7 +27,8 @@ export class CompetencesComponent implements OnInit {
     nom: undefined,
     prenom: undefined,
     idtuteur: undefined,
-    idens: undefined
+    idens: undefined,
+    datetime: undefined
 
   }
 
@@ -53,6 +54,8 @@ export class CompetencesComponent implements OnInit {
       this.fields.prenom = this.stage.prenom;
       this.fields.idtuteur = this.stage.idtuteur;
       this.fields.idens = this.stage.idens;
+      // @ts-ignore
+      this.fields.datetime = Date.now() ;
 
       for (let categorie of this.competences) {
         for (let quest of categorie.questions){
@@ -75,7 +78,6 @@ export class CompetencesComponent implements OnInit {
       }
 
     });
-    console.log(this.fields) ;
     this.message.sendMessage('stages/evalcompetences/'+this.idStage,this.fields).subscribe( res => {
       this.router.navigateByUrl("/tuteur").then(r => { console.log(r) ;}) ;
       this.toastr.success("L'évaluation a bien été enregistrée") ;
