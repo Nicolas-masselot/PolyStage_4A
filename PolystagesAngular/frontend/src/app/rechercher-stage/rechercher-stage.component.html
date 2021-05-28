@@ -1,29 +1,29 @@
 <h1 class="mt-2">Rechercher un Stage</h1>
 <div class="md-form mt-0">
   <input
-    ng-change="allStagesBySearchValue(searchValue)"
+    (change)="allStagesBySearchValue()"
     id="searchBar"
-    ng-model="searchValue"
+    [(ngModel)]="searchValue"
     class="form-control"
     type="text"
     placeholder="Search: Titre du stage, Description du stage, Entreprise, Promo, Année"
     aria-label="Search"
   />
   <button
-    ng-click="allStagesBySearchValue(searchValue)"
+    (click)="allStagesBySearchValue()"
     class="btn btn-light btn-lg"
     ng-disabled="!val"
   >
     Search
   </button>
   <button
-    ng-click="allStagesJsonToCsv(stages)"
+    (click)="allStagesJsonToCsv()"
     class="btn btn-success btn-lg float-lg-right"
   >
     Download CSV
   </button>
   <button
-    ng-click="getAllStages()"
+    (click)="getAllStages()"
     class="btn btn-primary btn-lg float-lg-right"
   >
     Afficher tous les stages
@@ -38,32 +38,50 @@
       </select>
     </div> -->
 
-  <table class="table" id="dataTable">
-    <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Titre du stage</th>
-      <th scope="col">Description du stage</th>
-      <!-- <th scope="col">Nom de l'entreprise</th> -->
-      <th scope="col">Promo</th>
-      <th scope="col">Année</th>
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
-    </tr>
-    </thead>
-    <tbody id="table-body">
-    <!--  <tr ng-repeat="stage in stages" >
-         <th scope="row"></th>
-          <td>{{stage.titrestage}}</td>
-          <td>{{stage.description}}</td>
-          <td>{{stage.nomentreprise}}</td>
-          <td>{{stage.niveau}}</td>
-          <td>{{stage.annee}}</td>
-          <td> <button ng-click="initModify(stage)" class="btn btn-info px-4" data-toggle="modal" data-target="#modifyModal"><i class="fa fa-info-circle fa-lg" aria-hidden="true"></i> </button> </td>
-          <td><button ng-click="initDeleteStage(stage)" class="btn btn-danger px-3" data-toggle="modal" data-target="#deleteModal" aria-hidden="true" ><i class="fa fa-trash fa-lg" aria-hidden="true" ></i></button></td>
-        </tr> -->
-    </tbody>
+    <ng-container matColumnDef="#">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> # </th>
+      <td mat-cell *matCellDef="let element"> 1 </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="titrestage">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Titre du stage </th>
+      <td mat-cell *matCellDef="let element"> {{element.titrestage}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Description du stage </th>
+      <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="niveau">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Promo </th>
+      <td mat-cell *matCellDef="let element"> {{element.niveau}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="annee">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Année </th>
+      <td mat-cell *matCellDef="let element"> {{element.annee}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="modifier">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+      <td mat-cell *matCellDef="let element">  </td>
+    </ng-container>
+
+    <ng-container matColumnDef="supprimer">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+      <td mat-cell *matCellDef="let element">  </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" style="transform: rotate(0);"></tr>
+
   </table>
-  <div class="pagenumbers" id="pagination"></div>
+
+  <mat-paginator [pageSizeOptions]="[5]" showFirstLastButtons></mat-paginator>
 
   <!--<div class="container">
     <div id="pagination-wrapper"></div>
