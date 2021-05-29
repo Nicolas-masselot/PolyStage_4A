@@ -10,30 +10,30 @@
       <div class="file-field big-2">
         <div class="btn btn-outline-success waves-effect btn-lg float-left">
           <span>Choose files</span>
-          <input ng-change="" id="fileInput" ng-model="fileInput" type="file" multiple>
+          <input id="fileInput" type="file" class="file-upload" (change)="onFileChange($event)" multiple>
         </div>
         <div class="file-path-wrapper">
-          <input  class="file-path validate" type="text" placeholder="Upload one or more files">
+          <input class="file-path validate" type="text" placeholder="Upload one or more files">
         </div>
       </div>
     </form>
-    <button ng-click="loadStagesFromCsv()"  class="btn btn-outline-primary ">Load</button>
+    <button (click)="loadStagesFromCsv()"  class="btn btn-outline-primary ">Load</button>
   </div>
 </div>
 
 <br>
 
-<div ng-if="listStages">
+<div *ngIf="listStages.length != 0">
   <div class="d-flex justify-content-center">
     <div class="card w-75 text-center">
       <div class="card-body">
         <h2>La liste des stages</h2>
         <p class="text-danger">veuillez vérifier les informations saisies avant de sauvegarder</p>
         <button  type="button" class="btn btn-danger btn-lg float-lg-right" data-toggle="modal" data-target="#exampleModal">Annuler</button>
-        <button ng-click="setStagesData()"  class="btn btn-success btn-lg float-lg-right" data-toggle="modal" data-target="#saveModal" >Sauvegarder</button>
+        <button (click)="setStagesData()"  class="btn btn-success btn-lg float-lg-right" data-toggle="modal" data-target="#saveModal" >Sauvegarder</button>
       </div>
 
-      <div class="card border-dark text-center" ng-repeat="stage in listStages">
+      <div class="card border-dark text-center" *ngFor="let stage of listStages">
         <div class="card-header bg-transparent">
           <h3> {{stage.Sujetdustage}} </h3>
         </div>
@@ -59,7 +59,7 @@
           <h5 class="card-title">Date de fin</h5>
           <p class="card-text">{{stage.Datedefin}}</p>
 
-          <button  ng-click="init(stage)" type="button" class="btn btn-danger btn-lg " data-toggle="modal" data-target="#modifyModal">Modifier</button>
+          <button  (click)="init(stage)" type="button" class="btn btn-danger btn-lg " data-toggle="modal" data-target="#modifyModal">Modifier</button>
         </div>
       </div>
     </div>
@@ -141,7 +141,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" data-dismiss="modal">Annuler</button>
-        <button ng-click="SaveModifications()" type="button" class="btn btn-danger">Sauvegarder</button>
+        <button (click)="SaveModifications()" type="button" class="btn btn-danger">Sauvegarder</button>
       </div>
     </div>
   </div>
@@ -163,7 +163,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" data-dismiss="modal">Non</button>
-        <button ng-click="cancelSave()" type="button" class="btn btn-danger">Oui</button>
+        <button (click)="cancelSave()" type="button" class="btn btn-danger">Oui</button>
       </div>
     </div>
   </div>
@@ -185,7 +185,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" data-dismiss="modal">Non</button>
-        <button ng-click="saveStages()" type="button" class="btn btn-danger">Oui</button>
+        <button (click)="saveStages()" type="button" class="btn btn-danger">Oui</button>
       </div>
     </div>
   </div>

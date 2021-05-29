@@ -42,6 +42,8 @@ import {MatDialogModule} from "@angular/material/dialog";
 import { AjoutEntrepriseComponent } from './ajout-entreprise/ajout-entreprise.component';
 import { EvalComponent } from './eval/eval.component';
 import { CompetencesComponent } from './competences/competences.component';
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatTableModule} from "@angular/material/table";
 
 
 // @ts-ignore
@@ -87,7 +89,9 @@ import { CompetencesComponent } from './competences/competences.component';
         MatDatepickerModule,
         MatNativeDateModule,
         MatInputModule,
-        MatDialogModule
+        MatDialogModule,
+        MatTableModule,
+        MatPaginatorModule
     ],
   providers: [MatDatepickerModule],
   bootstrap: [AppComponent]
