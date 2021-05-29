@@ -14,7 +14,7 @@ import {ToastrService} from "ngx-toastr";
 })
 export class RechercherStageComponent implements OnInit {
 
-  displayedColumns: string[] = ['#', 'titrestage', 'description', 'niveau', 'annee', 'modifier', 'supprimer'];
+  displayedColumns: string[] = ['idTable', 'titrestage', 'description', 'niveau', 'annee', 'modifier', 'supprimer'];
   stages: any[] = [];
   dataSource = new MatTableDataSource<any>(this.stages);
 
@@ -24,6 +24,7 @@ export class RechercherStageComponent implements OnInit {
   searchValue: string = "";
 
   currentItem: any = {};
+  DeleteStageItem: any = {};
 
   constructor(private service: MessageService,
               private auth: AuthService,
@@ -41,7 +42,7 @@ export class RechercherStageComponent implements OnInit {
     let response = this.service.sendGetMessageQuery("stages", data);
     response.subscribe(
       r => {
-        this.stages = r.data;
+        this.recupererStages(r);
         this.dataSource.data = this.stages;
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
@@ -62,7 +63,7 @@ export class RechercherStageComponent implements OnInit {
       let response = this.service.sendGetMessageQuery("stages/byVal/" + this.searchValue, data);
       response.subscribe(
         r => {
-          this.stages = r.data;
+          this.recupererStages(r);
           this.dataSource.data = this.stages;
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
@@ -73,54 +74,236 @@ export class RechercherStageComponent implements OnInit {
     }
   }
 
+  recupererStages(data: any): void
+  {
+    let l = data.length
+    for (let i = 0; i < l; i++)
+    {
+      data[i].idTable = i+1;
+    }
+
+    this.stages = data;
+  }
+
   oneStageJsonToCsv(stage: any): void
   {
-
+    let data = {data: stage};
+    let response = this.service.sendMessage("convertOneStageJsonToCsv", data);
+    response.subscribe(
+      r => {
+        this.toastr.success("Fichier téléchargé avec succés");
+        window.open("http://localhost:8080/downloadFileStagesCSV", "_blank");
+      },
+      error => {
+        this.toastr.error("Une erreur s'est produite, le fichier n'est pas téléchargé");
+      }
+    );
   }
 
   allStagesJsonToCsv(): void
   {
-
+    let data = {data: this.stages};
+    let response = this.service.sendMessage("convertAllStagesJsonToCsv", data);
+    response.subscribe(
+      r => {
+        this.toastr.success("Fichier téléchargé avec succés");
+        window.open("http://localhost:8080/downloadFileStagesCSV", "_blank");
+      },
+      error => {
+        this.toastr.error("Une erreur s'est produite, le fichier n'est pas téléchargé");
+      }
+    );
   }
 
-  getAllStagesId(): any
+  initModify(stage: any): void
   {
+    let item = stage;
 
-  }
+    let titrestage = (<HTMLInputElement>document.getElementById("Sujetdustage")!);
+    titrestage.value = item.titrestage;
+    let description = (<HTMLInputElement>document.getElementById("Descriptiondustage")!);
+    description.value = item.description;
+    let nomentreprise = (<HTMLInputElement>document.getElementById("Raisonsociale")!);
+    nomentreprise.value = item.nomentreprise;
+    let VilledeStage = (<HTMLInputElement>document.getElementById("VilledeStage")!);
+    VilledeStage.value = item.Ville;
+    let PaysdeStage = (<HTMLInputElement>document.getElementById("PaysdeStage")!);
+    PaysdeStage.value = item.Pays;
+    let datedebut = (<HTMLInputElement>document.getElementById("Datededebut")!);
+    datedebut.value = item.datedebut.substring(0, 10); // à fin de recuperer que la date YYYY-MM-DD
+    let datefin = (<HTMLInputElement>document.getElementById("Datedefin")!);
+    datefin.value = item.datefin.substring(0, 10);
 
-  allStagesInfosById(): void
-  {
+    // get nom and prenom eleve with his id
+    let data = {eleveId: item.ideleve};
+    let response = this.service.sendGetMessageQuery("eleves/" + item.ideleve, data);
+    response.subscribe(
+      r => {
+        let nomEleve = (<HTMLInputElement>document.getElementById("NomEtudiant")!);
+        item.nomEleve = (<any>r)[0].nom;
+        nomEleve.value = item.nomEleve;
 
-  }
+        let prenomEleve = (<HTMLInputElement>document.getElementById("PrenomEtudiant")!);
+        item.prenomEleve = (<any>r)[0].prenom;
+        prenomEleve.value = item.prenomEleve;
+      },
+      error => {}
+    );
 
-  initModify(idstage: number): void
-  {
+    // get nom et prenom encadrant
+    let data2 = {idsend: item.idens};
+    response = this.service.sendGetMessageQuery("enseignantsNameById", data2);
+    response.subscribe(
+      r => {
+        let Nomenseignantencadrant = (<HTMLInputElement>document.getElementById(
+          "Nomenseignantencadrant"
+        )!);
+        item.Nomenseignantencadrant = r.data[0].nom;
+        Nomenseignantencadrant.value = item.Nomenseignantencadrant;
 
+        let Prenomenseignantencadrant = (<HTMLInputElement>document.getElementById(
+          "Prenomenseignantencadrant"
+        )!);
+        item.Prenomenseignantencadrant = r.data[0].prenom;
+        Prenomenseignantencadrant.value = item.Prenomenseignantencadrant;
+      },
+      error => {}
+    );
+
+    // get nom et prenom tuteur de stage
+    let data3 = {idtuteur: item.idtuteur};
+    response = this.service.sendGetMessageQuery("tuteurNameById", data3);
+    response.subscribe(
+      r => {
+        let NomduTuteurdestagedanslentreprise = (<HTMLInputElement>document.getElementById(
+          "NomduTuteurDesStagesDansLentreprise"
+        )!);
+        item.nomTuteur = (<any>r)[0].nom;
+        NomduTuteurdestagedanslentreprise.value = item.nomTuteur;
+
+        let PrenomduTuteurdestagedanslentreprise = (<HTMLInputElement>document.getElementById(
+          "PrenomduTuteurDesStagesDansLentreprise"
+        )!);
+        item.prenomTuteur = (<any>r)[0].prenom;
+        PrenomduTuteurdestagedanslentreprise.value = item.prenomTuteur;
+
+        let MailTuteurdestagedanslentreprise = (<HTMLInputElement>document.getElementById(
+          "MailTuteurDesStageDansLentreprise"
+        )!);
+        item.emailtuteur = (<any>r)[0].emailtuteur;
+        MailTuteurdestagedanslentreprise.value = item.emailtuteur;
+      },
+      error => {}
+    );
+
+    let Adressedustage = (<HTMLInputElement>document.getElementById("Adressedustage")!);
+    Adressedustage.value = item.adressestage;
+
+    let Annee = (<HTMLInputElement>document.getElementById("Annee")!);
+    Annee.value = item.annee;
+
+    let Niveau = (<HTMLInputElement>document.getElementById("Niveau")!);
+    Niveau.value = item.niveau;
+
+    // le stage à modifier
+    this.currentItem = item;
+    //console.log(this.currentItem);
   }
 
   SaveModifications(): void
   {
+    let titrestage = (<HTMLInputElement>document.getElementById("Sujetdustage")!).value;
+    let description = (<HTMLInputElement>document.getElementById("Descriptiondustage")!).value;
+    let nomentreprise = (<HTMLInputElement>document.getElementById("Raisonsociale")!).value;
+    let VilledeStage = (<HTMLInputElement>document.getElementById("VilledeStage")!).value;
+    let PaysdeStage = (<HTMLInputElement>document.getElementById("PaysdeStage")!).value;
+    let datedebut = (<HTMLInputElement>document.getElementById("Datededebut")!).value;
+    let datefin = (<HTMLInputElement>document.getElementById("Datedefin")!).value;
+    let prenomEleve = (<HTMLInputElement>document.getElementById("PrenomEtudiant")!).value;
+    let nomEleve = (<HTMLInputElement>document.getElementById("NomEtudiant")!).value;
+    let NomduTuteurdestagedanslentreprise = (<HTMLInputElement>document.getElementById(
+      "NomduTuteurDesStagesDansLentreprise"
+    )!).value;
+    let PrenomduTuteurdestagedanslentreprise = (<HTMLInputElement>document.getElementById(
+      "PrenomduTuteurDesStagesDansLentreprise"
+    )!).value;
+    let MailTuteurdestagedanslentreprise = (<HTMLInputElement>document.getElementById(
+      "MailTuteurDesStageDansLentreprise"
+    )!).value;
+    let Adressedustage = (<HTMLInputElement>document.getElementById("Adressedustage")!).value;
+    let Prenomenseignantencadrant = (<HTMLInputElement>document.getElementById(
+      "Prenomenseignantencadrant"
+    )!).value;
+    let Nomenseignantencadrant = (<HTMLInputElement>document.getElementById(
+      "Nomenseignantencadrant"
+    )!).value;
+    let Annee = (<HTMLInputElement>document.getElementById("Annee")!).value;
+    let Niveau = (<HTMLInputElement>document.getElementById("Niveau")!).value;
 
+    let newItem = this.currentItem;
+    // mettre a jour le stage avec les nouvelles informations
+    newItem.titrestage = titrestage;
+    newItem.description = description;
+    newItem.nomentreprise = nomentreprise;
+    newItem.VilledeStage = VilledeStage;
+    newItem.PaysdeStage = PaysdeStage;
+    newItem.datedebut = datedebut;
+    newItem.datefin = datefin;
+    newItem.MailTuteurdestagedanslentreprise = MailTuteurdestagedanslentreprise;
+    newItem.NomduTuteurdestagedanslentreprise = NomduTuteurdestagedanslentreprise;
+    newItem.PrenomduTuteurdestagedanslentreprise = PrenomduTuteurdestagedanslentreprise;
+    newItem.Prenomenseignantencadrant = Prenomenseignantencadrant;
+    newItem.Nomenseignantencadrant = Nomenseignantencadrant;
+    newItem.prenomEleve = prenomEleve;
+    newItem.nomEleve = nomEleve;
+    newItem.Adressedustage = Adressedustage;
+    newItem.annee = Annee;
+    newItem.niveau = Niveau;
+
+    let indexItem = this.stages.indexOf(this.currentItem);
+    this.stages[indexItem] = newItem;
+
+    this.updateStage(newItem);
+
+    /*
+    $("#modifyModal").modal("hide");
+    */
   }
 
   deleteStage(): void
   {
-
+    let data = {};
+    let response = this.service.sendGetMessageQuery("deleteStage/" + this.DeleteStageItem.idstage, data);
+    response.subscribe(
+      r => {
+        this.toastr.success("Le stages a été supprimé avec succés");
+        /*
+        $("#deleteModal").modal("hide");
+         */
+      },
+      error => {
+        this.toastr.error("Erreur, le stage n'est pas supprimé");
+      }
+    );
   }
 
   updateStage(element: any): void
   {
-
+    let data = element;
+    let response = this.service.sendPutMessage("stageInfos/" + element.idstage, data);
+    response.subscribe(
+      r => {
+        this.toastr.success("Le stage a été mis à jours avec succés");
+      },
+      error => {
+        this.toastr.error("Erreur, Les données du stage(s) ne sont pas enregistrées");
+      }
+    );
   }
 
-  init(item: any): void
+  initDeleteStage(stage: any): void
   {
-
-  }
-
-  initDeleteStage(idstage: number): void
-  {
-
+    this.DeleteStageItem = stage;
   }
 
 }

@@ -12,8 +12,8 @@ const requests = require('request')
 
 // conversion json ( stage ) to format csv
 exports.convertAllStagesJsonToCsv = function (req, res) {
-  let length = req.query.data.length
-  let tabStageId = req.query.data
+  let length = req.body.data.length
+  let tabStageId = req.body.data
   let stagesInfo = []
   let stages = ''
 
@@ -54,7 +54,7 @@ exports.convertAllStagesJsonToCsv = function (req, res) {
 
 
 exports.convertOneStageJsonToCsv = function (req, res) {
-    let data = JSON.parse(req.query.data)
+    let data = JSON.parse(req.body.data)
       converter.json2csv(data, (err, csv) => {
           if (err) {
             res.send(err)
