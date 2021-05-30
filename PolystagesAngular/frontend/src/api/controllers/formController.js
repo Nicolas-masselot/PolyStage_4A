@@ -186,41 +186,50 @@ exports.update_stage_byId = function (req, res) {
 }
 
 exports.update_stageInfos_byId = function (req, res) {
-  var newStage = Stage.upadteStageConst(req.body);
-  console.log(newStage)
-  if (req.body.adresseentreprise) {
-    Entreprise.updateEntreprise(req.body, function (res) { })
+
+  var newStage = Stage.upadteStageConst(req.body.body);
+  //console.log(newStage)
+  if (req.body.body.adresseentreprise) {
+    Entreprise.updateEntreprise(req.body.body, function (res) { })
   }
   // si nous avons mis a jour le tuteur
-  if (req.body.emailtuteur && req.body.nomTuteur && req.body.prenomTuteur) {
-    Tuteur.createTuteur(req.body, function (err, result) {
+  if (req.body.body.emailtuteur && req.body.body.nomTuteur && req.body.body.prenomTuteur) {
+    Tuteur.createTuteur(req.body.body, function (err, result) {
       if (err) res.status(500).send(err);
-      newStage.idtuteur = result;
+      if (result) {
+        newStage.idtuteur = result;
+      }
     })
   }
   // si nous avons mis a jour le nom de l entreprise
-  if (req.body.nomentreprise) {
-    Entreprise.getEntrepriseByName(req.body.nomentreprise, function (err, result) {
+  if (req.body.body.nomentreprise) {
+    Entreprise.getEntrepriseByName(req.body.body.nomentreprise, function (err, result) {
       if (err) res.status(500).send(err);
-      newStage.identreprise = result[0].identreprise;
+      if (result[0]) {
+        newStage.identreprise = result[0].identreprise;
+      }
     })
   }
   // si nous avons mis a jour l'encadrant
-  if (req.body.Nomenseignantencadrant && req.body.Prenomenseignantencadrant) {
-    let nomEncad = req.body.Nomenseignantencadrant
-    let prenomEncad = req.body.Prenomenseignantencadrant
+  if (req.body.body.Nomenseignantencadrant && req.body.body.Prenomenseignantencadrant) {
+    let nomEncad = req.body.body.Nomenseignantencadrant
+    let prenomEncad = req.body.body.Prenomenseignantencadrant
     Enseignant.getEnseignantIdByNomAndPrenom(nomEncad, prenomEncad, function (err, result) {
       if (err) res.status(500).send(err);
-      newStage.idens = result[0].idens;
+      if (result[0]) {
+        newStage.idens = result[0].idens;
+      }
     })
   }
   // si nous avons mis a jour les infos de l'étudiant
-  if (req.body.nomEleve && req.body.prenomEleve) {
-    let nomEleve = req.body.nomEleve
-    let prenomEleve = req.body.prenomEleve
+  if (req.body.body.nomEleve && req.body.body.prenomEleve) {
+    let nomEleve = req.body.body.nomEleve
+    let prenomEleve = req.body.body.prenomEleve
     Eleve.getEleveIdByNomAndPrenom(nomEleve, prenomEleve, function (err, result) {
       if (err) res.status(500).send(err);
-      newStage.ideleve = result[0].ideleve;
+      if (result[0]) {
+        newStage.ideleve = result[0].ideleve;
+      }
     })
   }
     Stage.updateStage(req.params.idstage, newStage, function (err, stage) {
