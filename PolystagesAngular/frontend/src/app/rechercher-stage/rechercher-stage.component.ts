@@ -7,6 +7,8 @@ import {MessageService} from "../message/message.service";
 import {Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
 
+declare var $: any;
+
 @Component({
   selector: 'app-rechercher-stage',
   templateUrl: './rechercher-stage.component.html',
@@ -208,6 +210,8 @@ export class RechercherStageComponent implements OnInit {
     // le stage à modifier
     this.currentItem = item;
     //console.log(this.currentItem);
+
+    $("#modifyModal").appendTo("body").modal("show");
   }
 
   SaveModifications(): void
@@ -265,9 +269,12 @@ export class RechercherStageComponent implements OnInit {
 
     this.updateStage(newItem);
 
-    /*
     $("#modifyModal").modal("hide");
-    */
+  }
+
+  closeModifications(): void
+  {
+    $("#modifyModal").modal("hide");
   }
 
   deleteStage(): void
@@ -277,14 +284,13 @@ export class RechercherStageComponent implements OnInit {
     response.subscribe(
       r => {
         this.toastr.success("Le stages a été supprimé avec succés");
-        /*
-        $("#deleteModal").modal("hide");
-         */
+        this.getAllStages();
       },
       error => {
         this.toastr.error("Erreur, le stage n'est pas supprimé");
       }
     );
+    $("#deleteModal").modal("hide");
   }
 
   updateStage(element: any): void
@@ -293,7 +299,8 @@ export class RechercherStageComponent implements OnInit {
     let response = this.service.sendPutMessage("stageInfos/" + element.idstage, data);
     response.subscribe(
       r => {
-        this.toastr.success("Le stage a été mis à jours avec succés");
+        this.toastr.success("Le stage a été mis à jour avec succés");
+        this.getAllStages();
       },
       error => {
         this.toastr.error("Erreur, Les données du stage(s) ne sont pas enregistrées");
@@ -304,6 +311,12 @@ export class RechercherStageComponent implements OnInit {
   initDeleteStage(stage: any): void
   {
     this.DeleteStageItem = stage;
+    $("#deleteModal").appendTo("body").modal("show");
+  }
+
+  annulerDeleteStage(): void
+  {
+    $("#deleteModal").modal("hide");
   }
 
 }

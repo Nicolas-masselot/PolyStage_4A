@@ -60,16 +60,18 @@
     <ng-container matColumnDef="modifier">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Modifier</th>
       <td mat-cell *matCellDef="let element">
-        <button (click)="initModify(element)" class="btn btn-info px-4" data-toggle="modal"
-                data-target="#modifyModal"><i class="fa fa-info-circle fa-lg" aria-hidden="true"></i> </button>
+        <button (click)="initModify(element)" type="button" class="btn btn-info px-4">
+          <i class="fa fa-info-circle fa-lg" aria-hidden="true"></i>
+        </button>
       </td>
     </ng-container>
 
     <ng-container matColumnDef="supprimer">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Supprimer</th>
       <td mat-cell *matCellDef="let element">
-        <button (click)="initDeleteStage(element)" class="btn btn-danger px-3" data-toggle="modal"
-                data-target="#deleteModal" aria-hidden="true" ><i class="fa fa-trash fa-lg" aria-hidden="true" ></i></button>
+        <button (click)="initDeleteStage(element)" class="btn btn-danger px-3">
+          <i class="fa fa-trash fa-lg" aria-hidden="true" ></i>
+        </button>
       </td>
     </ng-container>
 
@@ -291,11 +293,11 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">
+        <button (click)="closeModifications()" type="button" class="btn btn-primary">
           Annuler
         </button>
         <button
-          ng-click="SaveModifications()"
+          (click)="SaveModifications()"
           type="button"
           class="btn btn-danger"
         >
@@ -310,6 +312,7 @@
 
 <div
   class="modal fade deleteModal"
+  id="deleteModal"
   tabindex="-1"
   role="dialog"
   aria-labelledby="deleteModalLabel"
@@ -318,7 +321,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="deleteModal">Attention</h5>
+        <h5 class="modal-title">Attention</h5>
         <button
           type="button"
           class="close"
@@ -335,10 +338,10 @@
         <p>Etes-vous sûr de vouloir effectuer cette action ?</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">
+        <button (click)="annulerDeleteStage()" type="button" class="btn btn-primary">
           Non
         </button>
-        <button ng-click="deleteStage()" type="button" class="btn btn-danger">
+        <button (click)="deleteStage()" type="button" class="btn btn-danger">
           Oui
         </button>
       </div>
