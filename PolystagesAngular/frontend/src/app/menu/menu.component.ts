@@ -9,6 +9,8 @@ import {Router} from "@angular/router";
 })
 export class MenuComponent implements OnInit {
 
+  displayConnexion: boolean = false;
+
   displayAccueilEleve: boolean = false;
   displayAccueilEnseignant: boolean = false;
   displayAccueilTuteur: boolean = false;
@@ -24,6 +26,8 @@ export class MenuComponent implements OnInit {
   {
     this.router.events.subscribe((ev) =>
     {
+      this.displayConnexion = false;
+
       this.displayAccueilEleve = false;
       this.displayAccueilEnseignant = false;
       this.displayAdministration = false;
@@ -50,6 +54,10 @@ export class MenuComponent implements OnInit {
         {
           this.displayAccueilTuteur = true;
         }
+      }
+      else
+      {
+        this.displayConnexion = true;
       }
     });
   }

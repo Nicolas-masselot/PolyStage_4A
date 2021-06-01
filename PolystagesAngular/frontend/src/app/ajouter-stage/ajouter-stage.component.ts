@@ -6,6 +6,8 @@ import {MessageService} from "../message/message.service";
 import {Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
 
+declare var $: any;
+
 @Component({
   selector: 'app-ajouter-stage',
   templateUrl: './ajouter-stage.component.html',
@@ -38,7 +40,7 @@ export class AjouterStageComponent implements OnInit {
     let response = this.service.sendMessage("convertStagesCsvToJson", data);
     response.subscribe(
       r => {
-        //console.log($scope.listStages);
+        //console.log(this.listStages);
         this.toastr.success('Les stages sont récupérés avec succés ');
       },
       error => {
@@ -182,7 +184,7 @@ export class AjouterStageComponent implements OnInit {
     this.listStages[indexItem] = newItem;
 
     this.toastr.success('Données du stage modifiées avec succés');
-    //$('#modifyModal').modal('hide')
+    $('#modifyModal').modal('hide')
   }
 
   cancelSave(): void
@@ -199,7 +201,6 @@ export class AjouterStageComponent implements OnInit {
       response.subscribe(
         r => {
           this.toastr.success('Les stages sont enregistrés avec succés');
-          //$('#saveModal').modal('hide');
         },
         error => {
           this.toastr.error('Erreur, Les données du stage(s) ne sont pas enregistrées');
@@ -207,6 +208,7 @@ export class AjouterStageComponent implements OnInit {
       );
 
     })
+    $('#saveModal').modal('hide');
   }
 
 }

@@ -1,27 +1,65 @@
-# Frontend
+#Installation (a faire dans le même dossier que ce fichier)
+npm install
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.5.
+#lancement (frontend + backend)
+npm start
 
-## Development server
+#lancement séparé
+backend : node src/api/server.js
+frontend : ng serve
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+#configuration base de données et mailing
+Informations de configuration à indiquer dans le fichier 'api/config.js'
 
-## Code scaffolding
+Script de création de la base de données : fichier 'd17023188.sql'
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+#Pour accèder à l'application dans un navigateur web
+localhost:4200
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-## Running unit tests
+#Résumé application
+Le FRONT se situe dans le répertoire src/app/
+Le BACK se situe dans le répertoire src/api/
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+#Modification template mail
+Mails de confirmation : src/api/controllers/mailController.js
+Mails d'évaluation : src/api/controllers/formController.js
 
-## Running end-to-end tests
+#Modification template pdf
+Les templates sont dans public/templates/
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+#Informations supplémentaires
+Pour toute modification concernant les dates limites de rendu ou les évaluations il faut faire le changement dans la base de données
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+#Comptes tests
+
+Compte élève avec stages :
+- identifiant : bilal.bechari@etu.univ-amu.fr
+- mdp : bilalbechari
+
+Compte élève sans stage :
+- identifiant : isabelle.gumos@etu.univ-amu.fr
+- mdp : isabellegumos
+
+###Tous les élèves ont ici comme identifiant leur mail/numetudiant, et comme mot de passe {prenom}{nom}
+
+Compte enseignant avec stages :
+- identifiant : nicolas.baudru@univ-amu.fr
+- mdp : prof
+
+Compte enseignant sans stages :
+- identifiant : nguyen.laurent97@gmail.com
+- mdp : prof
+
+###Tous les profs ont comme identifiant leur mail, et comme mot de passe 'prof'
+
+Compte tuteur :
+- identifiant : bilal.bechari@etu.univ-amu.fr
+- mdp : ZGL;tSZ-
+
+###Tous les comptes sont générés lors du lancement de l'évaluation par l'enseignant
+
+
