@@ -29,6 +29,10 @@ Mails d'évaluation : src/api/controllers/formController.js
 #Modification template pdf
 Les templates sont dans public/templates/
 
+#Fonctionnalités pas encore finalisées lors de la transition AngularJS vers Angular
+Ajout de stage : récupèration depuis le fichier CSV.
+Recherche de stage : télécharger le fichier CSV correspondant.
+
 #Informations supplémentaires
 Pour toute modification concernant les dates limites de rendu ou les évaluations il faut faire le changement dans la base de données
 
