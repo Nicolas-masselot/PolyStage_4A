@@ -122,20 +122,12 @@ exports.FormEval = function (req, res) {
   }
 
   try {
-    if (!fs.existsSync('./public/' + req.body.annee)){
-      fs.mkdirSync('./public/' + req.body.annee) ;
-    }
-
+    fs.mkdirSync('./public/' + req.body.annee) ;
   } catch (e){ console.log(e);}
   try {
-    if (!fs.existsSync('./public/' + req.body.annee)){
-      fs.mkdirSync('./public/' + req.body.annee + '/' + req.body.niveau + 'A') ;
-    }
-
+    fs.mkdirSync('./public/' + req.body.annee + '/' + req.body.niveau + 'A') ;
   } catch (e){ console.log(e);}
 
- // la conversion ne fonctionne pas erreur = Cannot find LibreOffice. Document conversion cannot be used
-  // si on enlève les options le fichier pdf produit est illisible
   carbone.render(template, req.body, options, function (err, result) {
     if (err) return console.log(err);
     var newStage = {}
@@ -161,16 +153,10 @@ exports.FormComp = function (req, res) {
     + nomfich
 
   try {
-    if (!fs.existsSync('./public/' + req.body.annee)){
       fs.mkdirSync('./public/' + req.body.annee) ;
-    }
-
   } catch (e){ console.log(e);}
   try {
-    if (!fs.existsSync('./public/' + req.body.annee)){
       fs.mkdirSync('./public/' + req.body.annee + '/' + req.body.niveau + 'A') ;
-    }
-
   } catch (e){ console.log(e);}
   var template = './public/templates/template_competences.odt';
 

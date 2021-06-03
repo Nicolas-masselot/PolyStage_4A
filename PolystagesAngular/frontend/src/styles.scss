@@ -1,11 +1,14 @@
 
-.btn:focus:active
-{
-
-  width: 200px;
-  height: 100px;
-
+a {
+  max-height: 55px;
+  max-width: 250px;
 }
+
+button {
+  max-height: 55px;
+  max-width: 300px;
+}
+
 
 #target {
   display: block;

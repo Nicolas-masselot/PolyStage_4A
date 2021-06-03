@@ -66,4 +66,9 @@ export class TuteurComponent implements OnInit {
     this.router.navigate(['competences', { stageId: idstage}]).then(() => {}) ;
   }
 
+  openLink(url:string) : void
+  {
+    window.open(url,"_blank");
+  }
+
 }
