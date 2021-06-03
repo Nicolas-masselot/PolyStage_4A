@@ -1,23 +1,17 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.6deb4
+-- version 4.9.3
 -- https://www.phpmyadmin.net/
 --
--- Client :  139.124.69.90:3306
--- Généré le :  Jeu 16 Janvier 2020 à 11:46
--- Version du serveur :  5.7.23-log
--- Version de PHP :  7.0.33-0+deb9u6
+-- Hôte : localhost:8889
+-- Généré le :  sam. 16 jan. 2021 à 16:30
+-- Version du serveur :  5.7.26
+-- Version de PHP :  7.4.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
 --
--- Base de données :  `d17023188`
+-- Base de données :  `Polystages`
 --
 
 -- --------------------------------------------------------
@@ -32,7 +26,7 @@ CREATE TABLE `categorie` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `categorie`
+-- Déchargement des données de la table `categorie`
 --
 
 INSERT INTO `categorie` (`idcat`, `name`) VALUES
@@ -55,7 +49,7 @@ CREATE TABLE `competences` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `competences`
+-- Déchargement des données de la table `competences`
 --
 
 INSERT INTO `competences` (`idcompetence`, `sigle`, `libelle`) VALUES
@@ -93,7 +87,7 @@ CREATE TABLE `eleves` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `eleves`
+-- Déchargement des données de la table `eleves`
 --
 
 INSERT INTO `eleves` (`ideleve`, `nom`, `prenom`, `email`, `numetudiant`, `mdp`) VALUES
@@ -118,7 +112,7 @@ CREATE TABLE `enseignants` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `enseignants`
+-- Déchargement des données de la table `enseignants`
 --
 
 INSERT INTO `enseignants` (`idens`, `nom`, `prenom`, `emailens`, `mdpens`, `admin`) VALUES
@@ -152,7 +146,7 @@ CREATE TABLE `entreprise` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `entreprise`
+-- Déchargement des données de la table `entreprise`
 --
 
 INSERT INTO `entreprise` (`identreprise`, `sigle`, `nomcomplet`) VALUES
@@ -218,7 +212,7 @@ CREATE TABLE `inscription` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `inscription`
+-- Déchargement des données de la table `inscription`
 --
 
 INSERT INTO `inscription` (`ideleve`, `annee`, `niveau`) VALUES
@@ -240,7 +234,7 @@ CREATE TABLE `niveauxcompetences` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `niveauxcompetences`
+-- Déchargement des données de la table `niveauxcompetences`
 --
 
 INSERT INTO `niveauxcompetences` (`idniveauxcompetences`, `libelle`, `idcompetence`) VALUES
@@ -349,7 +343,7 @@ CREATE TABLE `questions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `questions`
+-- Déchargement des données de la table `questions`
 --
 
 INSERT INTO `questions` (`idquest`, `question`, `cat`, `souscat`, `type`, `is4a`, `is5a`, `choix`, `niveau`) VALUES
@@ -408,12 +402,12 @@ CREATE TABLE `retardeleve` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `retardeleve`
+-- Déchargement des données de la table `retardeleve`
 --
 
 INSERT INTO `retardeleve` (`ideleve`, `mailenvoye`, `rapport`, `presentation`, `autoeval`) VALUES
 (2, 1, 1, 1, 0),
-(3, 1, 1, 0, 0);
+(3, 0, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -427,7 +421,7 @@ CREATE TABLE `retardtuteur` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `retardtuteur`
+-- Déchargement des données de la table `retardtuteur`
 --
 
 INSERT INTO `retardtuteur` (`idtuteur`, `mailenvoye`) VALUES
@@ -445,7 +439,7 @@ CREATE TABLE `souscategorie` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `souscategorie`
+-- Déchargement des données de la table `souscategorie`
 --
 
 INSERT INTO `souscategorie` (`idsouscat`, `name`) VALUES
@@ -471,7 +465,7 @@ CREATE TABLE `stage` (
   `datedebut` date DEFAULT NULL,
   `datefin` date DEFAULT NULL,
   `identreprise` mediumint(9) DEFAULT NULL,
-  `titrestage` varchar(45) DEFAULT NULL,
+  `titrestage` varchar(255) DEFAULT NULL,
   `description` text COMMENT 'quelques phrases expliquant le contenu du stage',
   `adressestage` text COMMENT 'adresse ou le stage a lieu',
   `adremailstage` varchar(255) DEFAULT NULL COMMENT 'adresse mail du stagiaire durant le stage (email entreprise)',
@@ -487,17 +481,25 @@ CREATE TABLE `stage` (
   `datelimiteeval` date DEFAULT NULL,
   `datesoutenance` date DEFAULT NULL COMMENT 'Date de la soutenance',
   `datecomp` timestamp NULL DEFAULT NULL,
-  `chemincomp` varchar(150) DEFAULT NULL
+  `chemincomp` varchar(150) DEFAULT NULL,
+  `Ville` varchar(255) DEFAULT NULL,
+  `Pays` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `stage`
+-- Déchargement des données de la table `stage`
 --
 
-INSERT INTO `stage` (`idstage`, `ideleve`, `niveau`, `annee`, `idtuteur`, `idens`, `datedebut`, `datefin`, `identreprise`, `titrestage`, `description`, `adressestage`, `adremailstage`, `cheminrapport`, `daterapport`, `cheminpres`, `datepres`, `chemineval`, `dateeval`, `evallancee`, `confidentiel`, `datelimiterendu`, `datelimiteeval`, `datesoutenance`, `datecomp`, `chemincomp`) VALUES
-(1, 3, '4', 2019, 2, 4, '2019-04-07', '2019-05-07', 3, 'Chef de projet junior', 'Description d\'un stage de quatrième année en tant que chef de projet', NULL, NULL, './public/2020/5A/2020_5A_BECHARI_Bilal_rapport.pdf', '2019-04-06 22:00:00', './public/2020/5A/2020_5A_BECHARI_Bilal_presentation.pdf', NULL, NULL, NULL, NULL, 0, '2018-01-01', '2018-01-01', '2018-01-01', NULL, NULL),
-(84, 3, '5', 2020, 1, 7, '2020-01-20', '2020-01-21', 23, 'Sharepoint admin', 'Automatisation d\'outils de création de tableau détaillant les bits des registres pour les RM (reference manual) pour la division MDG. Support pour la maintenant de l\'intranet, des workspace et des docshares. Support pour la migration de l\'intranet, des workspaces et des docshares de la division MDG et ses sous divisions vers Office 365. ', 'Zone Industrielle, 190 Avenue Coq, 13106 Rousset', 'bilalbechari@st.com', './public/2020/5A/2020_5A_BECHARI_Bilal_rapport.pdf', '2020-01-15 23:00:00', './public/2020/5A/2020_5A_BECHARI_Bilal_presentation.pdf', '2020-01-15 23:00:00', './public/2020/5A/2020_5A_BECHARI_Bilal_evaluation.pdf', '2020-01-16 07:53:12', '2020-01-15 18:20:48', 0, '2020-01-30', '2020-01-31', '2020-02-25', '2020-01-15 17:44:20', './public/2020/5A/2020_5A_BECHARI_Bilal_competences.pdf'),
-(92, 2, '5', 2020, NULL, 5, '2020-01-16', '2020-01-31', 14, 'API Designer', 'Developpement d\'application et API REST', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `stage` (`idstage`, `ideleve`, `niveau`, `annee`, `idtuteur`, `idens`, `datedebut`, `datefin`, `identreprise`, `titrestage`, `description`, `adressestage`, `adremailstage`, `cheminrapport`, `daterapport`, `cheminpres`, `datepres`, `chemineval`, `dateeval`, `evallancee`, `confidentiel`, `datelimiterendu`, `datelimiteeval`, `datesoutenance`, `datecomp`, `chemincomp`, `Ville`, `Pays`) VALUES
+(1, 1, '4', 2022, 1, 4, '2019-09-20', '2019-11-16', 2, 'Chef de projet junior', 'Stage dev web ', 'Castellane 13006', NULL, './public/2020/5A/2020_5A_BECHARI_Bilal_rapport.pdf', '2019-04-06 22:00:00', './public/2020/5A/2020_5A_BECHARI_Bilal_presentation.pdf', NULL, NULL, NULL, NULL, 0, '2018-01-01', '2018-01-01', '2018-01-01', NULL, NULL, 'Marseille', 'France'),
+(84, 3, '5', 2020, 2, 2, '2019-12-14', '2019-12-14', 23, 'Sharepoint admin', 'automatisation', NULL, NULL, './public/2020/5A/2020_5A_BECHARI_Bilal_rapport.pdf', '2020-12-19 23:00:00', './public/2020/5A/2020_5A_BECHARI_Bilal_presentation.pdf', '2020-01-15 23:00:00', './public/2020/5A/2020_5A_BECHARI_Bilal_evaluation.pdf', '2020-01-16 07:53:12', '2020-01-15 18:20:48', 0, '2020-01-30', '2020-01-31', '2020-02-25', '2020-01-15 17:44:20', './public/2020/5A/2020_5A_BECHARI_Bilal_competences.pdf', '', ''),
+(93, 2, '5', 2020, 4, 5, '2020-01-16', '2020-01-31', 14, 'API Designer', 'Developpement d\'application et API REST', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 15:18:59', 0, NULL, NULL, NULL, NULL, NULL, '', ''),
+(96, 2, '5', 2020, 2, 5, '2020-01-16', '2020-01-31', 14, 'API Designer', 'Developpement d\'application et API REST', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 15:18:59', 0, NULL, NULL, NULL, NULL, NULL, '', ''),
+(185, 3, '5', 2016, 3, 2, '2019-03-06', '2019-03-06', 1, 'Développement logiciel pour campings dans l\'équipe R&D de Sequoiasoft', 'Stage développement de logiciel interne', 'Vieux port', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, '', ''),
+(190, 3, '5', 2015, 3, 2, '2019-03-06', NULL, 1, 'Développement logiciel pour campings dans l\'équipe R&D de Sequoiasoft', 'Stage développement de logiciel interne', 'Vieux port', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, '', ''),
+(193, 1, '4', 2022, 1, 4, '2019-09-28', '2019-11-24', 2, 'Chef de projet junior', 'Stage dev web ', 'Castellane 13006', NULL, './public/2020/5A/2020_5A_BECHARI_Bilal_rapport.pdf', '2019-04-06 22:00:00', './public/2020/5A/2020_5A_BECHARI_Bilal_presentation.pdf', NULL, NULL, NULL, NULL, 0, '2018-01-01', '2018-01-01', '2018-01-01', NULL, NULL, '', ''),
+(194, 3, '5', 2020, 2, 2, '2019-12-14', '2019-12-14', 23, 'Sharepoint admin', 'automatisation', NULL, NULL, './public/2020/5A/2020_5A_BECHARI_Bilal_rapport.pdf', '2020-01-15 23:00:00', './public/2020/5A/2020_5A_BECHARI_Bilal_presentation.pdf', '2020-01-15 23:00:00', './public/2020/5A/2020_5A_BECHARI_Bilal_evaluation.pdf', '2020-01-16 07:53:12', '2020-01-15 18:20:48', 0, '2020-01-30', '2020-01-31', '2020-02-25', '2020-01-15 17:44:20', './public/2020/5A/2020_5A_BECHARI_Bilal_competences.pdf', '', ''),
+(197, 3, '5', 2014, 3, 2, '2019-05-15', '2019-08-16', 1, 'Développement logiciel pour campings dans l\'équipe R&D de Sequoiasoft', 'Stage développement de logiciel interne', 'Vieux port', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 'Lattes', 'France');
 
 -- --------------------------------------------------------
 
@@ -515,18 +517,18 @@ CREATE TABLE `tuteurs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `tuteurs`
+-- Déchargement des données de la table `tuteurs`
 --
 
 INSERT INTO `tuteurs` (`idtuteur`, `nom`, `prenom`, `emailtuteur`, `identreprise`, `mdp`) VALUES
 (1, 'BERGONZI', 'Ludovic', 'bilal.bechari@etu.univ-amu.fr', 23, '0aa41b6c2f75abc64c93636bd5094cb3c22e852acd277dc20982720f3a5f252464f2c1a0ae3f9c11d07c325a60932a6bfdf9211b30c8c583c0fcffd2dfde6121'),
-(2, 'REVAUX', 'Nathalie', 'bilal.bechari+84@etu.univ-amu.fr', 14, '7c4a920cee3926f1acbc2a0f06cbb834c8a88482bef9cb0721eb2812b368d6f71ebd8a24e9558a4e47e278c4048d409572ebdf6b939ce56f66d9b9035476bcd1'),
-(3, 'KASTANEK', 'Stan', 'test@etu.univ-amu.fr', 2, '7c4a920cee3926f1acbc2a0f06cbb834c8a88482bef9cb0721eb2812b368d6f71ebd8a24e9558a4e47e278c4048d409572ebdf6b939ce56f66d9b9035476bcd1'),
-(4, 'tuteurnom', 'tuteurprenom', 'isabelle.gumos@etu.univ-amu.fr', 78, '4ed413219424126672c30fa35d59fb3df5e44951731a185f1d4e133a7c17399a8d4373996e31f59410fa1f35f25e0b771cfe02ff531194af9931da5c3b9973f9'),
-(41, 'KASTANEK', 'Stan', 'testtesteste@etu.univ-amu.fr', 14, '7c4a920cee3926f1acbc2a0f06cbb834c8a88482bef9cb0721eb2812b368d6f71ebd8a24e9558a4e47e278c4048d409572ebdf6b939ce56f66d9b9035476bcd1');
+(2, 'REVAUX', 'Nathalie', 'bilal.bechari+84@etu.univ-amu.fr', 14, '46fc474dc2f425822acbd75c936a518564d538eeebc47bc1af3f036bb5b7a3add6772d14609a40ef913e52de4ed4bb716c1cc772961a1ecf87fb105cbfb81534'),
+(3, 'KASTANEK', 'Stan', 'test@etu.univ-amu.fr', 2, 'd1c6da166724bc0c900e5205c85c94fa8066e514e1f9b61486fed0268ef39ff0a1e94ea8536173070bbe8412f995d305a2443af85717df73fe5ad54044f779c6'),
+(4, 'tuteurnom', 'tuteurprenom', 'isabelle.gumos@etu.univ-amu.fr', 78, 'f4afb2a611e280b7993c440e8af39e956218f62cc989a85bf1745d800dd73d5df99ee0c6f296ee408699602170e7a79c1de883bf1e63d73e88a0445af1dbcf5e'),
+(41, 'KASTANEK', 'Stan', 'testtesteste@etu.univ-amu.fr', 14, 'f0894872b096b8750467d173f27af006c55e56b09c8227afbf8ca9765e24bc353f6758f03b11b339d6a98570c60f57f3f96f68b80ce97853954b7db885bd0028');
 
 --
--- Index pour les tables exportées
+-- Index pour les tables déchargées
 --
 
 --
@@ -626,7 +628,7 @@ ALTER TABLE `tuteurs`
   ADD KEY `identreprise` (`identreprise`);
 
 --
--- AUTO_INCREMENT pour les tables exportées
+-- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
@@ -634,53 +636,63 @@ ALTER TABLE `tuteurs`
 --
 ALTER TABLE `categorie`
   MODIFY `idcat` tinyint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT pour la table `competences`
 --
 ALTER TABLE `competences`
   MODIFY `idcompetence` tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
 --
 -- AUTO_INCREMENT pour la table `eleves`
 --
 ALTER TABLE `eleves`
-  MODIFY `ideleve` mediumint(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ideleve` mediumint(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT pour la table `enseignants`
 --
 ALTER TABLE `enseignants`
-  MODIFY `idens` mediumint(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `idens` mediumint(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
 --
 -- AUTO_INCREMENT pour la table `entreprise`
 --
 ALTER TABLE `entreprise`
   MODIFY `identreprise` mediumint(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+
 --
 -- AUTO_INCREMENT pour la table `niveauxcompetences`
 --
 ALTER TABLE `niveauxcompetences`
   MODIFY `idniveauxcompetences` tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
+
 --
 -- AUTO_INCREMENT pour la table `questions`
 --
 ALTER TABLE `questions`
   MODIFY `idquest` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+
 --
 -- AUTO_INCREMENT pour la table `souscategorie`
 --
 ALTER TABLE `souscategorie`
   MODIFY `idsouscat` tinyint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT pour la table `stage`
 --
 ALTER TABLE `stage`
-  MODIFY `idstage` mediumint(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
+  MODIFY `idstage` mediumint(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=198;
+
 --
 -- AUTO_INCREMENT pour la table `tuteurs`
 --
 ALTER TABLE `tuteurs`
-  MODIFY `idtuteur` mediumint(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `idtuteur` mediumint(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+
 --
--- Contraintes pour les tables exportées
+-- Contraintes pour les tables déchargées
 --
 
 --
@@ -722,7 +734,3 @@ ALTER TABLE `stage`
   ADD CONSTRAINT `fk_stage_2` FOREIGN KEY (`idtuteur`) REFERENCES `tuteurs` (`idtuteur`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_stage_4` FOREIGN KEY (`idens`) REFERENCES `enseignants` (`idens`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `stage_ibfk_1` FOREIGN KEY (`identreprise`) REFERENCES `entreprise` (`identreprise`);
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
