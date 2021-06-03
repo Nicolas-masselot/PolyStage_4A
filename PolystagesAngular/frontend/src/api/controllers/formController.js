@@ -120,6 +120,20 @@ exports.FormEval = function (req, res) {
   } else {
     template = template + 'template4a.odt'
   }
+
+  try {
+    if (!fs.existsSync('./public/' + req.body.annee)){
+      fs.mkdirSync('./public/' + req.body.annee) ;
+    }
+
+  } catch (e){ console.log(e);}
+  try {
+    if (!fs.existsSync('./public/' + req.body.annee)){
+      fs.mkdirSync('./public/' + req.body.annee + '/' + req.body.niveau + 'A') ;
+    }
+
+  } catch (e){ console.log(e);}
+
  // la conversion ne fonctionne pas erreur = Cannot find LibreOffice. Document conversion cannot be used
   // si on enlève les options le fichier pdf produit est illisible
   carbone.render(template, req.body, options, function (err, result) {
@@ -145,6 +159,19 @@ exports.FormComp = function (req, res) {
     + nomfich
   var dirresult = './public/' + req.body.annee + '/' + req.body.niveau + 'A/'
     + nomfich
+
+  try {
+    if (!fs.existsSync('./public/' + req.body.annee)){
+      fs.mkdirSync('./public/' + req.body.annee) ;
+    }
+
+  } catch (e){ console.log(e);}
+  try {
+    if (!fs.existsSync('./public/' + req.body.annee)){
+      fs.mkdirSync('./public/' + req.body.annee + '/' + req.body.niveau + 'A') ;
+    }
+
+  } catch (e){ console.log(e);}
   var template = './public/templates/template_competences.odt';
 
   carbone.render(template, req.body, options, function (err, result) { // idem
